@@ -1,0 +1,9 @@
+{
+    "options": {},
+    "problems": {
+        "activation-recurse": "Ativação de recurso",
+        "bug": "Bug",
+        "sharing-recurse": "Compartilhamento de recurso",
+        "technical": "Técnico"
+    }
+}
