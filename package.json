@@ -1,0 +1,27 @@
+{
+  "name": "help-now",
+  "version": "1.0.0",
+  "description": "Help Now – Chamado rápido, resposta imediata.\r O Help Now é uma aplicação web de chamados pensada pra redes locais. Simples, leve e de fácil uso, ele conecta pontos da rede em tempo real através de um WebSocket, garantindo uma comunicação rápida e estável entre usuários e o host.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "generate-files": "node generate-env.js && node generate-options.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eded001/help-now.git"
+  },
+  "keywords": [],
+  "author": "Ed",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/eded001/help-now/issues"
+  },
+  "homepage": "https://github.com/eded001/help-now#readme",
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "sqlite3": "^5.1.7",
+    "ws": "^8.18.3"
+  }
+}
