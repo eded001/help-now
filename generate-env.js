@@ -6,9 +6,9 @@ const interfaces = os.networkInterfaces();
 let ip = null;
 
 const PORTS = {
-    HOST_PORT: process.argv[0] || 5510,
-    HOST_WEBSOCKET_PORT: process.argv[1] || 5515,
-    CLIENT_PORT: process.argv[2] || 5520
+    HOST_PORT: 5510 || process.argv[0],
+    HOST_WEBSOCKET_PORT: 5515 || process.argv[1],
+    CLIENT_PORT: 5520 || process.argv[2]
 };
 
 for (const name in interfaces) {
