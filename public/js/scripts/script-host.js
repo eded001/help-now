@@ -10,15 +10,15 @@ const webSocketInfos = {
 
 window.addEventListener('DOMContentLoaded', () => {
     if (webSocket?.readyState === WebSocket.OPEN) {
-        console.log('WebSocket connection established');
+        console.log('WebSocket já está conectado.');
         return;
     }
 
-    const hostId = `host-${generateUUID()}`;
+    console.log('Tentando conectar WebSocket...');
     webSocket = new WebSocket(`ws://${webSocketInfos.ip}:${webSocketInfos.port}`);
 
     webSocket.addEventListener('open', () => {
-        console.log('WebSocket connection established');
+        console.log('WebSocket conectado com sucesso.');
         messagesContainer.hidden = false;
 
         sendMessage({
