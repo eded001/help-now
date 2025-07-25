@@ -37,15 +37,31 @@ buttonFree.addEventListener('click', () => {
         buttonFree.textContent = 'Ocupado';
         busy = true;
         console.log("ocupado");
+
+    if (localStorage.getItem("chamados") === null) {
+        localStorage.setItem("chamados", JSON.stringify([]));
     } else {
-        buttonFree.textContent = 'Livre';
-        busy = false;
-        console.log("livre");
+        const items = JSON.parse(localStorage.getItem("chamados"));
+
+        items.forEach(item => {
+            const itemElement = createMessageElement(item);
+
+            messagesContainer.appendChild(itemElement);
+        });
     }
 });
 
 function handleIncomingMessage(event) {
     const { content, id } = JSON.parse(event.data);
+
+    addToStorage({ content, id });
+
+    try {
+        const chamados = JSON.parse(localStorage.getItem("chamados") || "[]");
+        console.log(chamados);
+    } catch (error) {
+        console.error("Erro ao ler chamados do localStorage:", error);
+    }
 
     if (busy) {
         sendMessage({
@@ -184,4 +200,37 @@ function generateUUID() {
         const v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
+}
+
+function addToStorage(message) {
+    const items = JSON.parse(localStorage.getItem("chamados")) || [];
+    items.push(message);
+    localStorage.setItem("chamados", JSON.stringify(items));
+
+    // const { content, id } = message;
+    // const date = getDate();
+    // const hour = getHour();
+}
+
+function getDate() {
+    const date = new Date();
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth()).padStart(2, '0');
+    const year = String(date.getFullYear());
+
+    const dateFormatted = `${day}-${month}-${year}`;
+
+    return dateFormatted;
+}
+
+function getHour() {
+    const date = new Date();
+
+    const hour = String(date.getHours()).padStart(2, '0');
+    const minute = String(date.getMinutes()).padStart(2, '0');
+
+    const hourFormatted = `${hour}:${minute}`;
+
+    return hourFormatted;
 }
