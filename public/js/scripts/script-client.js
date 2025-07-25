@@ -102,7 +102,7 @@ function handleWebSocketMessage(event) {
             updateStatus("Suporte a caminho!", "#1dc42b", true);
             break;
         case 'host-busy':
-            updateStatus("Calma que o cabra tá numa missão agora, mas já já ele aparece", "#c4441d", true);
+            updateStatus("Os técnicos estão ocupados, aguarde alguns instantes", "#c4441d", true);
             break;
         default:
             console.log('Mensagem do servidor: ', response);

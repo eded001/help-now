@@ -51,7 +51,7 @@ function handleIncomingMessage(event) {
         sendMessage({
             type: 'host-busy',
             to: id,
-            message: "Segura ae"
+            message: "Pera aí rapidola que ele tá ocupado agora"
         });
     }
 
