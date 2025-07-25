@@ -51,6 +51,12 @@ buttonFree.addEventListener('click', () => {
     }
 });
 
+buttonFree.addEventListener('click', () => {
+    busy = !busy;
+    buttonFree.textContent = busy ? 'Ocupado' : 'Livre';
+    console.log(busy ? 'ocupado' : 'livre');
+});
+
 function handleIncomingMessage(event) {
     const { content, id } = JSON.parse(event.data);
 
