@@ -2,13 +2,15 @@ const messagesContainer = document.querySelector('#messages');
 const buttonFree = document.querySelector('#button-free');
 
 let webSocket, busy;
-
+const RECONNECT_INTERVAL = 3000;
 const webSocketInfos = {
     ip: window.env.ip,
     port: window.env.webSocketPort
 };
 
-window.addEventListener('DOMContentLoaded', () => {
+const hostId = `host-${generateUUID()}`;
+
+function connectWebSocket() {
     if (webSocket?.readyState === WebSocket.OPEN) {
         console.log('WebSocket já está conectado.');
         return;
@@ -29,14 +31,20 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     webSocket.addEventListener('message', handleIncomingMessage);
-    webSocket.addEventListener('error', err => console.error('Erro WebSocket: ', err));
-});
 
-buttonFree.addEventListener('click', () => {
-    if (buttonFree.textContent === 'Livre') {
-        buttonFree.textContent = 'Ocupado';
-        busy = true;
-        console.log("ocupado");
+    webSocket.addEventListener('close', () => {
+        console.warn('WebSocket desconectado. Tentando reconectar em 3 segundos...');
+        setTimeout(connectWebSocket, RECONNECT_INTERVAL);
+    });
+
+    webSocket.addEventListener('error', err => {
+        console.error('Erro no WebSocket: ', err);
+        webSocket.close(); // força reconexão
+    });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    connectWebSocket();
 
     if (localStorage.getItem("chamados") === null) {
         localStorage.setItem("chamados", JSON.stringify([]));
