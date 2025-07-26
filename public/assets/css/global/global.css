@@ -5,5 +5,16 @@
     margin: 0;
     box-sizing: border-box;
 
-    outline-color: #33333395;
+    outline-color: currentColor;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }
