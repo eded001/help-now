@@ -5,10 +5,10 @@ const fs = require('fs');
 const path = require('path');
 
 const dirs = {
-    pages: path.join(__dirname, './public/pages'),
-    css: path.join(__dirname, './public/css'),
-    js: path.join(__dirname, './public/js/scripts'),
-    public: path.join(__dirname, './public')
+    pages: path.join(__dirname, '../public/pages'),
+    css: path.join(__dirname, '../public/css'),
+    js: path.join(__dirname, '../public/js/scripts'),
+    public: path.join(__dirname, '../public')
 };
 
 const mimeTypes = {
@@ -51,8 +51,15 @@ function createServer(port, ip, homePage) {
 
         fs.readFile(filePath, (error, data) => {
             if (error) {
-                res.writeHead(404);
-                res.end('Arquivo não encontrado');
+                const notFoundPath = path.join(dirs.pages, 'not-found.html');
+                fs.readFile(notFoundPath, (err404, data404) => {
+                    res.writeHead(404, { 'Content-Type': 'text/html' });
+                    if (err404) {
+                        res.end('<h1>404 - Página não encontrada</h1>');
+                    } else {
+                        res.end(data404);
+                    }
+                });
                 console.warn('Não encontrado: ', filePath);
                 return;
             }
