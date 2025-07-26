@@ -13,7 +13,15 @@ module.exports = {
         }
 
         const newUser = await UserModel.create({ name, username });
-
         return newUser;
+    },
+
+    async findByUsername(username) {
+        if (!username) {
+            throw new Error('Username é obrigatório');
+        }
+
+        const user = await UserModel.findOne({ where: { username } });
+        return { name: user.name };
     }
 };
