@@ -8,3 +8,4 @@ env.js
 options.js
 options.json
 test-*
+db.sqlite
