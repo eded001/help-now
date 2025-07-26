@@ -1,3 +1,5 @@
+@import url('../vars/vars-account.css');
+
 body {
     display: grid;
     height: 100vh;
@@ -8,13 +10,13 @@ body {
 
     padding: 10px;
 
-    background-color: #7B4019;
+    background-color: var(--color01);
 }
 
 #image,
 #register-section {
     border-radius: 20px;
-    background-color: #FF7D29;
+    background-color: var(--color02);
 }
 
 #image {
@@ -40,7 +42,7 @@ body {
     font-size: 5em;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
-    color: #FFBF78;
+    color: var(--color03);
 }
 
 #image #title::before,
@@ -81,21 +83,12 @@ body {
     font-size: 3em;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
-    color: #7B4019;
-}
-#register-section #register-title #user-icon {
-    --size: 200px;
-    /* border: 1px solid; */
+    color: var(--color01);
 
-    height: var(--size);
-    width: var(--size);
-
-    background: url('../../images/user.png') center center no-repeat;
-    background-size: 100%;
+    user-select: none;
 }
 
 #register-section form {
-    border: 2px solid #f0f;
     display: grid;
 
     place-items: center;
@@ -104,7 +97,6 @@ body {
 }
 
 #register-section form #content {
-    /* border: 1px solid; */
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -114,17 +106,19 @@ body {
     border: none;
     border-bottom: 1px solid;
     border-width: 4px;
+    border-color: #ffffff75;
 
     background-color: #ffffff50;
-    color: #ffffff75;
 
-    font-size: 1.1em;
+    color: #fff;
 
-    padding: 5px;
+    font-size: 1em;
+
+    padding: 10px;
 }
 
 #register-section form #content input[type=text]::placeholder {
-    color: #fff;
+    color: #ffffff75;
 }
 
 #register-section form #content input[type=submit] {
@@ -134,17 +128,12 @@ body {
     font-size: 1.3em;
 
     background-color: #fff;
-    color: #FF7D29;
+    color: var(--color02);
 
-    border: 1px solid;
+    border: none;
 }
 
 #register-section a {
     font-family: Arial, Helvetica, sans-serif;
-    color: #FFEEA9;
-
-    text-decoration: none;
-}
-#register-section a:hover {
-    text-decoration: underline;
+    color: var(--color04);
 }
