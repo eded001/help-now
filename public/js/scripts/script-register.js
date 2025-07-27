@@ -35,7 +35,7 @@ form.addEventListener('submit', event => {
             }
 
             if (data.status = 'OK') {
-                fetch(`${url}/users`, {
+                fetch(`${url}/create`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
