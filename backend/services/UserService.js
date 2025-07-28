@@ -22,6 +22,7 @@ module.exports = {
         }
 
         const user = await UserModel.findOne({ where: { username } });
-        return { name: user.name };
+        if (!user) return null;
+        return user;
     }
 };
