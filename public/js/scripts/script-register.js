@@ -9,8 +9,6 @@ const apiInfos = {
 
 const url = `http://${apiInfos.ip}:${apiInfos.port}`;
 
-console.log(`${url}/health`);
-
 form.addEventListener('submit', event => {
     event.preventDefault();
 
@@ -22,20 +20,15 @@ form.addEventListener('submit', event => {
         return;
     }
 
-    fetch(`${url}/health`)
+    fetch(url + '/health')
         .then(response => {
-            if (!response.ok) {
-                throw new Error("Erro ao conectar com o servidor.");
-            }
+            if (!response.ok) throw new Error("Erro ao conectar com o servidor.");
             return response.json();
         })
         .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-
-            if (data.status = 'OK') {
-                fetch(`${url}/create`, {
+            if (data.error) throw new Error(data.error);
+            if (data.status === 'OK') {
+                return fetch(url + '/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -44,29 +37,23 @@ form.addEventListener('submit', event => {
                         name: username,
                         username: idUser,
                     }),
-                })
-                    .then(res => {
-                        if (!res.ok) {
-                            throw new Error(`Erro ${res.status}: ${res.statusText}`);
-                        }
-                        return res.json();
-                    })
-                    .then(data => {
-                        if (data.error) {
-                            throw new Error(data.error);
-                        }
-
-                        console.log(`Usuário "${data.username}" criado com sucesso!`);
-                        alert(`Usuário "${data.username}" criado com sucesso!`);
-                    })
-                    .catch(error => {
-                        console.error("Erro:", error.message);
-                        alert("Erro ao criar usuário. Tente novamente mais tarde.");
-                    });
+                });
+            } else {
+                throw new Error('Servidor indisponível');
             }
         })
+        .then(async res => {
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.error || `Erro ${res.status}: ${res.statusText}`);
+            }
+            return res.json();
+        })
+        .then(data => {
+            alert(`Usuário "${data.username || data.name}" criado com sucesso!`);
+            window.location.href = '/app';
+        })
         .catch(error => {
-            console.error("Erro:", error.message);
-            alert("Erro ao conectar com o servidor. Tente novamente mais tarde.");
+            alert(`Erro ao criar usuário: ${error.message}`);
         });
 });
