@@ -4,11 +4,12 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+const PORT = process.env.PORT || 3000;
+const IP = process.env.IP || '127.0.0.1';
+
 const dirs = {
-    pages: path.join(__dirname, '../public/pages'),
-    css: path.join(__dirname, '../public/css'),
-    js: path.join(__dirname, '../public/js/scripts'),
-    public: path.join(__dirname, '../public')
+    public: path.join(__dirname, '../public'),
+    pages: path.join(__dirname, '../public/pages')
 };
 
 const mimeTypes = {
@@ -23,57 +24,41 @@ const mimeTypes = {
     '.svg': 'image/svg+xml'
 };
 
-// Função genérica para criar servidor
-function createServer(port, ip, homePage) {
-    const server = http.createServer((req, res) => {
-        let filePath = '';
-        let contentType = 'text/plain';
+const server = http.createServer((req, res) => {
+    let filePath;
+    let contentType;
 
-        console.log(`Request for: ${req.url} from IP: ${req.socket.remoteAddress}`);
+    console.log(`Request: ${req.url}`);
 
-        if (req.url === '/') {
-            filePath = path.join(dirs.pages, homePage);
-            contentType = 'text/html';
-        } else {
-            const ext = path.extname(req.url);
-            contentType = mimeTypes[ext] || 'application/octet-stream';
+    if (req.url === '/') {
+        filePath = path.join(dirs.pages, 'login.html');
+        contentType = 'text/html';
+    } else if (req.url === '/register') {
+        filePath = path.join(dirs.pages, 'register.html');
+        contentType = 'text/html';
+    } else if (req.url === '/app') {
+        filePath = path.join(dirs.pages, 'client.html');
+        contentType = 'text/html';
+    } else {
+        const ext = path.extname(req.url);
+        contentType = mimeTypes[ext] || 'application/octet-stream';
 
-            const safePath = path.normalize(req.url).replace(/^(\.\.[\/\\])+/, '');
-            filePath = path.join(dirs.public, safePath);
-        }
+        const safePath = path.normalize(req.url).replace(/^(\.\.[\/\\])+/, '');
+        filePath = path.join(dirs.public, safePath);
+    }
 
-        if (!filePath.startsWith(dirs.public)) {
-            res.writeHead(403);
-            res.end('Acesso negado');
-            console.warn('Tentativa de acesso indevido: ', filePath);
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            res.writeHead(404, { 'Content-Type': 'text/html' });
+            res.end('<h1>404 - Página não encontrada</h1>');
             return;
         }
 
-        fs.readFile(filePath, (error, data) => {
-            if (error) {
-                const notFoundPath = path.join(dirs.pages, 'not-found.html');
-                fs.readFile(notFoundPath, (err404, data404) => {
-                    res.writeHead(404, { 'Content-Type': 'text/html' });
-                    if (err404) {
-                        res.end('<h1>404 - Página não encontrada</h1>');
-                    } else {
-                        res.end(data404);
-                    }
-                });
-                console.warn('Não encontrado: ', filePath);
-                return;
-            }
-
-            res.writeHead(200, { 'Content-Type': contentType });
-            res.end(data);
-        });
+        res.writeHead(200, { 'Content-Type': contentType });
+        res.end(data);
     });
+});
 
-    server.listen(port, ip, () => {
-        console.log(`Servidor rodando em http://${ip}:${port} (${homePage})`);
-    });
-}
-
-// Iniciar os dois servidores
-createServer(process.env.HOST_PORT, process.env.IP, 'host.html');
-createServer(process.env.CLIENT_PORT, process.env.IP, 'client.html');
+server.listen(PORT, IP, () => {
+    console.log(`Servidor rodando em http://${IP}:${PORT}`);
+});
