@@ -12,15 +12,19 @@ function generateOptionsFile(jsonPath, outputPath) {
             .map(([key, val]) => {
                 const keyFormatted = /^[a-zA-Z0-9_]+$/.test(key) ? key : `'${key}'`;
                 const valFormatted = typeof val === 'string' ? val.trim() : val;
-                return `    ${keyFormatted}: ${JSON.stringify(valFormatted)}`;
+                return `        ${keyFormatted}: ${JSON.stringify(valFormatted)}`;
             })
             .join(',\n');
+
+    const allOptionsStr = `window.allOptions = {\n` +
+        `    use: {\n${objToString(options)}\n    },\n` +
+        `    problems: {\n${objToString(problems)}\n    }\n};\n\n`;
 
     const optionsUseStr = `const optionsUse = {\n${objToString(options)}\n};\n\n`;
     const optionsProblemsStr = `const optionsProblems = {\n${objToString(problems)}\n};\n\n`;
     const exportStr = 'export { optionsUse, optionsProblems };';
 
-    const finalFile = optionsUseStr + optionsProblemsStr + exportStr;
+    const finalFile = allOptionsStr + optionsUseStr + optionsProblemsStr + exportStr;
 
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
