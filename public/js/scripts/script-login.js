@@ -17,20 +17,15 @@ form.addEventListener('submit', event => {
         return;
     }
 
-    fetch(`${url}/health`)
+    fetch(url + '/health')
         .then(response => {
-            if (!response.ok) {
-                throw new Error("Erro ao conectar com o servidor.");
-            }
+            if (!response.ok) throw new Error("Erro ao conectar com o servidor.");
             return response.json();
         })
         .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-
+            if (data.error) throw new Error(data.error);
             if (data.status === 'OK') {
-                return fetch(`${url}/login`, {
+                return fetch(url + '/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -49,11 +44,10 @@ form.addEventListener('submit', event => {
             return res.json();
         })
         .then(data => {
-            console.log('Login bem-sucedido:', data);
             alert(`Bem-vindo, ${data.user.name}!`);
+            window.location.href = '/app';
         })
         .catch(err => {
-            console.error('Falha no login:', err.message);
             alert(`Falha no login: ${err.message}`);
         });
 });
