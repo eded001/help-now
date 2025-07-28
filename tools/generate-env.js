@@ -28,7 +28,6 @@ if (!ip) {
     process.exit(1);
 }
 
-// Conteúdo do .env (para o backend)
 const envContent = `# main
 IP=${ip}
 
@@ -43,22 +42,18 @@ HOST_WEBSOCKET_PORT=${PORTS.HOST_WEBSOCKET_PORT}
 CLIENT_PORT=${PORTS.CLIENT_PORT}
 `;
 
-// Conteúdo do env.js (para o frontend)
 const configContent = `window.env = {
     ip: "${ip}",
     webSocketPort: "${PORTS.HOST_WEBSOCKET_PORT}",
     apiPort: "${PORTS.API_PORT}"
 };`;
 
-// Caminhos
 const envDirBackend = path.join(__dirname, '../backend');
 const envDirJs = path.join(__dirname, '../public/js/utils');
 
-// Criação dos diretórios se não existirem
 fs.mkdirSync(envDirBackend, { recursive: true });
 fs.mkdirSync(envDirJs, { recursive: true });
 
-// Escrita dos arquivos
 fs.writeFileSync(path.join(envDirBackend, '.env'), envContent);
 fs.writeFileSync(path.join(envDirJs, 'env.js'), configContent);
 
