@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.API_PORT || 5525;
 
-const sequelize = require('../db/conn');
+const sequelize = require('./utils/conn');
 const UserRoutes = require('./routes/UserRoutes');
 
 sequelize.sync()

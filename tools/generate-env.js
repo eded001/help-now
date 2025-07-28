@@ -52,7 +52,7 @@ const configContent = `window.env = {
 
 // Caminhos
 const envDirBackend = path.join(__dirname, '../backend');
-const envDirJs = path.join(__dirname, '../public/js/env');
+const envDirJs = path.join(__dirname, '../public/js/utils');
 
 // Criação dos diretórios se não existirem
 fs.mkdirSync(envDirBackend, { recursive: true });

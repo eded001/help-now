@@ -30,5 +30,5 @@ function generateOptionsFile(jsonPath, outputPath) {
 
 generateOptionsFile(
     path.resolve(__dirname, '../options.json'),
-    path.resolve(__dirname, '../public/js/scripts/options.js')
+    path.resolve(__dirname, '../public/js/utils/options.js')
 );
