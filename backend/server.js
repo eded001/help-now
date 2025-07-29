@@ -1,64 +1,57 @@
 require('dotenv').config({ path: './.env' });
 
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
+const session = require('express-session');
 const path = require('path');
 
-const PORT = process.env.PORT || 3000;
-const IP = process.env.IP || '127.0.0.1';
+const UserRoutes = require('./routes/UserRoutes');
+const AdminRoutes = require('./routes/AdminRoutes');
 
-const dirs = {
-    public: path.join(__dirname, '../public'),
-    pages: path.join(__dirname, '../public/pages')
-};
+const authMiddleware = require('./middlewares/authMiddleware');
+const adminMiddleware = require('./middlewares/adminMiddleware');
 
-const mimeTypes = {
-    '.html': 'text/html',
-    '.css': 'text/css',
-    '.js': 'application/javascript',
-    '.json': 'application/json',
-    '.png': 'image/png',
-    '.jpg': 'image/jpeg',
-    '.jpeg': 'image/jpeg',
-    '.gif': 'image/gif',
-    '.svg': 'image/svg+xml'
-};
+const app = express();
 
-const server = http.createServer((req, res) => {
-    let filePath;
-    let contentType;
+app.use(express.json());
 
-    console.log(`Request: ${req.url}`);
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false,
+        maxAge: 1000 * 60 * 60 * 24,
+    },
+}));
 
-    if (req.url === '/') {
-        filePath = path.join(dirs.pages, 'login.html');
-        contentType = 'text/html';
-    } else if (req.url === '/register') {
-        filePath = path.join(dirs.pages, 'register.html');
-        contentType = 'text/html';
-    } else if (req.url === '/app') {
-        filePath = path.join(dirs.pages, 'client.html');
-        contentType = 'text/html';
-    } else {
-        const ext = path.extname(req.url);
-        contentType = mimeTypes[ext] || 'application/octet-stream';
+app.use(express.static(path.join(__dirname, '../public')));
 
-        const safePath = path.normalize(req.url).replace(/^(\.\.[\/\\])+/, '');
-        filePath = path.join(dirs.public, safePath);
+// rotas públicas
+app.get('/', (req, res) => {
+    if (req.session.user) {
+        return res.sendFile(path.join(__dirname, '../public/pages/client.html'));
     }
-
-    fs.readFile(filePath, (err, data) => {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            res.end('<h1>404 - Página não encontrada</h1>');
-            return;
-        }
-
-        res.writeHead(200, { 'Content-Type': contentType });
-        res.end(data);
-    });
+    res.sendFile(path.join(__dirname, '../public/pages/login.html'));
 });
 
-server.listen(PORT, IP, () => {
+app.get('/register', (req, res) => {
+    if (req.session.user) return res.redirect('/');
+    res.sendFile(path.join(__dirname, '../public/pages/register.html'));
+});
+
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK' });
+});
+
+// Rotas da API
+app.use('/api/user', UserRoutes);
+
+// Rotas admin protegidas com middlewares
+app.use('/api/admin', authMiddleware, adminMiddleware, AdminRoutes);
+
+const IP = process.env.IP;
+const PORT = process.env.PORT;
+
+app.listen(PORT, () => {
     console.log(`Servidor rodando em http://${IP}:${PORT}`);
 });
