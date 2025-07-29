@@ -18,11 +18,13 @@ module.exports = {
 
     async findByUsername(username) {
         if (!username) {
-            throw new Error('Username é obrigatório');
+            throw new Error('O ID de usuário é obrigatório');
         }
 
         const user = await UserModel.findOne({ where: { username } });
-        if (!user) return null;
+        if (!user) {
+            return null;
+        }
         return user;
     }
 };

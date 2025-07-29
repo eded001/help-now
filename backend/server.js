@@ -24,23 +24,29 @@ app.use(session({
     },
 }));
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public/')));
 
 // rotas públicas
 app.get('/', (req, res) => {
     if (req.session.user) {
         return res.sendFile(path.join(__dirname, '../public/pages/client.html'));
+    } else if (req.session.user.host) {
+        return res.sendFile(path.join(__dirname, '../public/pages/host.html'));
     }
+
     res.sendFile(path.join(__dirname, '../public/pages/login.html'));
 });
 
 app.get('/register', (req, res) => {
-    if (req.session.user) return res.redirect('/');
+    if (req.session.user) {
+        return res.redirect('/');
+    }
+
     res.sendFile(path.join(__dirname, '../public/pages/register.html'));
 });
 
-app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'OK' });
+app.use('/admin', (req, res) => {
+    return res.sendFile(path.join(__dirname, '../public/pages/login/admin-login.html'));
 });
 
 // Rotas da API

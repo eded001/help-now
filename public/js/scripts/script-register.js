@@ -1,10 +1,10 @@
 const form = document.querySelector('form');
-const usernameInput = document.querySelector("#username");
+const usernameInput = document.querySelector("#username-user");
 const idUserInput = document.querySelector("#id-user");
 
 const { ip, port } = window.env;
 
-const url = `http://${ip}:${port}/api/user`;
+const url = `http://${ip}:${port}`;
 
 form.addEventListener('submit', event => {
     event.preventDefault();
@@ -25,7 +25,7 @@ form.addEventListener('submit', event => {
         .then(data => {
             if (data.error) throw new Error(data.error);
             if (data.status === 'OK') {
-                return fetch(url + 'create', {
+                return fetch(url + '/api/user/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
