@@ -1,14 +1,16 @@
 const form = document.querySelector('form');
 const idUserInput = document.querySelector("#id-user");
-
+const passUserInput = document.querySelector("#pass-admin") || false;
 const { ip, port } = window.env;
 
-const url = `http://${ip}:${port}/api/user`;
+const url = `http://${ip}:${port}/api`;
 
 form.addEventListener('submit', event => {
     event.preventDefault();
 
     const idUser = idUserInput.value.trim();
+    const passUser = passUserInput ? passUserInput.value.trim() : false;
+
     if (idUser === "") {
         alert("Por favor, preencha todos os campos.");
         return;
@@ -22,13 +24,7 @@ form.addEventListener('submit', event => {
         .then(data => {
             if (data.error) throw new Error(data.error);
             if (data.status === 'OK') {
-                return fetch(url + '/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ username: idUser }),
-                });
+                return login({username: idUser, password: passUser})
             } else {
                 throw new Error('Servidor indisponível');
             }
@@ -42,6 +38,7 @@ form.addEventListener('submit', event => {
         })
         .then(data => {
             alert(`Bem-vindo, ${data.user.name}!`);
+
             window.location.href = '/';
         })
         .catch(err => {
