@@ -1,4 +1,4 @@
-import { optionsUse, optionsProblems } from "./options.js";
+const { use, problems } = window.allOptions;
 
 const elements = {
     startButton: document.querySelector('#start'),
@@ -14,21 +14,16 @@ const elements = {
 
 let webSocket, clientId;
 
-const webSocketInfos = {
-    ip: window.env.ip,
-    port: window.env.webSocketPort
-};
+const { ip, webSocketPort } = window.env;
 
 document.addEventListener('DOMContentLoaded', () => {
-    populateSelect(elements.departmentSelect, optionsUse);
-    populateSelect(elements.ticketType, optionsProblems);
+    populateSelect(elements.departmentSelect, use);
+    populateSelect(elements.ticketType, problems);
 });
 
 window.addEventListener('beforeunload', event => {
     if (elements.statusResponse.textContent !== "Suporte a caminho!") {
-        // Cancelar o evento padrão
-        event.preventDefault(); // Alguns navegadores exigem isso
-        // Mensagem de confirmação (nem todos os navegadores mostram mais essa mensagem)
+        event.preventDefault();
         event.returnValue = '';
     }
 });
@@ -63,7 +58,7 @@ function startSession() {
         return;
     }
 
-    webSocket = new WebSocket(`ws://${webSocketInfos.ip}:${webSocketInfos.port}`);
+    webSocket = new WebSocket(`ws://${ip}:${webSocketPort}`);
 
     webSocket.addEventListener('open', () => {
         console.log('WebSocket connection established');

@@ -9,7 +9,7 @@ module.exports = {
         const exists = await UserModel.findOne({ where: { username } });
 
         if (exists) {
-            throw new Error('Este username já está em uso');
+            throw new Error('Este ID de usuário já está em uso');
         }
 
         const newUser = await UserModel.create({ name, username });

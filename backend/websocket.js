@@ -3,7 +3,7 @@ require('dotenv').config({ path: './.env' });
 const WebSocket = require('ws');
 
 const IP = process.env.IP;
-const PORT = process.env.HOST_WEBSOCKET_PORT;
+const PORT = process.env.WEBSOCKET_PORT;
 const server = new WebSocket.Server({ port: PORT });
 
 const clients = new Map();
@@ -64,7 +64,6 @@ server.on('connection', socket => {
                 console.warn('[AVISO] Nenhum host conectado para receber mensagens');
             }
 
-            // Confirmação ao cliente
             clientEntry.socket.send(JSON.stringify({
                 type: 'confirmation',
                 message: 'Sua mensagem foi recebida com sucesso!'

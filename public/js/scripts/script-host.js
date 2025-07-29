@@ -129,7 +129,7 @@ function handleIncomingMessage(event) {
         return;
     }
 
-    // Caso novo chamado
+    // caso novo chamado
     const messageElement = createMessageElement({ content, id });
     messagesContainer.appendChild(messageElement);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;

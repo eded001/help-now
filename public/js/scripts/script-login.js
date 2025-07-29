@@ -1,12 +1,9 @@
 const form = document.querySelector('form');
 const idUserInput = document.querySelector("#id-user");
 
-const apiInfos = {
-    ip: window.env.ip,
-    port: window.env.apiPort
-};
+const { ip, port } = window.env;
 
-const url = `http://${apiInfos.ip}:${apiInfos.port}`;
+const url = `http://${ip}:${port}/api/user`;
 
 form.addEventListener('submit', event => {
     event.preventDefault();
@@ -45,7 +42,7 @@ form.addEventListener('submit', event => {
         })
         .then(data => {
             alert(`Bem-vindo, ${data.user.name}!`);
-            window.location.href = '/app';
+            window.location.href = '/';
         })
         .catch(err => {
             alert(`Falha no login: ${err.message}`);

@@ -6,13 +6,11 @@ const interfaces = os.networkInterfaces();
 let ip = null;
 
 const PORTS = {
-    HOST_PORT: process.argv[2] || 5510,
-    HOST_WEBSOCKET_PORT: process.argv[3] || 5515,
-    CLIENT_PORT: process.argv[4] || 5520,
-    API_PORT: process.argv[5] || 5525,
+    PORT: process.argv[3] || 5510,
+    WEBSOCKET_PORT: process.argv[4] || 5520,
 };
 
-// Pega o primeiro IPv4 válido (não interno)
+// pega o primeiro IPv4 válido (não interno)
 for (const name in interfaces) {
     for (const iface of interfaces[name]) {
         if (iface.family === 'IPv4' && !iface.internal) {
@@ -30,22 +28,18 @@ if (!ip) {
 
 const envContent = `# main
 IP=${ip}
+PORT=${PORTS.PORT}
 
-# api port
-API_PORT=${PORTS.API_PORT}
+# websocket
+WEBSOCKET_PORT=${PORTS.WEBSOCKET_PORT}
 
-# host ports
-HOST_PORT=${PORTS.HOST_PORT}
-HOST_WEBSOCKET_PORT=${PORTS.HOST_WEBSOCKET_PORT}
-
-# client port
-CLIENT_PORT=${PORTS.CLIENT_PORT}
-`;
+# secret key
+SECRET_KEY=${require('crypto').randomBytes(64).toString('hex')}`;
 
 const configContent = `window.env = {
     ip: "${ip}",
-    webSocketPort: "${PORTS.HOST_WEBSOCKET_PORT}",
-    apiPort: "${PORTS.API_PORT}"
+    port: "${PORTS.PORT}",
+    webSocketPort: "${PORTS.WEBSOCKET_PORT}"
 };`;
 
 const envDirBackend = path.join(__dirname, '../backend');
@@ -57,11 +51,8 @@ fs.mkdirSync(envDirJs, { recursive: true });
 fs.writeFileSync(path.join(envDirBackend, '.env'), envContent);
 fs.writeFileSync(path.join(envDirJs, 'env.js'), configContent);
 
-// Logs de confirmação
 console.log('.env criado com sucesso no backend!');
 console.log('env.js criado com sucesso no frontend!');
 console.log('IP usado: ', ip);
-console.log('WebSocket Port: ', PORTS.HOST_WEBSOCKET_PORT);
-console.log('Host Port: ', PORTS.HOST_PORT);
-console.log('Client Port: ', PORTS.CLIENT_PORT);
-console.log('API Port: ', PORTS.API_PORT);
+console.log('Porta usada: ', PORTS.PORT);
+console.log('WebSocket Port: ', PORTS.WEBSOCKET_PORT);

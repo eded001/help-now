@@ -18,13 +18,9 @@ function generateOptionsFile(jsonPath, outputPath) {
 
     const allOptionsStr = `window.allOptions = {\n` +
         `    use: {\n${objToString(options)}\n    },\n` +
-        `    problems: {\n${objToString(problems)}\n    }\n};\n\n`;
+        `    problems: {\n${objToString(problems)}\n    }\n};`;
 
-    const optionsUseStr = `const optionsUse = {\n${objToString(options)}\n};\n\n`;
-    const optionsProblemsStr = `const optionsProblems = {\n${objToString(problems)}\n};\n\n`;
-    const exportStr = 'export { optionsUse, optionsProblems };';
-
-    const finalFile = allOptionsStr + optionsUseStr + optionsProblemsStr + exportStr;
+    const finalFile = allOptionsStr;
 
     fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 

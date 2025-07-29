@@ -2,12 +2,9 @@ const form = document.querySelector('form');
 const usernameInput = document.querySelector("#username");
 const idUserInput = document.querySelector("#id-user");
 
-const apiInfos = {
-    ip: window.env.ip,
-    port: window.env.apiPort
-}
+const { ip, port } = window.env;
 
-const url = `http://${apiInfos.ip}:${apiInfos.port}`;
+const url = `http://${ip}:${port}/api/user`;
 
 form.addEventListener('submit', event => {
     event.preventDefault();
@@ -28,7 +25,7 @@ form.addEventListener('submit', event => {
         .then(data => {
             if (data.error) throw new Error(data.error);
             if (data.status === 'OK') {
-                return fetch(url + '/create', {
+                return fetch(url + 'create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -51,7 +48,7 @@ form.addEventListener('submit', event => {
         })
         .then(data => {
             alert(`Usuário "${data.username || data.name}" criado com sucesso!`);
-            window.location.href = '/app';
+            window.location.href = '/';
         })
         .catch(error => {
             alert(`Erro ao criar usuário: ${error.message}`);
