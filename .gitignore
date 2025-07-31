@@ -3,9 +3,16 @@ node_modules
 package-lock.json
 
 # app
+
+## frontend
+main.js
+
+## backend
 .env
-env.js
-options.js
 options.json
-test-*
 *.sqlite
+migrations
+apps/backend/prisma
+
+## other
+test
