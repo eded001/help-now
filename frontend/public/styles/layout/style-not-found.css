@@ -1,0 +1,60 @@
+body {
+    display: grid;
+    height: 100vh;
+
+    padding: 10px;
+
+    background-color: #3B060A;
+}
+
+main {
+    position: relative;
+
+    display: grid;
+    place-items: start left;
+
+    border-radius: 20px;
+    background-color: #FFF287;
+}
+
+main #logo {
+    position: absolute;
+
+    right: 10px;
+    bottom: 10px;
+
+    background: url('assets/images/logo-help-now.png') center center no-repeat;
+    background-size: 100%;
+
+    filter: contrast(-0.5);
+
+    height: 156px;
+    width: 381px;
+}
+
+main #not-found-section {
+    border-radius: 5px;
+
+    color: #C83F12;
+
+    font-size: 2em;
+
+    padding: 10px;
+
+    user-select: none;
+}
+
+main #not-found-section h1,
+main #not-found-section p {
+    user-select: none;
+}
+main #not-found-section h1 {
+    font-size: 4em;
+}
+
+main #not-found-section p {
+    font-size: 1.5em;
+    font-family: Arial, Helvetica, sans-serif;
+
+    width: 50%
+}

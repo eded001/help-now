@@ -1,0 +1,36 @@
+:root {
+    /* colors */
+    --color01: #4e6edf;
+    --color02: #3b5fcc;
+    --color03: #274fba;
+    --color04: #1440a7;
+    --color05: #003094;
+
+    --color06: #6f85e8;
+    --color07: #9aaef4;
+    --color08: #c3d0fa;
+    --color09: #e1e9fd;
+    --color10: #f4f7ff;
+
+    --color11: #5c78d6;
+    --color12: #4063c1;
+    --color13: #3353ab;
+    --color14: #1d3b91;
+    --color15: #0a2674;
+
+    --color16: #081f5c;
+    --color17: #061848;
+    --color18: #041234;
+    --color19: #030d25;
+    --color20: #010613;
+
+    /* fonts */
+    --font-title: 'Gill Sans',
+        'Gill Sans MT',
+        Calibri,
+        'Trebuchet MS',
+        sans-serif;
+    --font-text: Arial,
+        Helvetica,
+        sans-serif;
+}

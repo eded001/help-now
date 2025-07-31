@@ -1,0 +1,117 @@
+@import url('../base/account.variables.css');
+
+/* BASE */
+body {
+    display: grid;
+    place-items: center;
+
+    height: 100vh;
+    background-color: #dfd14e;
+}
+
+button {
+    display: grid;
+    place-items: center;
+
+    width: 200px;
+    height: 50px;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    transition: background-color 0.3s ease;
+}
+
+/* BUTTON */
+#messages button {
+    place-self: center;
+    background-color: #88860c;
+    color: #d2e86f;
+}
+#messages button:active {
+    background-color: #74720a;
+}
+#messages button:disabled {
+    background-color: #b0b0b0;
+    color: #7a7a7a;
+    cursor: not-allowed;
+}
+
+/* MESSAGES CONTAINER */
+#messages {
+    flex-direction: column;
+    gap: 15px;
+
+    min-width: 50vw;
+    max-width: 100vw;
+    height: 75vh;
+
+    padding: 15px;
+
+    background-color: #fff;
+    border-radius: 10px;
+
+    overflow-y: auto;
+}
+#messages::-webkit-scrollbar {
+    width: 5px;
+}
+#messages::-webkit-scrollbar-thumb {
+    background-color: #91891d;
+
+    border-radius: 10px;
+}
+#messages::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+#messages::-webkit-scrollbar-button {
+    background-color: transparent;
+}
+
+/* INDIVIDUAL MESSAGE */
+#messages .message {
+    padding: 8px 12px;
+    margin-bottom: 8px;
+
+    background-color: #ccbd3b;
+
+    border-radius: 6px;
+
+    font-size: 1rem;
+    word-break: break-word;
+}
+#messages .message h1 {
+    font-family: var(--font-title);
+    color: #5c5608;
+}
+#messages .message h2 {
+    font-family: var(--font-title);
+    color: #70690a;
+}
+#messages .message h3 {
+    font-family: var(--font-title);
+    color: #857d0d;
+}
+#messages .message p {
+    text-align: center;
+
+    margin: 20px 0;
+
+    font-family: var(--font-text);
+    color: #916e0f;
+}
+#messages .message button.remove:active {
+    background-color: #740a0a !important;
+}
+
+#button-free {
+    --distance: 10px;
+
+    position: absolute;
+
+    right: var(--distance);
+    bottom: var(--distance);
+}
