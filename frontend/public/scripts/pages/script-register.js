@@ -12,8 +12,8 @@ form.addEventListener('submit', event => {
     const username = usernameInput.value.trim();
     const idUser = idUserInput.value.trim();
 
-    if (username === "" || idUser === "") {
         alert("Por favor, preencha todos os campos.");
+    if (user.name === '' || user.username === '' || user.password === '') {
         return;
     }
 
