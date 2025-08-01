@@ -1,30 +1,13 @@
-require('dotenv').config({ path: '../../.env' });
-
 const express = require('express');
-const session = require('express-session');
 const path = require('path');
-const errorHandler = require('../api/middlewares/errorHandler.middleware');
 
-const app = express();
+const router = express.Router();
 
-// sessão
-app.use(session({
-    secret: "SECRET_KEY", // ou process.env.SECRET_KEY
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: false,
-        maxAge: 1000 * 60 * 60 * 24,
-    },
-}));
-
-app.use(errorHandler);
-
-// arquivos estáticos
-app.use(express.static(path.join(__dirname, '../../../frontend/public/')));
+// arquivos estáticos (HTML, CSS, JS)
+router.use(express.static(path.join(__dirname, '../../../frontend/public')));
 
 // página principal
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     console.log('file requested: ', req.url);
 
     if (!req.session.user) {
@@ -39,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 // página de cadastro
-app.get('/register', (req, res) => {
+router.get('/register', (req, res) => {
     if (req.session.user) {
         return res.redirect('/');
     }
@@ -48,8 +31,8 @@ app.get('/register', (req, res) => {
 });
 
 // página de login admin
-app.get('/admin', (req, res) => {
+router.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../../../frontend/pages/admin-login.html'));
 });
 
-module.exports = app;
+module.exports = router;
