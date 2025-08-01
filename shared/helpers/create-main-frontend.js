@@ -1,3 +1,44 @@
+// TODO: adaptar o window.env para o novo modelo criado
+// ou
+// TODO: substituir pelo Vite
+/*
+const env = {
+    ip: "192.168.100.11",
+    port: "5500"
+};
+
+const allOptions = {
+    options: {
+        "Agendamentos": "Agendamentos",
+        "Contato": "Contato",
+        "Contratos": "Contratos",
+        "Controle Interno": "Controle Interno",
+        "Comunicação": "Comunicação",
+        "DAF": "DAF (Administração Financeira)",
+        "DEAC": "DEAC (Cultura)",
+        "DPH": "DPH (Patrimônio Histórico)",
+        "Gabinete": "Gabinete",
+        "Jurídico": "Jurídico",
+        "Materiais": "Materiais",
+        "Planejamento": "Planejamento",
+        "Protocolo": "Protocolo",
+        "RH": "RH (Recursos Humanos)",
+        "Sincronizado": "Sincronizado",
+        "Serviços Gerais": "Serviços Gerais",
+        "Superintendência": "Superintendência",
+        "Turismo": "Turismo"
+    },
+    problems: {
+        "activation-recurse": "Ativação de recurso",
+        "bug": "Bug",
+        "sharing-recurse": "Compartilhamento de recurso",
+        "technical": "Técnico"
+    }
+};
+
+export { env, allOptions };
+ */
+
 const file = require('../utils/file.util');
 const getIP = require('../utils/ip.util').getLocalIPv4;
 
@@ -17,8 +58,6 @@ module.exports = {
         const envContent = `window.env = {
     ip: "${envInfos.ip}",
     port: "${envInfos.ports.server}",
-    webSocketPort: "${envInfos.ports.websocket}",
-    apiPort: "${envInfos.ports.api}"
 }`;
 
         const optionsContent = `window.allOptions = ${await file.readFile('../constants', 'options.json')}`;
