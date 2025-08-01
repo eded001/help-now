@@ -1,13 +1,12 @@
 const prisma = require('../../../prisma/client');
 
 module.exports = {
-        const hashedPassword = password;
-
     async create({ username, name, password, role = 'CLIENT' }) {
         return prisma.user.create({
             data: {
                 username,
                 name,
+                password,
                 role,
             },
             select: {
