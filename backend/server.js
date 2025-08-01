@@ -1,19 +1,34 @@
-const http = require('http');
-const appApi = require('./src/api/app.api');
-const appWeb = require('./src/web/app.web');
 require('dotenv').config();
 
-const serverWeb = http.createServer(appWeb);
+const http = require('http');
+const express = require('express');
+const session = require('express-session');
 
-// inicia WebSocket
-require('./src/ws/websocket')(serverWeb);
+const webApp = require('./src/web/app.web'); // rotas web
+const apiApp = require('./src/api/app.api'); // rotas API
 
-// web
-serverWeb.listen(process.env.PORT, () => {
-    console.log(`Servidor Web rodando em http://${process.env.IP}:${process.env.PORT}`);
-});
+const app = express();
 
-// api
-appApi.listen(process.env.API_PORT, () => {
-    console.log(`Servidor API rodando em http://${process.env.IP}:${process.env.API_PORT}/api`);
+app.use(session({
+    secret: 'default-secret', // process.env.SECRET_KEY
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false, // true se estiver usando HTTPS
+        maxAge: 1000 * 60 * 60 * 24, // 1 dia
+    },
+}));
+
+// rotas da API
+app.use(apiApp);
+
+// rotas da aplicação Web
+app.use(webApp);
+
+const server = http.createServer(app);
+
+const { IP, PORT } = process.env;
+
+server.listen(PORT, () => {
+    console.log(`Servidor rodando em http://${IP}:${PORT}`);
 });
