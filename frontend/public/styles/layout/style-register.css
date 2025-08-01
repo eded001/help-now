@@ -89,11 +89,14 @@ body {
 }
 
 #register-section form {
-    display: grid;
+    display: flex;
 
-    place-items: center;
+    justify-content: center;
+    align-items: center;
 
-    grid-template-rows: 5fr 1fr;
+    flex-direction: column;
+
+    gap: 20px;
 }
 
 #register-section form #content {
@@ -121,9 +124,10 @@ body {
 #register-section form #content input[type=text]::placeholder,
 #register-section form #content input[type=password]::placeholder {
     color: #ffffff75;
+    user-select: none;
 }
 
-#register-section form #content input[type=submit] {
+#register-section form input[type=submit] {
     border-radius: 5px;
     padding: 5px;
 
