@@ -1,56 +1,26 @@
 const form = document.querySelector('form');
-const usernameInput = document.querySelector("#username-user");
-const idUserInput = document.querySelector("#id-user");
+const userNameInput = document.querySelector("#username-user");
+const userUsernameInput = document.querySelector("#id-user");
+const userPasswordInput = document.querySelector("#pass-user");
 
-const { ip, port } = window.env;
-
-const url = `http://${ip}:${port}`;
+import { register } from "./utils/user.util.js";
 
 form.addEventListener('submit', event => {
     event.preventDefault();
 
-    const username = usernameInput.value.trim();
-    const idUser = idUserInput.value.trim();
-
-        alert("Por favor, preencha todos os campos.");
-    if (user.name === '' || user.username === '' || user.password === '') {
-        return;
+    const user = {
+        name: userNameInput.value.trim(),
+        username: userUsernameInput.value.trim(),
+        password: userPasswordInput.value.trim()
     }
 
-    fetch(url + '/health')
-        .then(response => {
-            if (!response.ok) throw new Error("Erro ao conectar com o servidor.");
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) throw new Error(data.error);
-            if (data.status === 'OK') {
-                return fetch(url + '/api/user/create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: username,
-                        username: idUser,
-                    }),
-                });
-            } else {
-                throw new Error('Servidor indisponível');
-            }
-        })
-        .then(async res => {
-            if (!res.ok) {
-                const data = await res.json();
-                throw new Error(data.error || `Erro ${res.status}: ${res.statusText}`);
-            }
-            return res.json();
-        })
-        .then(data => {
-            alert(`Usuário "${data.username || data.name}" criado com sucesso!`);
-            window.location.href = '/';
-        })
-        .catch(error => {
-            alert(`Erro ao criar usuário: ${error.message}`);
-        });
+    if (user.name === '' || user.username === '' || user.password === '') {
+        alert('Por favor, preencha todos os campos.');
+        return;
+    } else {
+        (async () => {
+            const result = await register(user);
+            console.log(result);
+        })();
+    }
 });
