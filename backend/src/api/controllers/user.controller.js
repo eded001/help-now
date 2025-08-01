@@ -9,9 +9,16 @@ module.exports = {
                 return res.status(400).json({ error: error.details[0].message });
             }
 
-            res.status(201).json(newUser);
             const { username, name, password, role } = value;
             const newUser = await UserService.create({ username, name, password, role });
+
+            const { password: _, ...userWithoutPassword } = newUser;
+            req.session.user = userWithoutPassword;
+
+            res.status(201).json({
+                message: "Usuário criado com sucesso!",
+                user: userWithoutPassword
+            });
         } catch (error) {
             if (error.code === 'P2002') {
                 return res.status(409).json({ error: 'Username já existe.' });
