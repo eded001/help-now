@@ -23,6 +23,7 @@ module.exports = {
             if (error.code === 'P2002') {
                 return res.status(409).json({ error: 'Username já existe.' });
             }
+
             console.error(error);
             res.status(500).json({ error: 'Erro interno.' });
         }
@@ -61,6 +62,7 @@ module.exports = {
                 console.error(err);
                 return res.status(500).json({ error: 'Erro ao fazer logout.' });
             }
+
             res.clearCookie('connect.sid');
             res.json({ message: 'Logout realizado com sucesso.' });
         });
