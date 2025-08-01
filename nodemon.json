@@ -1,10 +1,9 @@
 {
-    "watch": ["backend"],
-    "ext": "js",
+    "watch": ["frontend", "backend"],
+    "ext": "html, css, js",
     "ignore": [
-        "node_modules",
-        "dist"
+        "node_modules"
     ],
-    "exec": "cd apps/backend && node server.js",
-    "delay": "500"
+    "exec": "cd backend && node server.js",
+    "delay": "100"
 }
