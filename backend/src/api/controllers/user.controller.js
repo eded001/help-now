@@ -1,11 +1,5 @@
-const Joi = require('joi');
+const { userSchema } = require('../models/user.model');
 const UserService = require('../services/user.service');
-
-const userSchema = Joi.object({
-    username: Joi.string().min(3).max(30).required(),
-    password: Joi.string().min(6).required(),
-    role: Joi.string().valid('ADMIN', 'CLIENT', 'SUPPORT').optional(),
-});
 
 module.exports = {
     async create(req, res) {
