@@ -5,12 +5,12 @@ const WebSocket = require('ws');
 const IP = process.env.IP;
 const PORT = process.env.WEBSOCKET_PORT;
 
-const server = new WebSocket.Server({ port: PORT });
 const clients = new Map();
 
 module.exports = function (server) {
-    const wss = new WebSocket.Server({ server });
-    wss.on('connection', socket => {
+    const ws = new WebSocket.Server({ server });
+    
+    ws.on('connection', socket => {
         socket.isAlive = true;
 
         socket.on('pong', () => {
@@ -18,7 +18,7 @@ module.exports = function (server) {
         });
 
         const interval = setInterval(() => {
-            wss.clients.forEach(client => {
+            ws.clients.forEach(client => {
                 if (!client.isAlive) {
                     return client.terminate();
                 }
