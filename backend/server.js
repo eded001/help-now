@@ -6,6 +6,7 @@ const session = require('express-session');
 
 const webApp = require('./src/web/app.web'); // rotas web
 const apiApp = require('./src/api/app.api'); // rotas API
+const websocket = require('./src/ws/websocket'); // websocket
 
 const app = express();
 
@@ -27,8 +28,11 @@ app.use(webApp);
 
 const server = http.createServer(app);
 
+websocket(server);
+
 const { IP, PORT } = process.env;
 
 server.listen(PORT, () => {
-    console.log(`Servidor rodando em http://${IP}:${PORT}`);
+    console.log(`> Network: http://${IP}:${PORT}`);
+    console.log(`> Local:   http://localhost:${PORT}`);
 });
