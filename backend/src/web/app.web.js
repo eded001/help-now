@@ -6,9 +6,9 @@ const router = express.Router();
 // arquivos estáticos (HTML, CSS, JS)
 router.use(express.static(path.join(__dirname, '../../../frontend/public')));
 
-// página principal
 router.get('/', (req, res) => {
     console.log('file requested: ', req.url);
+// rota principal protegida (redireciona para o HTML conforme role)
 
     if (!req.session.user) {
         return res.sendFile(path.join(__dirname, '../../../frontend/pages/login.html'));
@@ -18,21 +18,22 @@ router.get('/', (req, res) => {
         return res.sendFile(path.join(__dirname, '../../../frontend/pages/host.html'));
     }
 
+    // default CLIENT
     return res.sendFile(path.join(__dirname, '../../../frontend/pages/client.html'));
 });
 
-// página de cadastro
+// página de cadastro (aberta)
 router.get('/register', (req, res) => {
     if (req.session.user) {
         return res.redirect('/');
     }
 
-    res.sendFile(path.join(__dirname, '../../../frontend/pages/register.html'));
+    // não autenticado
 });
 
-// página de login admin
 router.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../../../frontend/pages/admin-login.html'));
+// informações de sessão (protegida)
 });
 
 module.exports = router;
