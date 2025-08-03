@@ -1,0 +1,11 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    outline-color: currentColor;
+}
+
+body * {
+    border: 5px solid;
+}
