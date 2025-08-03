@@ -8,11 +8,6 @@ const router = express.Router();
 router.use(cors({ origin: '*' }));
 router.use(express.json());
 
-// health check
-router.get('/health', (req, res) => {
-    res.status(200).json({ status: 'Ok', timestamp: new Date().toISOString() });
-});
-
 router.use('/api', routes);
 
 // error handler no fim
