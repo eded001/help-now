@@ -49,7 +49,7 @@ module.exports = {
             const { password: _, ...userWithoutPassword } = user;
             req.session.user = userWithoutPassword;
 
-            res.json({ message: 'Login bem-sucedido', user: userWithoutPassword });
+            res.json({ success: true, user: userWithoutPassword });
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Erro interno.' });
@@ -64,7 +64,7 @@ module.exports = {
             }
 
             res.clearCookie('connect.sid');
-            res.json({ message: 'Logout realizado com sucesso.' });
+            res.json({ success: true });
         });
     },
 
