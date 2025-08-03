@@ -13,42 +13,20 @@ enum Role {
   SUPPORT
 }
 
+// TODO: add update row
+
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String
-  username  String    @unique
-  password  String
-  role      Role      @default(CLIENT) // client (default), admin, support
-  createdAt DateTime  @default(now())
-
-  createdTickets Ticket[] @relation("CreatedTickets")
-  handledTickets Ticket[] @relation("HandledTickets")
-
-  messages Message[]
+  id         Int      @id @default(autoincrement())
+  name       String
+  username   String   @unique
+  password   String
+  department String   @default("General")
+  role       Role     @default(CLIENT) // client (default), admin, support
+  created_at DateTime @default(now())
+  // update_at  DateTime
 }
 
 model Ticket {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  status      String   @default("open") // open (default), in_progress, closed
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  clientId    Int
-  client      User     @relation("CreatedTickets", fields: [clientId], references: [id])
-
-  supportId    Int?
-  support      User?    @relation("HandledTickets", fields: [supportId], references: [id])
-
-  messages    Message[]
-}
-
-model Message {
-  id        Int      @id @default(autoincrement())
-  content   String
-  ticketId  Int
-  authorId  Int
-  ticket    Ticket   @relation(fields: [ticketId], references: [id])
-  author    User     @relation(fields: [authorId], references: [id])
+  id   Int    @id @default(autoincrement())
+  name String
 }

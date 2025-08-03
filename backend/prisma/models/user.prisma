@@ -1,0 +1,14 @@
+// models/user.prisma
+model User {
+    id         Int      @id @default(autoincrement())
+    name       String
+    username   String   @unique
+    password   String
+    department String   @default("General")
+    role       Role     @default(CLIENT)
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    ticketsCreated  Ticket[] @relation("CreatedTickets")
+    ticketsAssigned Ticket[] @relation("AssignedTickets")
+}

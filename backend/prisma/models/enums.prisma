@@ -1,0 +1,28 @@
+// models/enums.prisma
+enum Role {
+    ADMIN
+    CLIENT
+    SUPPORT
+}
+
+enum TicketStatus {
+    OPEN
+    IN_PROGRESS
+    RESOLVED
+    CLOSED
+}
+
+enum TicketPriority {
+    LOW
+    MEDIUM
+    HIGH
+    URGENT
+}
+
+enum TicketCategory {
+    HARDWARE
+    SOFTWARE
+    NETWORK
+    ACCESS
+    OTHER
+}
