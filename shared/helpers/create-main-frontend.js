@@ -1,44 +1,3 @@
-// TODO: adaptar o window.env para o novo modelo criado
-// ou
-// TODO: substituir pelo Vite
-/*
-const env = {
-    ip: "192.168.100.11",
-    port: "5500"
-};
-
-const allOptions = {
-    options: {
-        "Agendamentos": "Agendamentos",
-        "Contato": "Contato",
-        "Contratos": "Contratos",
-        "Controle Interno": "Controle Interno",
-        "Comunicação": "Comunicação",
-        "DAF": "DAF (Administração Financeira)",
-        "DEAC": "DEAC (Cultura)",
-        "DPH": "DPH (Patrimônio Histórico)",
-        "Gabinete": "Gabinete",
-        "Jurídico": "Jurídico",
-        "Materiais": "Materiais",
-        "Planejamento": "Planejamento",
-        "Protocolo": "Protocolo",
-        "RH": "RH (Recursos Humanos)",
-        "Sincronizado": "Sincronizado",
-        "Serviços Gerais": "Serviços Gerais",
-        "Superintendência": "Superintendência",
-        "Turismo": "Turismo"
-    },
-    problems: {
-        "activation-recurse": "Ativação de recurso",
-        "bug": "Bug",
-        "sharing-recurse": "Compartilhamento de recurso",
-        "technical": "Técnico"
-    }
-};
-
-export { env, allOptions };
- */
-
 const file = require('../utils/file.util');
 const getIP = require('../utils/ip.util').getLocalIPv4;
 
@@ -48,25 +7,27 @@ module.exports = {
 
         const envInfos = {
             ip: getIP(),
-            ports: {
-                server: 5500,
-                websocket: 5515,
-                api: 5525
-            }
-        }
+            port: 5500
+        };
 
-        const envContent = `window.env = {
+        // Geração do export de env
+        const envExport = `export const env = {
     ip: "${envInfos.ip}",
-    port: "${envInfos.ports.server}",
-}`;
+    port: "${envInfos.port}"
+};`;
 
-        const optionsContent = `window.allOptions = ${await file.readFile('../constants', 'options.json')}`;
+        // Carrega dados do JSON
+        const options = require('../constants/options.json');
+
+        // Separação em dois exports
+        const departmentsExport = `export const departments = ${JSON.stringify(options.departments, null, 4)};`;
+        const problemsExport = `export const problems = ${JSON.stringify(options.problems, null, 4)};`;
+
+        // Junta o conteúdo final
+        const content = `${envExport}\n\n${departmentsExport}\n\n${problemsExport}`;
 
         try {
-            const content = `${envContent}\n\n${optionsContent}`;
-
-            await file.writeFile('../../../frontend/scripts', 'main.js', content);
-
+            await file.writeFile('../../frontend/public/scripts', 'main.js', content);
             console.log('Arquivo main.js criado com sucesso!\n');
         } catch (error) {
             console.error(`Erro ao criar arquivo main.js: ${error.message}`);

@@ -1,38 +1,28 @@
 const writeFile = require('../utils/file.util').writeFile;
 const getIP = require('../utils/ip.util').getLocalIPv4;
 
-module.exports = {
-    async createEnvBackend() {
-        console.log("Criando arquivo .env no backend...");
+async function createEnvBackend() {
+    console.log("Criando arquivo .env no backend...");
 
-        try {
-            const ip = getIP();
-            const ports = {
-                server: 5500,
-                websocket: 5515,
-                api: 5525
-            }
+    try {
+        const ip = getIP(); // pega o IP local dinamicamente
+        const port = 5500;  // valor fixo
 
-            const content = `# environment variables
+        const content = `# environment variables
 
-## IP address
+## Address
 IP=${ip}
-
-## Ports
-PORT=${ports.server}
-WEBSOCKET_PORT=${ports.websocket}
-API_PORT=${ports.api}
+PORT=${port}
 
 # db
 DATABASE_URL="file:../db/database.sqlite"`;
 
-            await writeFile('../../../backend/', '.env', content);
+        await writeFile('../../backend', '.env', content);
 
-            console.log('Arquivo .env criado com sucesso!\n');
-        } catch (error) {
-            console.error(`Erro ao criar arquivo .env: ${error.message}`);
-        }
+        console.log('Arquivo .env criado com sucesso!\n');
+    } catch (error) {
+        console.error(`Erro ao criar arquivo .env: ${error.message}`);
     }
 }
 
-module.exports.createEnvBackend;
+module.exports = { createEnvBackend };
