@@ -1,11 +1,6 @@
 @import url('../base/variables/register.variable.css');
 
 body {
-    display: grid;
-    height: 100vh;
-
-    padding: 10px;
-
     background-color: var(--color01);
 }
 

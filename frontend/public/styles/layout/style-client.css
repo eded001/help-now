@@ -2,8 +2,6 @@
 
 /* BASE */
 body {
-    height: 100vh;
-    display: grid;
     place-items: center;
     background-color: var(--color01);
 }
