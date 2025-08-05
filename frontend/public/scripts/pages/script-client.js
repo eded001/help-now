@@ -14,7 +14,8 @@ const elements = {
 
 let webSocket, clientId;
 
-const { ip, webSocketPort } = window.env;
+const { ip, port } = env;
+
 
 document.addEventListener('DOMContentLoaded', () => {
     populateSelect(elements.departmentSelect, departments);
@@ -58,7 +59,7 @@ function startSession() {
         return;
     }
 
-    webSocket = new WebSocket(`ws://${ip}:${webSocketPort}`);
+    webSocket = new WebSocket(`ws://${ip}:${port}`);
 
     webSocket.addEventListener('open', () => {
         console.log('WebSocket connection established');
