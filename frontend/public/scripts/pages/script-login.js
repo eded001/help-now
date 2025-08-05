@@ -20,7 +20,7 @@ form.addEventListener('submit', event => {
         password: userPasswordInput.value
     }
 
-    if (!username || !password) {
+    if (!user.username || !user.password) {
         alert('Por favor, preencha todos os campos.');
         return;
     } else {
