@@ -1,14 +1,12 @@
-import { env } from "../../main.js";
-
 async function request(endpoint, method, content = {}) {
-    const url = `http://${env.ip}:${env.port}/api/${endpoint}`;
+    const url = '/api' + endpoint;
 
     const response = await fetch(url, {
         method,
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(content)
+        ...(Object.keys(content).length > 0 && { body: JSON.stringify(content) })
     });
 
     if (!response.ok) {
@@ -19,7 +17,7 @@ async function request(endpoint, method, content = {}) {
 }
 
 async function checkHealth() {
-    const url = `http://${env.ip}:${env.port}/health`;
+    const url = '/health';
 
     try {
         const response = await fetch(url);
