@@ -18,4 +18,13 @@ async function login({ username, password }) {
     }
 }
 
-export { register, login };
+async function checkAuth() {
+    try {
+        return await request('/users/auth-check', 'GET');
+    } catch (error) {
+        console.error('Erro na verificação de autenticação:', error);
+        throw error;
+    }
+}
+
+export { register, login, checkAuth };
