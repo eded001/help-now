@@ -16,6 +16,12 @@ form.addEventListener('submit', event => {
         alert('Por favor, preencha todos os campos.');
         return;
     } else {
-        login(user);
+        login(user).then(response => {
+            if (response.success) {
+                window.location.href = '/';
+            }
+        }).catch(error => {
+            console.log(error);
+        });
     }
 });

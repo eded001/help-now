@@ -18,9 +18,12 @@ form.addEventListener('submit', event => {
         alert('Por favor, preencha todos os campos.');
         return;
     } else {
-        (async () => {
-            const result = await register(user);
-            console.log(result);
-        })();
+        register(user).then(response => {
+            if (response.success) {
+                window.location.href = '/';
+            }
+        }).catch(error => {
+            console.log(error);
+        });
     }
 });
