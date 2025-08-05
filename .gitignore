@@ -14,5 +14,6 @@ options.json
 migrations
 apps/backend/prisma
 
-## other
+## test
+test*
 test
