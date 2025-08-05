@@ -7,47 +7,108 @@
     <!-- <link rel="stylesheet" href="styles/base/globals/reset.global.css" />
     <link rel="stylesheet" href="styles/layout/style-client.css" />  -->
     <link rel="shortcut icon" href="./assets/images/avatar.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="../public/styles/base/globals/reset.global.css">
+    <link rel="stylesheet" href="../public/styles/base/globals/element-reset.global.css">
+    <link rel="stylesheet" href="../public/styles/layout/new-style-client.css">
 </head>
 <body>
-    <button id="start">Solicitar chamado</button>
+    <section class="sidebar">
+        <h1 class="sidebar__logo">
+            <a href="#">Help Now</a>
+        </h1>
 
-    <form method="post" hidden>
-        <div id="title">
-            <h1>Dados do chamado</h1>
-            <h2>Preencha o formulário</h2>
-        </div>
+        <nav class="sidebar__options">
+            <button class="sidebar__option">Configurações</button>
+            <button class="sidebar__option">FAQ</button>
+        </nav>
 
-        <div id="data-container">
-            <p>
-                <label for="type">Tipo de chamado</label>
-                <select id="type"></select>
-            </p>
+        <!-- TODO: adicionar um link para saiba mais -->
+    </section>
 
-            <p>
-                <label for="name">Nome</label>
-                <input type="text" id="name" placeholder="Digite o seu nome" autocomplete="off" />
-            </p>
+    <main class="client">
+        <div class="client__header">
+            <div class="client__greeting">Olá, ${username.user}</div>
 
-            <p>
-                <label for="departments">Setor/Departamento</label>
-                <select id="departments"></select>
-            </p>
+            <div class="client__header-content">
+                <div class="client__presentation">
+                    <h1>Meus Chamados</h1>
+                    <p>Este é o seu painel de acompanhamento. Visualize o status das suas solicitações, consulte
+                        detalhes e registre
+                        novos chamados sempre que precisar. Nossa equipe está pronta para te atender com agilidade e
+                        precisão.</p>
+                </div>
 
-            <div id="description-problem">
-                <textarea id="description" rows="10" placeholder="Descrição do problema"></textarea>
+                <div class="client__support-button">
+                    <button><span>+</span> <span>Solicitar <br> novo chamado</span></button>
+                </div>
             </div>
         </div>
 
-        <div id="buttons">
-            <button type="submit" id="submit">Abrir chamado</button>
-            <button type="button" id="cancel" disabled>Cancelar chamado</button>
+        <div class="client__tickets">
+            <div class="ticket">
+                <div class="ticket__header">
+                    <a href="#" class="ticket__code">#7463</a>
+                    <span class="ticket__category">Software</span>
+                </div>
+                <div class="ticket__title">Erro ao abrir o sistema de vendas</div>
+                <div class="ticket__footer">
+                    <span class="ticket__info">Aberto em 30/07/2025</span>
+                    <span class="ticket__status ticket__status--open">Aberto</span>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket__header">
+                    <a href="#" class="ticket__code">#7464</a>
+                    <span class="ticket__category">Rede</span>
+                </div>
+                <div class="ticket__title">Wi-Fi instável na sala de reuniões</div>
+                <div class="ticket__footer">
+                    <span class="ticket__info">Aberto em 28/07/2025</span>
+                    <span class="ticket__status ticket__status--in-progress">Em andamento</span>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket__header">
+                    <a href="#" class="ticket__code">#7465</a>
+                    <span class="ticket__category">Hardware</span>
+                </div>
+                <div class="ticket__title">Notebook com tela quebrada</div>
+                <div class="ticket__footer">
+                    <span class="ticket__info">Concluído em 25/07/2025</span>
+                    <span class="ticket__status ticket__status--closed">Resolvido</span>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket__header">
+                    <a href="#" class="ticket__code">#7466</a>
+                    <span class="ticket__category">Suporte Técnico</span>
+                </div>
+                <div class="ticket__title">Configuração de e-mail não sincroniza</div>
+                <div class="ticket__footer">
+                    <span class="ticket__info">Aberto em 02/08/2025</span>
+                    <span class="ticket__status ticket__status--open">Aberto</span>
+                </div>
+            </div>
+
+            <div class="ticket">
+                <div class="ticket__header">
+                    <a href="#" class="ticket__code">#7467</a>
+                    <span class="ticket__category">Segurança</span>
+                </div>
+                <div class="ticket__title">Alerta de acesso não autorizado</div>
+                <div class="ticket__footer">
+                    <span class="ticket__info">Aberto em 01/08/2025</span>
+                    <span class="ticket__status ticket__status--in-review">Em análise</span>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <div id="status">Esperando o envio...</div>
-    </form>
-
-    <script src="scripts/main.js"></script>
-    <script type="module" src="scripts/main.js"></script>
-    <script type="module" src="scripts/pages/script-client.js"></script>
+    <!-- <script type="module" src="scripts/main.js"></script>
+    <script type="module" src="scripts/pages/script-client.js"></script> -->
 </body>
 </html>
