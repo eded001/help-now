@@ -1,4 +1,4 @@
-const { departments, problems } = window.allOptions;
+import { env, departments, problems } from "/scripts/main.js";
 
 const elements = {
     startButton: document.querySelector('#start'),
