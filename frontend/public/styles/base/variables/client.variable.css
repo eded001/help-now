@@ -1,0 +1,12 @@
+:root {
+    /* palette colors */
+    --color01: #DFF2EB;
+    --color02: #B9E5E8;
+    --color03: #7AB2D3;
+    --color04: #4A628A;
+
+    /* status colors */
+    --open: #;
+    --progress: #;
+    --resolved: #;
+}
