@@ -6,6 +6,12 @@ body {
 
 main {
     position: relative;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 20px;
+    background-color: var(--color02);
 }
 
 main #logo {
@@ -16,14 +22,6 @@ main #logo {
 
     height: 312px;
     width: 761px;
-}
-
-main {
-    display: grid;
-    place-items: center;
-
-    border-radius: 20px;
-    background-color: var(--color02);
 }
 
 main #login-section {
@@ -67,7 +65,7 @@ main #login-section h1 {
 main #login-section form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 
 main #login-section form input[type=text] {
