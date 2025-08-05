@@ -1,6 +1,6 @@
 const form = document.querySelector('form');
-const userUsernameInput = document.querySelector("#id-user");
-const userPasswordInput = document.querySelector("#pass-user");
+const userUsernameInput = document.querySelector("#user-username");
+const userPasswordInput = document.querySelector("#user-password");
 
 import { login } from "./utils/user.util.js";
 
