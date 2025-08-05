@@ -2,7 +2,15 @@ const form = document.querySelector('form');
 const userUsernameInput = document.querySelector("#user-username");
 const userPasswordInput = document.querySelector("#user-password");
 
-import { login } from "./utils/user.util.js";
+import { login, checkAuth } from "./utils/user.util.js";
+
+document.addEventListener('DOMContentLoaded', () => {
+    checkAuth().then(response => {
+        if (!response.authenticated) {
+            window.location.href = '/';
+        }
+    });
+});
 
 form.addEventListener('submit', event => {
     event.preventDefault();
