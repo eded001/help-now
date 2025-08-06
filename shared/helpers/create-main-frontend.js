@@ -1,4 +1,4 @@
-const file = require('../utils/file.util');
+const writeFile = require('../utils/file.util').writeFile;
 const getIP = require('../utils/ip.util').getLocalIPv4;
 
 module.exports = {
@@ -27,12 +27,10 @@ module.exports = {
         const content = `${envExport}\n\n${departmentsExport}\n\n${problemsExport}`;
 
         try {
-            await file.writeFile('../../frontend/public/scripts', 'main.js', content);
+            await writeFile.writeFile('../../frontend/public/scripts', 'main.js', content);
             console.log('Arquivo main.js criado com sucesso!\n');
         } catch (error) {
             console.error(`Erro ao criar arquivo main.js: ${error.message}`);
         }
     }
-}
-
-module.exports.createMainFile;
+};
