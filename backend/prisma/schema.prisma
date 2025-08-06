@@ -1,32 +1,76 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
+// --- datasource ---
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
+// --- generator ---
+generator client {
+  provider = "prisma-client-js"
+}
+
+// --- enums/Roles.enum.prisma ---
 enum Role {
-  ADMIN
-  CLIENT
-  SUPPORT
+    ADMIN
+    CLIENT
+    SUPPORT
 }
 
-// TODO: add update row
+// --- enums/TicketCategory.enum.prisma ---
+enum TicketCategory {
+    HARDWARE
+    SOFTWARE
+    NETWORK
+    ACCESS
+    OTHER
+}
 
+// --- enums/TicketPriority.enum.prisma ---
+enum TicketPriority {
+    LOW
+    MEDIUM
+    HIGH
+}
+
+// --- enums/TicketStatus.enum.prisma ---
+enum TicketStatus {
+    OPEN
+    IN_PROGRESS
+    RESOLVED
+}
+
+// --- models/User.model.prisma ---
+// models/user.prisma
 model User {
-  id         Int      @id @default(autoincrement())
-  name       String
-  username   String   @unique
-  password   String
-  department String   @default("General")
-  role       Role     @default(CLIENT) // client (default), admin, support
-  created_at DateTime @default(now())
-  // update_at  DateTime
+    id         Int      @id @default(autoincrement())
+    name       String
+    username   String   @unique
+    password   String
+    department String   @default("General")
+    role       Role     @default(CLIENT)
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    ticketsCreated  Ticket[] @relation("CreatedTickets")
+    ticketsAssigned Ticket[] @relation("AssignedTickets")
 }
 
+// --- models/Ticket.model.prisma ---
+// models/ticket.prisma
 model Ticket {
-  id   Int    @id @default(autoincrement())
-  name String
+    id          Int            @id @default(autoincrement())
+    title       String
+    description String
+    status      TicketStatus   @default(OPEN)
+    priority    TicketPriority @default(MEDIUM)
+    category    TicketCategory
+    created_at  DateTime       @default(now())
+    updated_at  DateTime       @updatedAt
+    resolved_at DateTime?
+
+    created_by_id Int
+    created_by    User @relation("CreatedTickets", fields: [created_by_id], references: [id])
+
+    assigned_to_id Int?
+    assigned_to    User? @relation("AssignedTickets", fields: [assigned_to_id], references: [id])
 }
