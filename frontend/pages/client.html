@@ -4,111 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Client | Help Now</title>
-    <!-- <link rel="stylesheet" href="styles/base/globals/reset.global.css" />
-    <link rel="stylesheet" href="styles/layout/style-client.css" />  -->
-    <link rel="shortcut icon" href="./assets/images/avatar.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="../public/styles/base/globals/reset.global.css">
+    <link rel="stylesheet" href="styles/base/globals/reset.global.css" />
     <link rel="stylesheet" href="../public/styles/base/globals/element-reset.global.css">
-    <link rel="stylesheet" href="../public/styles/layout/new-style-client.css">
+    <link rel="stylesheet" href="styles/layout/style-client.css" />
+    <link rel="shortcut icon" href="./assets/images/avatar.png" type="image/x-icon">
 </head>
 <body>
-    <section class="sidebar">
-        <h1 class="sidebar__logo">
-            <a href="#">Help Now</a>
-        </h1>
+    <div class="page-container">
+        <section class="sidebar">
+            <h1 class="sidebar__logo">
+                <a href="#" class="sidebar__logo-title">Help Now</a>
+            </h1>
 
-        <nav class="sidebar__options">
-            <button class="sidebar__option">Configurações</button>
-            <button class="sidebar__option">FAQ</button>
-        </nav>
+            <nav class="sidebar__options">
+                <a href="#" class="sidebar__option">Configurações</a>
+                <a href="#" class="sidebar__option">FAQ</a>
+            </nav>
 
-        <!-- TODO: adicionar um link para saiba mais -->
-    </section>
+            <a href="#" class="sidebar__link__saiba-mais">Saiba mais</a>
+        </section>
 
-    <main class="client">
-        <div class="client__header">
-            <div class="client__greeting">Olá, ${username.user}</div>
+        <main class="client">
+            <div class="client__header">
+                <div class="client__greeting">Olá, `${username.firstName} ${username.lastName}`</div>
 
-            <div class="client__header-content">
-                <div class="client__presentation">
-                    <h1>Meus Chamados</h1>
-                    <p>Este é o seu painel de acompanhamento. Visualize o status das suas solicitações, consulte
-                        detalhes e registre
-                        novos chamados sempre que precisar. Nossa equipe está pronta para te atender com agilidade e
-                        precisão.</p>
-                </div>
+                <div class="client__header-content">
+                    <div class="client__presentation">
+                        <h1>Meus chamados</h1>
+                        <p>Este é o seu painel de acompanhamento. Visualize o status das suas solicitações, consulte
+                            detalhes e registre novos chamados sempre que precisar. Nossa equipe está pronta para te
+                            atender com agilidade e precisão.</p>
+                    </div>
 
-                <div class="client__support-button">
-                    <button><span>+</span> <span>Solicitar <br> novo chamado</span></button>
+                    <div class="client__support-button">
+                        <button class="support-button">
+                            <span class="support-button__icon" aria-hidden="true">+</span>
+                            <span class="support-button__text">Solicitar <br> novo chamado</span>
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            <div class="client__tickets"></div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" style="display:none;">
+        <div class="modal">
+            <h2 class="modal__title">Solicitar Novo Chamado</h2>
+            <p class="modal__description">Preencha os detalhes do seu chamado para que nossa equipe possa atender você
+                rapidamente.</p>
+            <form class="modal__form" id="ticketForm">
+                <label class="modal__label" for="category">Categoria:</label><br />
+                <select class="modal__select" id="category" name="category" required>
+                    <option class="modal__option" value="">Selecione</option>
+                    <option class="modal__option" value="Software">Software</option>
+                    <option class="modal__option" value="Rede">Rede</option>
+                    <option class="modal__option" value="Hardware">Hardware</option>
+                    <option class="modal__option" value="Suporte Técnico">Suporte Técnico</option>
+                </select><br /><br />
+
+                <label class="modal__label" for="title">Título do chamado:</label><br />
+                <input class="modal__input" type="text" id="title" name="title" required /><br /><br />
+
+                <label class="modal__label" for="description">Descrição:</label><br />
+                <textarea class="modal__textarea" id="description" name="description" rows="4"
+                    required></textarea><br /><br />
+
+                <button class="modal__button modal__button--submit" type="submit">Enviar</button>
+                <button class="modal__button modal__button--cancel" type="button" id="closeModalBtn">Cancelar</button>
+            </form>
         </div>
+    </div>
 
-        <div class="client__tickets">
-            <div class="ticket">
-                <div class="ticket__header">
-                    <a href="#" class="ticket__code">#7463</a>
-                    <span class="ticket__category">Software</span>
-                </div>
-                <div class="ticket__title">Erro ao abrir o sistema de vendas</div>
-                <div class="ticket__footer">
-                    <span class="ticket__info">Aberto em 30/07/2025</span>
-                    <span class="ticket__status ticket__status--open">Aberto</span>
-                </div>
-            </div>
-
-            <div class="ticket">
-                <div class="ticket__header">
-                    <a href="#" class="ticket__code">#7464</a>
-                    <span class="ticket__category">Rede</span>
-                </div>
-                <div class="ticket__title">Wi-Fi instável na sala de reuniões</div>
-                <div class="ticket__footer">
-                    <span class="ticket__info">Aberto em 28/07/2025</span>
-                    <span class="ticket__status ticket__status--in-progress">Em andamento</span>
-                </div>
-            </div>
-
-            <div class="ticket">
-                <div class="ticket__header">
-                    <a href="#" class="ticket__code">#7465</a>
-                    <span class="ticket__category">Hardware</span>
-                </div>
-                <div class="ticket__title">Notebook com tela quebrada</div>
-                <div class="ticket__footer">
-                    <span class="ticket__info">Concluído em 25/07/2025</span>
-                    <span class="ticket__status ticket__status--closed">Resolvido</span>
-                </div>
-            </div>
-
-            <div class="ticket">
-                <div class="ticket__header">
-                    <a href="#" class="ticket__code">#7466</a>
-                    <span class="ticket__category">Suporte Técnico</span>
-                </div>
-                <div class="ticket__title">Configuração de e-mail não sincroniza</div>
-                <div class="ticket__footer">
-                    <span class="ticket__info">Aberto em 02/08/2025</span>
-                    <span class="ticket__status ticket__status--open">Aberto</span>
-                </div>
-            </div>
-
-            <div class="ticket">
-                <div class="ticket__header">
-                    <a href="#" class="ticket__code">#7467</a>
-                    <span class="ticket__category">Segurança</span>
-                </div>
-                <div class="ticket__title">Alerta de acesso não autorizado</div>
-                <div class="ticket__footer">
-                    <span class="ticket__info">Aberto em 01/08/2025</span>
-                    <span class="ticket__status ticket__status--in-review">Em análise</span>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- <script type="module" src="scripts/main.js"></script>
-    <script type="module" src="scripts/pages/script-client.js"></script> -->
+    <script src="../public/scripts/pages/modal.js"></script>
 </body>
 </html>
