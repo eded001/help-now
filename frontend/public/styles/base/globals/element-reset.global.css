@@ -5,8 +5,7 @@ body {
     padding: 10px;
 }
 
-button[type=button],
-button[type=submit],
+button,
 input[type=button]:hover,
 input[type=submit]:hover {
     cursor: pointer;
