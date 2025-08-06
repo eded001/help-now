@@ -12,7 +12,7 @@ body {
     padding: 10px;
     background-color: var(--color04);
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 1fr 6fr;
     gap: 10px;
     box-sizing: border-box;
 }
@@ -80,6 +80,8 @@ body {
     grid-template-rows: 1fr 4fr;
     gap: 10px;
     position: relative;
+
+    height: 100%;
 }
 
 .client__header {
@@ -113,8 +115,9 @@ body {
 .client__presentation {
     place-items: center left;
 
+    margin: 30px 0;
+
     display: grid;
-    grid-gap: 10px;
 }
 
 .client__presentation h1 {
@@ -175,7 +178,6 @@ body {
     flex-direction: column;
     gap: 16px;
     padding: 10px;
-    overflow-y: auto;
 }
 
 /* Ticket Component */
