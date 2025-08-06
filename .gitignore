@@ -17,3 +17,6 @@ apps/backend/prisma
 ## test
 test*
 test
+
+## other
+TODO.md
