@@ -76,7 +76,6 @@ body {
 /* Client Layout */
 
 .client {
-
     display: grid;
     grid-template-rows: 1fr 4fr;
     gap: 10px;
@@ -129,13 +128,12 @@ body {
 }
 
 .client__support-button {
-
     display: grid;
     place-items: center;
 }
 
 .client__support-button .support-button {
-
+    border: none;
     display: flex;
 
     justify-content: center;
