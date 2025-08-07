@@ -8,29 +8,33 @@
     <link rel="stylesheet" href="styles/base/globals/element-reset.global.css">
     <link rel="stylesheet" href="styles/layout/style-register.css">
     <link rel="shortcut icon" href="assets/images/icons/user.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../public/styles/layout/style-register.css">
 </head>
 <body>
-    <div id="image">
-        <div id="title">Help Now</div>
+    <div class="image">
+        <div class="image__title">Help Now</div>
     </div>
 
-    <div id="register-section">
-        <div id="register-title">
-            <h1>Cadastro</h1>
+    <section class="register">
+        <div class="register__header">
+            <h1 class="register__title">Cadastro</h1>
         </div>
 
-        <form method="post">
-            <div id="content">
-                <input type="text" required minlength="1" maxlength="30" id="username-user" placeholder="Digite o seu nome" autocomplete="off">
-                <input type="text" required minlength="3" maxlength="10" id="id-user" placeholder="Crie um ID" autocomplete="off">
-                <input type="password" required minlength="3" maxlength="10" id="pass-user" placeholder="Crie uma senha" autocomplete="off">
+        <form method="post" class="register__form">
+            <div class="register__content">
+                <input type="text" required minlength="3" maxlength="30" class="register__input" id="username-user"
+                    placeholder="Digite o seu nome" autocomplete="off" />
+                <input type="text" required minlength="3" maxlength="10" class="register__input" id="id-user"
+                    placeholder="Crie um ID" autocomplete="off" />
+                <input type="password" required minlength="3" maxlength="10" class="register__input" id="pass-user"
+                    placeholder="Crie uma senha" autocomplete="off" />
             </div>
 
-            <input type="submit" value="Registrar-se">
+            <input type="submit" value="Registrar-se" class="register__submit" />
 
-            <a href="/">Já sou cadastrado</a>
+            <a href="/" class="register__link">Já sou cadastrado</a>
         </form>
-    </div>
+    </section>
 
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/pages/utils/user.util.js"></script>
