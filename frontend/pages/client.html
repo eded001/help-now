@@ -14,13 +14,20 @@
 </head>
 <body>
     <section class="sidebar">
-        <h1 class="sidebar__logo">
-            <a href="#" class="sidebar__logo-title">Help Now</a>
-        </h1>
+        <div class="sidebar__header">
+            <h1 class="sidebar__header-title">DTI - SEMCULT</h1>
+            <h2 class="sidebar__header-subtitle">Central de ajuda</h2>
+        </div>
 
         <nav class="sidebar__options">
-            <a href="#" class="sidebar__option">Configurações</a>
-            <a href="#" class="sidebar__option">FAQ</a>
+            <a href="#" class="sidebar__option">Temas</a>
+            <a href="#" class="sidebar__option">Avaliação</a>
+            <a href="#" class="sidebar__option">Redefinição de senha</a>
+
+            <div class="sidebar__hr"></div>
+
+            <a href="#" class="sidebar__option">Chamados em aberto</a>
+            <a href="#" class="sidebar__option">Chamados resolvidos</a>
         </nav>
 
         <a href="#" class="sidebar__link__saiba-mais">Saiba mais</a>
@@ -32,7 +39,7 @@
 
             <div class="client__header-content">
                 <div class="client__presentation">
-                    <h1>Meus chamados</h1>
+                    <h1>Dashboard de chamados</h1>
                     <p>Este é o seu painel de acompanhamento. Visualize o status das suas solicitações, consulte
                         detalhes e registre novos chamados sempre que precisar. Nossa equipe está pronta para te
                         atender com agilidade e precisão.</p>
@@ -102,7 +109,8 @@
     <div class="modal-overlay" id="modalOverlay" style="display:none;">
         <div class="modal">
             <h2 class="modal__title">Solicitar novo chamado</h2>
-            <p class="modal__description">Preencha os detalhes do seu chamado para que nossa equipe possa atender você rapidamente.</p>
+            <p class="modal__description">Preencha os detalhes do seu chamado para que nossa equipe possa atender você
+                rapidamente.</p>
 
             <form class="modal__form" id="ticketForm">
                 <div class="form-group">
