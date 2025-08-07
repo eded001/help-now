@@ -1,19 +1,19 @@
 const supportButton = document.querySelector('.support-button');
-const modalOverlay = document.getElementById('modalOverlay');
+const modal = document.getElementById('modalOverlay');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const ticketForm = document.getElementById('ticketForm');
 
 supportButton.addEventListener('click', () => {
-    modalOverlay.style.display = 'flex';
+    modal.style.display = 'flex';
 });
 
 closeModalBtn.addEventListener('click', () => {
-    modalOverlay.style.display = 'none';
+    modal.classList.remove('show');
 });
 
-modalOverlay.addEventListener('click', (event) => {
-    if (event.target === modalOverlay) {
-        modalOverlay.style.display = 'none';
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.classList.remove('show');
     }
 });
 
