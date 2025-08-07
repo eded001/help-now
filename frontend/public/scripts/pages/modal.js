@@ -5,6 +5,9 @@ const ticketForm = document.getElementById('ticketForm');
 
 supportButton.addEventListener('click', () => {
     modal.style.display = 'flex';
+    requestAnimationFrame(() => {
+        modal.classList.add('show');
+    });
 });
 
 closeModalBtn.addEventListener('click', () => {
@@ -17,16 +20,14 @@ modal.addEventListener('click', (event) => {
     }
 });
 
-ticketForm.addEventListener('submit', (event) => {
-    event.preventDefault();
+modal.addEventListener('transitionend', () => {
+    if (!modal.classList.contains('show')) {
+        modal.style.display = 'none';
+    }
+});
 
-    const category = ticketForm.category.value.trim();
-    const title = ticketForm.title.value.trim();
-    const description = ticketForm.description.value.trim();
-
-    console.log('Chamado enviado:', { category, title, description });
-
-    alert('Chamado enviado com sucesso!');
-    ticketForm.reset();
-    modalOverlay.style.display = 'none';
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.classList.contains('show')) {
+        modal.classList.remove('show');
+    }
 });
