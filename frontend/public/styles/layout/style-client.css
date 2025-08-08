@@ -3,7 +3,7 @@
 
 body {
     display: grid;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 2fr 8fr;
     gap: 10px;
     background-color: var(--color04);
 }
@@ -24,8 +24,17 @@ body {
     padding: 10px;
 }
 
-.sidebar__title {
-    text-align: center;
+.sidebar__header {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.sidebar__header-logo-prefeitura {
+    display: block;
+    margin: auto;
 }
 
 .sidebar__header-title {
@@ -90,6 +99,8 @@ body {
     position: absolute;
     bottom: 10px;
     left: 50%;
+
+    width: 100%;
 
     font-family: var(--font-text);
 
