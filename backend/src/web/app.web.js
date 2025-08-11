@@ -25,6 +25,16 @@ router.get('/', checkAuth(validRoles), (req, res) => {
 
 // página de cadastro
 router.get('/register', (req, res) => {
+    const user = req.session.user;
+
+    console.log('register');
+    console.log(user);
+
+    if (user) {
+        req.session.userData = { role: user.role, nome: user.name };
+        return res.redirect('/');
+    }
+
     res.sendFile(path.join(__dirname, '../../../frontend/pages/register.html'));
 });
 
