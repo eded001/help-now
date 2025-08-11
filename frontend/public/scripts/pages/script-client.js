@@ -109,7 +109,7 @@ function handleSubmit(event) {
     event.preventDefault();
 
     const fields = [
-        elements.clientName,
+        elements.userName,
         elements.ticketType,
         elements.departmentSelect,
         elements.descriptionField
@@ -136,7 +136,7 @@ function handleSubmit(event) {
         id: clientId,
         host: false,
         message: {
-            name: elements.clientName.value.trim(),
+            name: elements.userName.value.trim(),
             option: elements.ticketType.value,
             department: elements.departmentSelect.value,
             description: elements.descriptionField.value.trim(),
