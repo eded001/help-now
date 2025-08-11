@@ -1,0 +1,202 @@
+@import url('../base/variables/client.variable.css');
+@import url('../base/globals/vars.global.css');
+
+/* Botão de suporte */
+.user__support-button {
+    display: grid;
+    place-items: center
+}
+
+.user__support-button .support-button {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--color10);
+    color: var(--color11);
+    font-size: 1.2em;
+    border-radius: 10px;
+    padding: 10px;
+    transition: var(--transition-hover);
+}
+
+.user__support-button .support-button:hover {
+    background-color: var(--color12);
+    color: var(--color09);
+}
+
+.user__support-button .support-button__icon {
+    font-size: 2em;
+}
+
+/* FUNDO COM BLUR */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+/* Ativa o fundo */
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+/* MODAL CENTRAL */
+.modal {
+    position: relative;
+
+    background: var(--color16);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 450px;
+    width: 90%;
+
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Quando o modal está visível */
+.modal-overlay.show .modal {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Título, descrição e estrutura do formulário */
+.modal__title {
+    text-align: center;
+    color: var(--color14);
+    font-family: var(--font-title);
+}
+
+.modal__description {
+    margin-bottom: 1.5rem;
+    color: var(--color04);
+    text-align: center;
+    font-family: var(--font-text);
+}
+
+.modal__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Inputs e campos */
+.modal__label {
+    font-family: var(--font-text-alternative);
+    font-weight: 600;
+    color: var(--color16);
+}
+
+.modal__select,
+.modal__select:valid,
+.modal__input,
+.modal__textarea,
+.modal__button--submit {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid var(--color15);
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color01);
+    color: var(--color05);
+}
+
+.modal__select,
+.modal__input::placeholder,
+.modal__textarea::placeholder,
+.modal__button--submit::placeholder {
+    color: #7E93A7;
+}
+
+*:focus {
+    outline: 2px solid var(--color08);
+}
+
+.modal__select option {
+    background-color: var(--color02);
+    color: var(--color05);
+}
+
+.modal__select option[selected] {
+    color: #a0c3e4;
+    background-color: #6a8094;
+}
+
+.modal__textarea {
+    resize: vertical;
+}
+
+.form-helper-text {
+    font-family: var(--font-text);
+    font-size: 0.875rem;
+    color: #ffffff75;
+    user-select: none;
+    margin-top: 10px;
+}
+
+
+/* Ações do formulário */
+.modal__button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal__button--submit {
+    font-size: 1.5em;
+    background-color: var(--color04);
+    color: white;
+    width: 100%;
+}
+
+.modal__button--submit:hover {
+    background-color: var(--color05);
+}
+
+.modal__button--cancel {
+    position: absolute;
+    font-size: 1.1em;
+    top: 0;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: var(--color10);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Inputs lado a lado */
+.form-group {
+    border-radius: 10px;
+
+    padding: 10px;
+    border: 1px solid var(--color09);
+
+    background-color: var(--color04);
+}

@@ -3,13 +3,13 @@ require('dotenv').config({ path: '../../.env' });
 const WebSocket = require('ws');
 
 const IP = process.env.IP;
-const PORT = process.env.WEBSOCKET_PORT;
+const PORT = process.env.PORT;
 
 const clients = new Map();
 
 module.exports = function (server) {
     const ws = new WebSocket.Server({ server });
-    
+
     ws.on('connection', socket => {
         socket.isAlive = true;
 

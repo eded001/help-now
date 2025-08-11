@@ -2,7 +2,7 @@ const { userSchema } = require('../models/user.model');
 const UserService = require('../services/user.service');
 
 module.exports = {
-    async create(req, res) {
+    async register(req, res) {
         try {
             const { error, value } = userSchema.validate(req.body);
             if (error) {

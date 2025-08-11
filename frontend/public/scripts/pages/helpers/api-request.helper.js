@@ -1,5 +1,5 @@
 async function request(endpoint, method, content = {}) {
-    const url = '/api' + endpoint;
+    const url = endpoint;
 
     const response = await fetch(url, {
         method,

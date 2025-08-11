@@ -1,0 +1,23 @@
+@import url('../base/variables/client.variable.css');
+@import url('../base/globals/vars.global.css');
+
+/* Específico do suporte */
+.sidebar__title {
+    text-align: center;
+}
+
+/* Botão nos tickets */
+.ticket__button {
+    border: none;
+    background-color: var(--color07);
+    color: var(--color01);
+    font-size: 1.2em;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.1s ease;
+}
+
+.ticket__button:hover {
+    background-color: var(--color08);
+    color: var(--color01);
+}

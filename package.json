@@ -4,7 +4,7 @@
   "description": "Help Now – Chamado rápido, resposta imediata.\r O Help Now é uma aplicação web de chamados pensada pra redes locais. Simples, leve e de fácil uso, ele conecta pontos da rede em tempo real através de um WebSocket, garantindo uma comunicação rápida e estável entre usuários e o host.",
   "scripts": {
     "dev": "nodemon",
-    "start": "cd backend && node server.js",
+    "start-server": "cd backend && node server.js",
     "start-api": "cd backend && node api.js",
     "start-websocket": "cd backend && node websocket.js",
     "generate-files": "cd tools && node generate-env.js && node generate-options.js",

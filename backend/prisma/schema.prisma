@@ -13,7 +13,7 @@ generator client {
 enum Role {
     ADMIN
     CLIENT
-    SUPPORT
+    SUPPORT 
 }
 
 // --- enums/TicketCategory.enum.prisma ---

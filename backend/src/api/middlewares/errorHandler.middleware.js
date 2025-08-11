@@ -1,5 +1,5 @@
-module.exports = {
-    errorHandler(err, req, res, next) {
+module.exports =
+    function errorHandler(err, req, res, next) {
         console.error('Erro capturado:', err);
 
         const status = err.status || 500;
@@ -7,4 +7,3 @@ module.exports = {
 
         res.status(status).json({ error: message });
     }
-}

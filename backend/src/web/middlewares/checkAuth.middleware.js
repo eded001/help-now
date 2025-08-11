@@ -1,5 +1,5 @@
-module.exports = {
-    checkAuth(allowedRoles) {
+module.exports =
+    function checkAuth(allowedRoles) {
         return (req, res, next) => {
             const user = req.session.user;
             if (!user || !allowedRoles.includes(user.role)) {
@@ -8,4 +8,3 @@ module.exports = {
             next();
         };
     }
-}

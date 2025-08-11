@@ -1,8 +1,8 @@
 const writeFile = require('../utils/file.util').writeFile;
 const getIP = require('../utils/ip.util').getLocalIPv4;
 
-module.exports = {
-    async createEnvBackend() {
+module.exports =
+    async function createEnvBackend() {
         console.log("Criando arquivo .env no backend...");
 
         try {
@@ -25,4 +25,3 @@ DATABASE_URL="file:../db/database.sqlite"`;
             console.error(`Erro ao criar arquivo .env: ${error.message}`);
         }
     }
-}

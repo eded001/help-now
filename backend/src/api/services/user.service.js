@@ -6,13 +6,13 @@ async function create({ username, name, password, role = 'CLIENT' }) {
             username,
             name,
             password,
-            role,
+            role
         },
         select: {
             id: true,
             username: true,
             role: true,
-            createdAt: true,
+            created_at: true,
         }
     });
 }

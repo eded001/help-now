@@ -4,126 +4,91 @@ body {
     background-color: var(--color01);
 }
 
-main {
+/* BLOCK */
+.login {
     position: relative;
-}
-
-main #logo {
-    position: absolute;
-
-    background: url('../../assets/images/logo-help-now.png') center center no-repeat;
-    background-size: 100%;
-
-    opacity: .50;
-
-    height: 312px;
-    width: 761px;
-}
-
-main {
     display: grid;
     place-items: center;
-
     border-radius: 20px;
     background-color: var(--color02);
 }
 
-main #login-section {
-    position: relative;
+/* ELEMENTS */
+.login__logo {
+    position: absolute;
+    background: url('../../assets/images/logo-help-now.png') center center no-repeat;
+    background-size: 100%;
+    opacity: .50;
+    height: 312px;
+    width: 761px;
+}
 
+.login__section {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
-
     padding: 50px;
-
     z-index: 1;
 }
 
-main #login-section::before {
+.login__section::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
+    inset: 0;
     background: #0000001f;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-
     z-index: -1;
 }
 
-main #login-section #user-icon {
-    --size: 150px;
-
-    height: var(--size);
-    width: var(--size);
-
-    background: url('../../assets/images/user.png') center center no-repeat;
-    background-size: 100%;
-}
-
-main #login-section form {
+.login__form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-main #login-section form #inputs {
+.login__inputs {
     display: flex;
     flex-direction: column;
-
     gap: 10px;
-
     margin-bottom: 15px;
 }
 
-main #login-section form input[type=text],
-main #login-section form input[type=password] {
+.login__input {
     border: none;
-    border-bottom: 1px solid;
-    border-width: 4px;
-    border-color: #ffffff75;
-
+    border-bottom: 4px solid #ffffff75;
     background-color: #ffffff50;
-
     font-size: 1em;
-
     padding: 10px;
-
     color: #fff;
 }
-main #login-section form input[type=text]::placeholder,
-main #login-section form input[type=password]::placeholder {
+
+.login__input::placeholder {
     color: #ffffff75;
 }
-main #login-section form input[type=submit] {
+
+.login__submit {
     border-radius: 5px;
     padding: 5px;
-
     font-size: 1.3em;
-
     background-color: #fff;
     color: var(--color02);
-
     border: none;
 }
 
-main div#login-section div#links {
+.login__links {
     display: flex;
     flex-direction: column;
-
+    align-items: center;
     gap: 10px;
 }
 
-main #login-section #links a {
+.login__link {
     font-family: Arial, Helvetica, sans-serif;
-
     color: #fff;
 }

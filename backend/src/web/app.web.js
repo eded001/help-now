@@ -1,12 +1,11 @@
 const express = require('express');
 const path = require('path');
-
 const router = express.Router();
+
 const checkAuth = require('./middlewares/checkAuth.middleware');
 
 const validRoles = ['CLIENT', 'SUPPORT', 'ADMIN'];
 
-// arquivos estáticos (HTML, CSS, JS)
 router.use(express.static(path.join(__dirname, '../../../frontend/public')));
 
 // rota principal protegida (redireciona para o HTML conforme role)
@@ -50,7 +49,7 @@ router.get('/login', (req, res) => {
 // página de configurações
 router.get('/settings', checkAuth(validRoles), (req, res) => {
     res.sendFile(path.join(__dirname, '../../../frontend/pages/settings.html'));
-})
+});
 
 // página de avaliação (aberta)
 router.get('/evaluation', (req, res) => {

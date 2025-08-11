@@ -1,6 +1,3 @@
-require('dotenv').config();
-
-const http = require('http');
 const express = require('express');
 const session = require('express-session');
 
@@ -26,7 +23,7 @@ app.use(apiApp);
 // rotas da aplicação Web
 app.use(webApp);
 
-const server = http.createServer(app);
+const server = require('http').createServer(app);
 
 websocket(server);
 
