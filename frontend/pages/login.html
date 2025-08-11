@@ -6,25 +6,25 @@
     <title>Login | Help Now</title>
     <link rel="stylesheet" href="styles/base/globals/reset.global.css">
     <link rel="stylesheet" href="styles/base/globals/element-reset.global.css">
-    <link rel="stylesheet" href="styles/layout/style-login.css">
+    <link rel="stylesheet" href="styles/layout/login.layout.css">
 </head>
 <body>
-    <main>
-        <div id="logo"></div>
+    <main class="login">
+        <div class="login__logo"></div>
 
-        <div id="login-section">
-            <form>
-                <div id="inputs">
-                    <input type="text" id="user-username" placeholder="Digite seu ID">
-                    <input type="password" id="user-password" placeholder="Digite sua senha">
+        <div class="login__section">
+            <form class="login__form">
+                <div class="login__inputs">
+                    <input type="text" class="login__input" id="user-username" placeholder="Digite seu ID">
+                    <input type="password" class="login__input" id="user-password" placeholder="Digite sua senha">
                 </div>
 
-                <input type="submit" value="Entrar">
+                <input type="submit" value="Entrar" class="login__submit">
             </form>
 
-            <div id="links">
-                <a href="/register">Quero me cadastrar</a>
-                <a href="#">Esqueci minha senha</a>
+            <div class="login__links">
+                <a href="/register" class="login__link">Quero me cadastrar</a>
+                <a href="#" class="login__link">Esqueci minha senha</a>
             </div>
         </div>
     </main>
