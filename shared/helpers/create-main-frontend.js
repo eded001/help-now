@@ -7,7 +7,7 @@ module.exports =
 
         const envInfos = {
             ip: getIP(),
-            port: 5500
+            port: 5525
         };
 
         // Geração do export de env

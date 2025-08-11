@@ -7,7 +7,7 @@ module.exports =
 
         try {
             const ip = getIP(); // pega o IP local dinamicamente
-            const port = 5500;  // valor fixo
+            const port = 5525;  // valor fixo
 
             const content = `# environment variables
 
