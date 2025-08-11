@@ -7,7 +7,7 @@
     "start-server": "cd backend && node server.js",
     "start-api": "cd backend && node api.js",
     "start-websocket": "cd backend && node websocket.js",
-    "generate-files": "cd tools && node generate-env.js && node generate-options.js",
+    "init": "node init.js && cd backend && npx prisma migrate dev --name init && npx prisma generate",
     "prisma-studio": "npx prisma studio --schema backend/prisma/schema.prisma"
   },
   "repository": {
