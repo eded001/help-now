@@ -3,7 +3,7 @@ const userNameInput = document.querySelector("#username-user");
 const userUsernameInput = document.querySelector("#id-user");
 const userPasswordInput = document.querySelector("#pass-user");
 
-import { register } from "./utils/user.util.js";
+import { register, login } from "./utils/user.util.js";
 
 form.addEventListener('submit', event => {
     event.preventDefault();
@@ -20,7 +20,13 @@ form.addEventListener('submit', event => {
     } else {
         register(user).then(response => {
             if (response.success) {
-                window.location.href = '/';
+                login(user).then(response => {
+                    if (response.success) {
+                        window.location.href = '/';
+                    }
+                }).catch(error => {
+                    console.error(error);
+                });
             }
         }).catch(error => {
             console.error(error);
