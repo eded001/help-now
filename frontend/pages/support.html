@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Client | Help Now</title>
-    <!-- <link rel="stylesheet" href="styles/base/globals/reset.global.css" />
-        <link rel="stylesheet" href="../public/styles/base/globals/element-reset.global.css">
-        <link rel="stylesheet" href="styles/layout/style-client.css" /> -->
-    <link rel="shortcut icon" href="./assets/images/avatar.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../public/styles/base/globals/reset.global.css" />
-    <link rel="stylesheet" href="../public/styles/base/globals/element-reset.global.css" />
-    <link rel="stylesheet" href="../public/styles/layout/style-support.css" />
+    <title>Suporte | Help Now</title>
+    <link rel="shortcut icon" href="assets/images/avatar.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/base/globals/reset.global.css" />
+    <link rel="stylesheet" href="styles/base/globals/element-reset.global.css">
+    <link rel="stylesheet" href="styles/layout/ui/user.ui.css">
+    <link rel="stylesheet" href="styles/layout/support.layout.css">
 </head>
 <body>
     <section class="sidebar">
         <div class="sidebar__header">
-            <img src="../public/assets/images/logo_prefeitura_negativa_vertical.png"
-                class="sidebar__header-logo-prefeitura" />
+            <div class="sidebar__header__logo">
+                <img src="/assets/images/logo_prefeitura_negativa_vertical.png"
+                    class="sidebar__header-logo-prefeitura" />
+                <div class="sidebar__header_block"></div>
+            </div>
 
             <div class="sidebar__header_title">
                 <h1 class="sidebar__header-title">DTI SEMCULT</h1>
@@ -25,27 +26,29 @@
         </div>
 
         <nav class="sidebar__options">
-            <a href="#" class="sidebar__option">Temas</a>
-            <a href="#" class="sidebar__option">Avaliação</a>
-            <a href="#" class="sidebar__option">Redefinição de senha</a>
+            <button class="sidebar__option">Temas</button>
+            <button class="sidebar__option">Avaliação</button>
+            <button class="sidebar__option">Redefinição de senha</button>
 
             <div class="sidebar__hr"></div>
 
-            <a href="#" class="sidebar__option">Dashboard</a>
+            <button class="sidebar__option">Dashboard</button>
             <!-- TODO: link para uma tabela dos chamados -->
-            <a href="#" class="sidebar__option">Resumo</a>
+            <button class="sidebar__option">Resumo</button>
         </nav>
 
-        <!-- <a href="#" class="sidebar__link__saiba-mais">Saiba mais</a> -->
-        <a href="#" class="sidebar__link__saiba-mais">Projetado e desenvolvido por Edgar Souza</a>
+        <div class="sidebar__section__links-about">
+            <p>Desenvolvido por <a href="https://github.com/eded001">Edgar Souza</a></p>
+            <a href="#" class="sidebar__link__saiba-mais">Saiba mais</a>
+        </div>
     </section>
 
-    <main class="client">
-        <div class="client__header">
-            <div class="client__greeting">Olá, `${username.firstName} ${username.lastName}`</div>
+    <main class="user">
+        <div class="user__header">
+            <div class="user__greeting">Olá, <span id="name-user">Edgar</span></div>
 
-            <div class="client__header-content">
-                <div class="client__presentation">
+            <div class="user__header-content">
+                <div class="user__presentation">
                     <h1>Dashboard de suporte</h1>
                     <p>Bem-vindo ao seu painel de suporte. Aqui você acompanha em tempo real o andamento dos seus
                         chamados, visualiza históricos, acessa detalhes técnicos e
@@ -56,7 +59,7 @@
             </div>
         </div>
 
-        <div class="client__tickets">
+        <div class="user__tickets">
             <div class="ticket">
                 <div class="ticket__header">
                     <a href="#" class="ticket__code">#7463</a>
@@ -106,47 +109,6 @@
             </div>
         </div>
     </main>
-
-    <!-- Modal -->
-    <div class="modal-overlay" id="modalOverlay" style="display:none;">
-        <div class="modal">
-            <h2 class="modal__title">Solicitar novo chamado</h2>
-            <p class="modal__description">Preencha os detalhes do seu chamado para que nossa equipe possa atender você
-                rapidamente.</p>
-
-            <form class="modal__form" id="ticketForm">
-                <div class="form-group">
-                    <label class="modal__label" for="category">Categoria</label>
-                    <select class="modal__select" id="category" name="category" required>
-                        <option value="" disabled selected>Selecione uma categoria</option>
-                        <option value="Software">Problema com Software</option>
-                        <option value="Rede">Problema de Rede/Internet</option>
-                        <option value="Hardware">Problema com Equipamento</option>
-                        <option value="Suporte Técnico">Dúvida ou Suporte Geral</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="modal__label" for="title">Título do chamado</label>
-                    <input class="modal__input" type="text" id="title" name="title"
-                        placeholder="Ex: Não consigo imprimir na impressora da recepção" required />
-                    <p class="form-helper-text">Seja breve e direto.</p>
-                </div>
-
-                <div class="form-group">
-                    <label class="modal__label" for="description">Descrição</label>
-                    <textarea class="modal__textarea" id="description" name="description" rows="5"
-                        placeholder="Descreva o problema com o máximo de detalhes possível. O que você tentou fazer? Qual foi a mensagem de erro?"
-                        required></textarea>
-                </div>
-
-                <div class="form-actions">
-                    <button class="modal__button modal__button--cancel" type="button" id="closeModalBtn">X</button>
-                    <button class="modal__button modal__button--submit" type="submit">Criar chamado</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <script src="../public/scripts/pages/modal.js"></script>
 </body>

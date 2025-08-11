@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro | Help Now</title>
+    <link rel="shortcut icon" href="assets/images/icons/user.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles/base/globals/reset.global.css">
     <link rel="stylesheet" href="styles/base/globals/element-reset.global.css">
-    <link rel="stylesheet" href="styles/layout/style-register.css">
-    <link rel="shortcut icon" href="assets/images/icons/user.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../public/styles/layout/style-register.css">
+    <link rel="stylesheet" href="styles/layout/register.layout.css">
 </head>
 <body>
     <div class="image">
@@ -21,7 +20,7 @@
         </div>
 
         <form method="post" class="register__form">
-            <div class="register__content">
+            <div class="register__fields">
                 <input type="text" required minlength="3" maxlength="30" class="register__input" id="username-user"
                     placeholder="Digite o seu nome" autocomplete="off" />
                 <input type="text" required minlength="3" maxlength="10" class="register__input" id="id-user"
@@ -30,14 +29,14 @@
                     placeholder="Crie uma senha" autocomplete="off" />
             </div>
 
-            <input type="submit" value="Registrar-se" class="register__submit" />
+            <input type="submit" value="Registrar-se" class="register__button" />
 
             <a href="/" class="register__link">Já sou cadastrado</a>
         </form>
     </section>
 
     <script type="module" src="scripts/main.js"></script>
-    <script type="module" src="scripts/pages/utils/user.util.js"></script>
     <script type="module" src="scripts/pages/script-register.js"></script>
+    <script type="module" src="scripts/pages/utils/user.util.js"></script>
 </body>
 </html>
