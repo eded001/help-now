@@ -16,7 +16,7 @@ module.exports = {
             req.session.user = userWithoutPassword;
 
             res.status(201).json({
-                message: "Usuário criado com sucesso!",
+                success: true,
                 user: userWithoutPassword
             });
         } catch (error) {
