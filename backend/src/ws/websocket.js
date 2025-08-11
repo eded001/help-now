@@ -5,7 +5,7 @@ const WebSocket = require('ws');
 const IP = process.env.IP;
 const PORT = process.env.PORT;
 
-const clients = new Map();
+const users = new Map();
 
 module.exports = function (server) {
     const ws = new WebSocket.Server({ server });
@@ -18,12 +18,12 @@ module.exports = function (server) {
         });
 
         const interval = setInterval(() => {
-            ws.clients.forEach(client => {
-                if (!client.isAlive) {
-                    return client.terminate();
+            ws.users.forEach(user => {
+                if (!user.isAlive) {
+                    return user.terminate();
                 }
-                client.isAlive = false;
-                client.ping();
+                user.isAlive = false;
+                user.ping();
             });
         }, 5000); // verifica a cada 5s
 
@@ -49,14 +49,14 @@ module.exports = function (server) {
                 const sessionId = msg.session || 'no-session-id';
 
                 // Remove duplicata se já existir
-                if (clients.has(id)) {
+                if (users.has(id)) {
                     console.warn(`ID duplicado detectado (${id}), substituindo conexão antiga`);
-                    const oldClient = clients.get(id);
+                    const oldClient = users.get(id);
                     oldClient.socket.close(); // Fecha a conexão anterior
-                    clients.delete(id);
+                    users.delete(id);
                 }
 
-                clients.set(id, { socket, isHost, sessionId });
+                users.set(id, { socket, isHost, sessionId });
 
                 console.info(`[INIT] ${isHost ? 'Host' : 'Cliente'} identificado como '${id}'`);
                 console.info(`[Sessão] ${sessionId}`);
@@ -65,14 +65,14 @@ module.exports = function (server) {
 
             // Cliente enviando mensagem para host
             if (msg.type === 'message' && msg.message && msg.id) {
-                const clientEntry = clients.get(msg.id);
+                const clientEntry = users.get(msg.id);
 
                 if (!clientEntry || clientEntry.isHost) {
                     console.warn(`Mensagem rejeitada de ${msg.id}: ID não encontrado ou é host`);
                     return;
                 }
 
-                const hostEntry = [...clients.entries()].find(([_, entry]) => entry.isHost);
+                const hostEntry = [...users.entries()].find(([_, entry]) => entry.isHost);
 
                 if (hostEntry && hostEntry[1].socket.readyState === WebSocket.OPEN) {
                     const fullMsg = {
@@ -105,7 +105,7 @@ module.exports = function (server) {
                     return;
                 }
 
-                const clientEntry = clients.get(msg.to);
+                const clientEntry = users.get(msg.to);
                 if (clientEntry?.socket.readyState === WebSocket.OPEN) {
                     clientEntry.socket.send(JSON.stringify({
                         type: 'host-confirmation',
@@ -126,7 +126,7 @@ module.exports = function (server) {
                     return;
                 }
 
-                const clientEntry = clients.get(msg.to);
+                const clientEntry = users.get(msg.to);
                 if (clientEntry?.socket.readyState === WebSocket.OPEN) {
                     clientEntry.socket.send(JSON.stringify({
                         type: 'host-busy',
@@ -146,8 +146,8 @@ module.exports = function (server) {
         socket.on('close', () => {
             clearInterval(interval);
 
-            if (id && clients.has(id)) {
-                clients.delete(id);
+            if (id && users.has(id)) {
+                users.delete(id);
                 console.log(`${isHost ? 'Host' : 'Cliente'} '${id}' desconectado e removido`);
             } else {
                 console.log('Cliente não identificado foi desconectado');
