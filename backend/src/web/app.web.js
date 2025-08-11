@@ -6,43 +6,40 @@ const checkAuth = require('./middlewares/checkAuth.middleware');
 
 const validRoles = ['CLIENT', 'SUPPORT', 'ADMIN'];
 
+// arquivos estáticos
 router.use(express.static(path.join(__dirname, '../../../frontend/public')));
 
-// rota principal protegida (redireciona para o HTML conforme role)
+// rota principal protegida
 router.get('/', checkAuth(validRoles), (req, res) => {
-    const { role, name } = req.session.user;
-
-    req.session.message = `Bem-vindo, ${role.toLowerCase()}!`;
-    req.session.userData = { role, nome: name };
+    const { role } = req.session.user;
 
     if (role === 'SUPPORT') {
         return res.sendFile(path.join(__dirname, '../../../frontend/pages/support.html'));
     }
-
     if (role === 'ADMIN') {
         return res.sendFile(path.join(__dirname, '../../../frontend/pages/admin-login.html'));
     }
 
-    // default CLIENT
     return res.sendFile(path.join(__dirname, '../../../frontend/pages/client.html'));
 });
 
-// página de cadastro (aberta)
+// página de cadastro
 router.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, '../../../frontend/pages/register.html'));
 });
 
-// página de login (aberta)
+// página de login
 router.get('/login', (req, res) => {
     const user = req.session.user;
 
-    if (user && user.role) {
-        req.session.message = `Bem-vindo, ${user.username}!`;
+    console.log('login');
+    console.log(user);
+
+    if (user) {
         req.session.userData = { role: user.role, nome: user.name };
         return res.redirect('/');
     }
 
-    // não autenticado
     return res.sendFile(path.join(__dirname, '../../../frontend/pages/login.html'));
 });
 
@@ -51,18 +48,17 @@ router.get('/settings', checkAuth(validRoles), (req, res) => {
     res.sendFile(path.join(__dirname, '../../../frontend/pages/settings.html'));
 });
 
-// página de avaliação (aberta)
+// página de avaliação
 router.get('/evaluation', (req, res) => {
     res.sendFile(path.join(__dirname, '../../../frontend/pages/evaluation.html'));
 });
 
-// informações de sessão (protegida)
+// informações de sessão
 router.get('/session-info', checkAuth(validRoles), (req, res) => {
     res.json({
         name: req.session.user.name,
         role: req.session.user.role,
-        message: req.session.message || null,
-        userData: req.session.userData || {},
+        userData: req.session.userData || {}
     });
 });
 
