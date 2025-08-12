@@ -9,8 +9,8 @@ module.exports = {
                 return res.status(400).json({ error: error.details[0].message });
             }
 
-            const { username, name, password, role } = value;
-            const newUser = await UserService.create({ username, name, password, role });
+            const { username, name, password, department, role } = value;
+            const newUser = await UserService.create({ username, name, password, department, role });
 
             const { password: _, ...userWithoutPassword } = newUser;
             req.session.user = userWithoutPassword;

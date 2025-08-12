@@ -13,7 +13,7 @@ generator client {
 enum Role {
     ADMIN
     CLIENT
-    SUPPORT 
+    SUPPORT
 }
 
 // --- enums/TicketCategory.enum.prisma ---
@@ -46,7 +46,7 @@ model User {
     name       String
     username   String   @unique
     password   String
-    department String   @default("General")
+    department String
     role       Role     @default(CLIENT)
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt

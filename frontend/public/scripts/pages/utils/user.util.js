@@ -1,8 +1,8 @@
 import { request } from "../helpers/api-request.helper.js";
 
-async function register({ username, name, password }) {
+async function register({ username, name, password, department }) {
     try {
-        return await request('/api/users/register', 'POST', { username, name, password });
+        return await request('/api/users/register', 'POST', { username, name, password, department });
     } catch (error) {
         console.error('Erro no registro:', error);
         throw error;
