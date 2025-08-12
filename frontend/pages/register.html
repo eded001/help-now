@@ -27,6 +27,9 @@
                     placeholder="Crie um ID" autocomplete="off" />
                 <input type="password" required minlength="3" maxlength="10" class="register__input" id="pass-user"
                     placeholder="Crie uma senha" autocomplete="off" />
+                <select class="register__modal__select" id="department-user" required>
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                </select>
             </div>
 
             <input type="submit" value="Registrar-se" class="register__button" />
@@ -37,6 +40,7 @@
 
     <script type="module" src="scripts/main.js"></script>
     <script type="module" src="scripts/pages/script-register.js"></script>
+    <script type="module" src="scripts/pages/renderOptions.script.js"></script>
     <script type="module" src="scripts/pages/utils/user.util.js"></script>
 </body>
 </html>

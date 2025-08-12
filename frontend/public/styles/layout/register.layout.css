@@ -108,6 +108,23 @@ body {
     border: none;
 }
 
+.register__modal__select {
+    border: none;
+    border-bottom: 4px solid #ffffff75;
+    background-color: #ffffff50;
+    color: #fff;
+    font-size: 1em;
+    padding: 10px;
+}
+
+.register__modal__select option {
+    background-color: #ffffff50;
+    color: #000;
+}
+.register__modal__select option[disabled] {
+    color: #00000050;
+}
+
 .register__link {
     font-family: Arial, Helvetica, sans-serif;
     color: var(--color04);
