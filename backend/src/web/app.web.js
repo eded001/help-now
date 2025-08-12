@@ -27,9 +27,6 @@ router.get('/', checkAuth(validRoles), (req, res) => {
 router.get('/register', (req, res) => {
     const user = req.session.user;
 
-    console.log('register');
-    console.log(user);
-
     if (user) {
         req.session.userData = { role: user.role, nome: user.name };
         return res.redirect('/');
@@ -41,9 +38,6 @@ router.get('/register', (req, res) => {
 // página de login
 router.get('/login', (req, res) => {
     const user = req.session.user;
-
-    console.log('login');
-    console.log(user);
 
     if (user) {
         req.session.userData = { role: user.role, nome: user.name };
