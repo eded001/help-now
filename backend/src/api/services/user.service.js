@@ -1,5 +1,6 @@
 const prisma = require('../../../prisma/client');
 
+// criar usuário
 async function create({ username, name, password, department, role = 'CLIENT' }) {
     return prisma.user.create({
         data: {
@@ -20,6 +21,7 @@ async function create({ username, name, password, department, role = 'CLIENT' })
     });
 }
 
+// encontrar usuário por nome
 async function findByUsername(username) {
     return prisma.user.findUnique({ where: { username } });
 }
