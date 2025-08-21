@@ -1,12 +1,12 @@
 // --- datasource ---
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
 }
 
 // --- generator ---
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 // --- enums/Roles.enum.prisma ---

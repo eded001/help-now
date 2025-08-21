@@ -1,14 +1,15 @@
 const express = require('express');
 const session = require('express-session');
+require('dotenv').config({ path: '../../.env' });
 
 const webApp = require('./src/web/app.web'); // rotas web
 const apiApp = require('./src/api/app.api'); // rotas API
-const websocket = require('./src/ws/websocket'); // websocket
+const createWebSocketServer = require('./src/ws'); // agora aponta pro index.js
 
 const app = express();
 
 app.use(session({
-    secret: 'default-secret', // process.env.SECRET_KEY
+    secret: 'default-secret', // ideal usar process.env.SECRET_KEY
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -25,9 +26,10 @@ app.use(webApp);
 
 const server = require('http').createServer(app);
 
-websocket(server);
-
 const { IP, PORT } = process.env;
+
+// cria o servidor WebSocket em cima do mesmo HTTP
+createWebSocketServer(server, { ip: IP, port: PORT });
 
 server.listen(PORT, () => {
     console.log(`> Network: http://${IP}:${PORT}`);

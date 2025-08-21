@@ -97,9 +97,6 @@ function handleWebSocketMessage(event) {
             elements.cancelButton.disabled = true;
             updateStatus("Suporte a caminho!", "#1dc42b", true);
             break;
-        case 'host-busy':
-            updateStatus("Os técnicos estão ocupados, aguarde alguns instantes", "#c4441d", true);
-            break;
         default:
             console.log('Mensagem do servidor: ', response);
     }

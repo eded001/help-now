@@ -1,6 +1,7 @@
-import { departments } from "../main.js";
+import { departments, problems } from "../main.js";
 
-const selectElement = document.querySelector("#department-user");
+const selectElementDepartments = document.querySelector("#department-user");
+const selectElementProblems = document.querySelector("#category-problem");
 
 document.addEventListener('DOMContentLoaded', () => {
     const defaultOption = document.createElement('option');
@@ -10,6 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const option = document.createElement('option');
         option.value = key;
         option.textContent = value;
-        selectElement.appendChild(option);
+        selectElementDepartments.appendChild(option);
     }
 });

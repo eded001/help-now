@@ -77,14 +77,6 @@ function handleIncomingMessage(event) {
         console.error("Erro ao ler chamados do localStorage:", error);
     }
 
-    if (busy) {
-        sendMessage({
-            type: 'host-busy',
-            to: id,
-            message: "Pera aí rapidola que ele tá ocupado agora"
-        });
-    }
-
     if (!content || !id) {
         console.warn('Mensagem inesperada ou mal formatada: ', event.data);
         return;
