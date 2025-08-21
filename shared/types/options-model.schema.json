@@ -1,9 +1,20 @@
 {
     "departments": {},
     "problems": {
-        "activation-recurse": "Ativação de recurso",
-        "bug": "Bug",
-        "sharing-recurse": "Compartilhamento de recurso",
-        "technical": "Técnico"
+        "feature-activation": "Solicitação ou problema na ativação de recurso",
+        "feature-sharing": "Solicitação ou problema no compartilhamento de recurso",
+        "technical-issue": "Problema técnico geral",
+        "software-issue": "Erro ou mau funcionamento de software",
+        "hardware-issue": "Defeito ou falha física em equipamento",
+        "network-issue": "Problema de conectividade ou rede",
+        "general-support": "Dúvida ou solicitação de suporte geral",
+        "security-incident": "Incidente ou vulnerabilidade de segurança",
+        "data-loss": "Perda, exclusão ou corrupção de dados",
+        "system-configuration": "Erro ou dificuldade na configuração de sistemas ou dispositivos",
+        "system-integration": "Problema na integração entre sistemas ou serviços",
+        "system-update": "Falha ou erro durante atualização de software ou sistema",
+        "system-performance": "Baixa performance ou lentidão no sistema",
+        "access-issue": "Problema de autenticação ou acesso a sistemas",
+        "backup-issue": "Solicitação ou problema relacionado a backup"
     }
 }
