@@ -14,13 +14,56 @@ body {
 }
 
 /* ELEMENTS */
-.login__logo {
+/* logo */
+.logo {
     position: absolute;
-    background: url('../../assets/images/logo-help-now.png') center center no-repeat;
-    background-size: 100%;
-    opacity: .50;
-    height: 312px;
-    width: 761px;
+    border-radius: 20px;
+    background-color: var(--color02);
+
+    border: 1px solid red;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 100%;
+
+    user-select: none;
+}
+
+.logo__image {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+
+    height: 20vmin;
+    width: 20vmin;
+
+    background-color: var(--color04);
+
+    -webkit-mask: url("../../assets/images/logo-prefeitura.png") no-repeat center / contain;
+    mask: url("../../assets/images/logo-prefeitura.png") no-repeat center / contain;
+
+    pointer-events: none;
+
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo__title {
+    display: flex;
+    text-align: center;
+    padding: 5px;
+    font-size: 5rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: var(--color04);
+}
+
+.logo__subtitle {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2rem;
+    color: var(--color05);
 }
 
 .login__section {
