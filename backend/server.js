@@ -4,7 +4,7 @@ require('dotenv').config({ path: '../../.env' });
 
 const webApp = require('./src/web/app.web'); // rotas web
 const apiApp = require('./src/api/app.api'); // rotas API
-const createWebSocketServer = require('./src/ws'); // agora aponta pro index.js
+const createWebSocketServer = require('./src/ws/app.websocket');
 
 const app = express();
 

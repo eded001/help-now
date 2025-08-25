@@ -27,7 +27,7 @@ module.exports =
         const content = `${envExport}\n\n${departmentsExport}\n\n${problemsExport}`;
 
         try {
-            await writeFile('../../frontend/public/scripts', 'main.js', content);
+            await writeFile('../../frontend/public/scripts/constants', 'main.constant.js', content);
             console.log('Arquivo main.js criado com sucesso!\n');
         } catch (error) {
             console.error(`Erro ao criar arquivo main.js: ${error.message}`);

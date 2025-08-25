@@ -5,7 +5,7 @@ package-lock.json
 # app
 
 ## frontend
-main.js
+main.constant.js
 
 ## backend
 .env

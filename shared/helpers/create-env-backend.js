@@ -15,7 +15,7 @@ module.exports =
 IP=${ip}
 PORT=${port}
 
-# db
+## db
 DATABASE_URL="file:../db/database.sqlite"`;
 
             await writeFile('../../backend', '.env', content);
