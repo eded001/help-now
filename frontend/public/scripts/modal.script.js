@@ -1,7 +1,8 @@
 const supportButton = document.querySelector('.support-button');
-const modal = document.getElementById('modalOverlay');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const ticketForm = document.getElementById('ticketForm');
+const modal = document.querySelector('#modalOverlay');
+const closeModalBtn = document.querySelector('#closeModalBtn');
+const submitModalBtn = document.querySelector('#submitModalBtn');
+const ticketForm = document.querySelector('#ticketForm');
 
 supportButton.addEventListener('click', () => {
     modal.style.display = 'flex';
@@ -14,7 +15,11 @@ closeModalBtn.addEventListener('click', () => {
     modal.classList.remove('show');
 });
 
-modal.addEventListener('click', (event) => {
+submitModalBtn.addEventListener('click', () => {
+    modal.classList.remove('show');
+});
+
+modal.addEventListener('click', event => {
     if (event.target === modal) {
         modal.classList.remove('show');
     }
