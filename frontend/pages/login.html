@@ -14,31 +14,33 @@
     <link rel="stylesheet" href="../../frontend/public/styles/layout/login.layout.css"> -->
 </head>
 <body>
-    <main class="login">
+    <section class="login">
         <div class="logo">
             <div class="logo__image"></div>
-
-            <div class="logo__title">DTI SEMCULT</div>
-            <div class="logo__subtitle">Central de ajuda</div>
+            <h1 class="logo__title">DTI SEMCULT</h1>
+            <h2 class="logo__subtitle">Central de ajuda</h2>
         </div>
-
 
         <div class="login__section">
+            <div class="login__header">
+                <h1 class="login__title">Acesse sua conta</h1>
+            </div>
+
             <form class="login__form">
-                <div class="login__inputs">
-                    <input type="text" class="login__input" id="user-username" placeholder="Digite seu ID">
-                    <input type="password" class="login__input" id="user-password" placeholder="Digite sua senha">
+                <div class="login__fields">
+                    <input type="text" class="login__input" id="user-username" placeholder="Digite seu ID" required value="edgar_test">
+                    <input type="password" class="login__input" id="user-password" placeholder="Digite sua senha" autocomplete="current-password" required value="senha123">
                 </div>
 
-                <input type="submit" value="Entrar" class="login__submit">
-            </form>
+                <input type="submit" value="Entrar" class="login__button">
 
-            <div class="login__links">
-                <a href="/register" class="login__link">Quero me cadastrar</a>
-                <a href="#" class="login__link">Esqueci minha senha</a>
-            </div>
+                <div class="login__links">
+                    <a href="/register" class="login__link">Quero me cadastrar</a>
+                    <a href="#" class="login__link">Esqueci minha senha</a>
+                </div>
+            </form>
         </div>
-    </main>
+    </section>
 
     <script type="module" src="./scripts/login.script.js"></script>
 </body>

@@ -9,14 +9,19 @@
     <link rel="stylesheet" href="styles/base/globals/element-reset.global.css">
     <link rel="stylesheet" href="styles/layout/ui/user.ui.css">
     <link rel="stylesheet" href="styles/layout/support.layout.css">
-</head>
+    <link rel="stylesheet" href="styles/base/animations/slide-in-right.animation.css" />
+
+    <!-- <link rel="stylesheet" href="../../frontend/public/styles/base/globals/reset.global.css" />
+    <link rel="stylesheet" href="../../frontend/public/styles/base/globals/element-reset.global.css">
+    <link rel="stylesheet" href="../../frontend/public/styles/layout/ui/user.ui.css">
+    <link rel="stylesheet" href="../../frontend/public/styles/layout/support.layout.css">
+    <link rel="stylesheet" href="../../frontend/public/styles/base/animations/slide-in-right.animation.css" /> -->
+    </head>
 <body>
     <section class="sidebar">
         <div class="sidebar__header">
             <div class="sidebar__header__logo">
-                <img src="/assets/images/logo_prefeitura_negativa_vertical.png"
-                    class="sidebar__header-logo-prefeitura" />
-                <div class="sidebar__header_block"></div>
+                <div class="sidebar__header-logo-prefeitura"></div>
             </div>
 
             <div class="sidebar__header_title">
@@ -45,11 +50,11 @@
 
     <main class="user">
         <div class="user__header">
-            <div class="user__greeting">Olá, <span id="name-user">Edgar</span></div>
+            <div class="user__greeting slide-in-right">Olá, <span id="name-user"></span><span id="logout"></span></div>
 
             <div class="user__header-content">
                 <div class="user__presentation">
-                    <h1>Dashboard de suporte</h1>
+                    <h1>Dashboard do suporte</h1>
                     <p>Bem-vindo ao seu painel de suporte. Aqui você acompanha em tempo real o andamento dos seus
                         chamados, visualiza históricos, acessa detalhes técnicos e
                         registra novas solicitações com praticidade. Tudo em um só lugar, com transparência, organização
@@ -64,6 +69,8 @@
                 <div class="ticket__header">
                     <a href="#" class="ticket__code">#7463</a>
                     <span class="ticket__category">Software</span>
+                    <span class="ticket__separator">|</span>
+                    <span class="ticket__name-user">Sei la</span>
                 </div>
                 <div class="ticket__title">Erro ao abrir o sistema de vendas</div>
                 <div class="ticket__footer">
@@ -110,6 +117,8 @@
         </div>
     </main>
 
-    <script src="../public/scripts/pages/modal.js"></script>
+    <script type="module" src="./scripts/support.script.js"></script>
+    <script type="module" src="./scripts/logout.script.js"></script>
+    <!-- <script type="module" src="../public/scripts/support.script.js"></script> -->
 </body>
 </html>

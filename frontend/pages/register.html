@@ -12,35 +12,37 @@
     <link rel="stylesheet" href="../../frontend/public/styles/layout/register.layout.css"> -->
 </head>
 <body>
-    <div class="logo">
-        <div class="logo__image"></div>
-
-        <div class="logo__title">DTI SEMCULT</div>
-        <div class="logo__subtitle">Central de ajuda</div>
-    </div>
-
     <section class="register">
-        <div class="register__header">
-            <h1 class="register__title">Cadastro</h1>
+        <div class="logo">
+            <div class="logo__image"></div>
+
+            <h1 class="logo__title">DTI SEMCULT</h1>
+            <h2 class="logo__subtitle">Central de ajuda</h2>
         </div>
 
-        <form method="post" class="register__form">
-            <div class="register__fields">
-                <input type="text" required minlength="3" maxlength="30" class="register__input" id="username-user"
-                    placeholder="Digite o seu nome" autocomplete="off" />
-                <input type="text" required minlength="3" maxlength="10" class="register__input" id="id-user"
-                    placeholder="Crie um ID" autocomplete="off" />
-                <input type="password" required minlength="3" maxlength="10" class="register__input" id="pass-user"
-                    placeholder="Crie uma senha" autocomplete="off" />
-                <select class="register__modal__select" id="department-user" required>
-                    <option value="" disabled selected>Selecione uma categoria</option>
-                </select>
+        <div class="register__section">
+            <div class="register__header">
+                <h1 class="register__title">Crie sua conta</h1>
             </div>
 
-            <input type="submit" value="Registrar-se" class="register__button" />
+            <form method="post" class="register__form">
+                <div class="register__fields">
+                    <input type="text" required minlength="3" maxlength="30" class="register__input" id="username-user" value="Edgar Souza"
+                        placeholder="Nome completo" autocomplete="off" />
+                    <input type="text" required minlength="3" maxlength="10" class="register__input" id="id-user" value="edgar"
+                        placeholder="Crie um ID" autocomplete="off" />
+                    <input type="password" required minlength="3" maxlength="10" class="register__input" id="pass-user" value="senha123"
+                        placeholder="Crie uma senha" autocomplete="off" />
+                    <select class="register__modal__select" id="department-user" required>
+                        <option value="" disabled selected>Selecione uma departamento</option>
+                    </select>
+                </div>
 
-            <a href="/" class="register__link">Já sou cadastrado</a>
-        </form>
+                <input type="submit" value="Registrar-se" class="register__button" />
+
+                <a href="/" class="register__link">Já sou cadastrado</a>
+            </form>
+        </div>
     </section>
 
     <!-- <script type="module" src="../public/scripts/register.script.js"></script> -->
