@@ -15,10 +15,7 @@ module.exports = {
             const { password: _, ...userWithoutPassword } = newUser;
             req.session.user = userWithoutPassword;
 
-            res.status(201).json({
-                success: true,
-                user: userWithoutPassword
-            });
+            res.status(201).json({ success: true });
         } catch (error) {
             if (error.code === 'P2002') {
                 return res.status(409).json({ error: 'Username já existe.' });
@@ -49,7 +46,7 @@ module.exports = {
             const { password: _, ...userWithoutPassword } = user;
             req.session.user = userWithoutPassword;
 
-            res.json({ success: true, user: userWithoutPassword });
+            res.status(201).json({ success: true });
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Erro interno.' });
@@ -64,11 +61,21 @@ module.exports = {
             }
 
             res.clearCookie('connect.sid');
-            res.json({ success: true });
+            res.status(201).json({ success: true });
         });
     },
 
     async authCheck(req, res) {
-        return res.json({ authenticated: true, user: req.session.user });
-    },
+        if (req.session && req.session.user) {
+            return res.json({
+                authenticated: true,
+                user: req.session.user
+            });
+        } else {
+            return res.status(401).json({
+                authenticated: false,
+                error: 'Usuário não autenticado.'
+            });
+        }
+    }
 };
