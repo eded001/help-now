@@ -7,7 +7,13 @@ import { login, checkAuth } from "./utils/user.util.js";
 document.addEventListener('DOMContentLoaded', async () => {
     const response = await checkAuth();
 
+    if (response.status === 401) {
+        console.warn('Usuário não autenticado');
+        return;
+    }
+
     const { authenticated } = await response.json();
+
 
     if (authenticated) {
         window.location.href = '/';

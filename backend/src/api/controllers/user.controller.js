@@ -67,7 +67,7 @@ module.exports = {
 
     async authCheck(req, res) {
         if (req.session && req.session.user) {
-            return res.json({
+            return res.status(200).json({
                 authenticated: true,
                 user: req.session.user
             });
