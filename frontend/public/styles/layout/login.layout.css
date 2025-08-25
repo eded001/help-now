@@ -1,126 +1,124 @@
-@import url('../base/variables/register.variable.css');
+@import url('../base/variables/client.variable.css');
 
 body {
-    background-color: var(--color01);
-}
-
-/* BLOCK */
-.login {
-    position: relative;
     display: grid;
     place-items: center;
-    border-radius: 20px;
-    background-color: var(--color02);
+    background-color: var(--color04);
 }
 
-/* ELEMENTS */
+.login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 /* logo */
 .logo {
-    position: absolute;
-    border-radius: 20px;
-    background-color: var(--color02);
+    position: relative;
 
-    border: 1px solid red;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: 2px solid var(--color11);
+
+    background-color: var(--color03);
 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 
-    height: 100%;
+    padding: 50px;
 
     user-select: none;
 }
 
 .logo__image {
-    position: absolute;
-    bottom: 25px;
-    left: 25px;
+    height: 30vmin;
+    width: 30vmin;
 
-    height: 20vmin;
-    width: 20vmin;
-
-    background-color: var(--color04);
+    background-color: var(--color05);
 
     -webkit-mask: url("../../assets/images/logo-prefeitura.png") no-repeat center / contain;
     mask: url("../../assets/images/logo-prefeitura.png") no-repeat center / contain;
 
     pointer-events: none;
-
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .logo__title {
     display: flex;
     text-align: center;
     padding: 5px;
-    font-size: 5rem;
+    font-size: 3rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: var(--color04);
+    color: var(--color05);
 }
 
 .logo__subtitle {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 2rem;
-    color: var(--color05);
+    font-size: 1.5rem;
+    color: var(--color04);
 }
 
+/* login section */
 .login__section {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
     padding: 50px;
-    z-index: 1;
+
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left: 2px solid var(--color11);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+
+    background-color: var(--color02);
 }
 
-.login__section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #0000001f;
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    z-index: -1;
+.login__title {
+    display: grid;
+    place-items: center;
+    font-size: 3em;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--color04);
+    user-select: none;
 }
 
 .login__form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    width: 100%;
+    max-width: 300px;
 }
 
-.login__inputs {
+.login__fields {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 15px;
 }
 
 .login__input {
     border: none;
-    border-bottom: 4px solid #ffffff75;
-    background-color: #ffffff50;
+    border-radius: 5px;
+    background-color: var(--color10);
+    color: var(--color08);
     font-size: 1em;
     padding: 10px;
-    color: #fff;
 }
 
 .login__input::placeholder {
-    color: #ffffff75;
+    color: var(--color14);
+    user-select: none;
 }
 
-.login__submit {
+.login__button {
     border-radius: 5px;
     padding: 5px;
     font-size: 1.3em;
-    background-color: #fff;
+    background-color: var(--color08);
     color: var(--color02);
+    width: 100%;
     border: none;
 }
 
@@ -133,5 +131,5 @@ body {
 
 .login__link {
     font-family: Arial, Helvetica, sans-serif;
-    color: #fff;
+    color: var(--color04);
 }
