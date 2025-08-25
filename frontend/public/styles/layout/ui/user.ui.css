@@ -8,15 +8,6 @@ body {
     background-color: var(--color04);
     overflow-x: hidden;
 }
-body::after {
-    content: '';
-    position: absolute;
-    height: 50px;
-    width: 10px;
-    top: 10px;
-    right: 0;
-    background-color: var(--color04);
-}
 
 /* Sidebar */
 .sidebar {

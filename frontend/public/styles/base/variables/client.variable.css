@@ -1,24 +1,4 @@
 :root {
-    /* palette colors */
-    --color01: #DFF2EB;
-    --color02: #B9E5E8;
-    --color03: #7AB2D3;
-    --color04: #4A628A;
-    --color05: #274472;
-    --color06: #202830;
-    --color07: #356899;
-    --color08: #274C6B;
-    --color09: #1A2E43;
-    --color10: #9CC5E8;
-    --color11: #5A87B9;
-    --color12: #3F6AA3;
-    --color13: #2C5080;
-    --color14: #1A3A5A;
-    --color15: #A7C0E8;
-    --color16: #C5D8F6;
-    --color17: #428EDB;
-    --color18: #3566B1;
-
     /* status colors */
     --color-status-open: #6BC4FF95;
     --color-status-in-progress: #FEC84D95;

@@ -1,9 +1,6 @@
-/* @import url('../base/variables/register.variable.css'); */
-@import url('../base/variables/client.variable.css');
+@import url('../base/vars.css');
 
 body {
-    display: grid;
-    place-items: center;
     background-color: var(--color04);
 }
 
@@ -145,4 +142,22 @@ body {
 .register__link {
     font-family: Arial, Helvetica, sans-serif;
     color: var(--color04);
+}
+
+.footer__section {
+    position: absolute;
+
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.footer__section p {
+    font-family: var(--font-text);
+    color: var(--color09);
+}
+
+.footer__section p a {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: var(--color17);
 }

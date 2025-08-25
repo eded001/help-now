@@ -1,8 +1,7 @@
 body {
     display: grid;
+    place-items: center;
     height: 100vh;
-
-    padding: 10px;
 }
 
 button,
