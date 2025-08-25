@@ -61,8 +61,8 @@ router.get('/evaluation', (req, res) => {
 router.get('/session-info', checkAuth(validRoles), (req, res) => {
     res.json({
         name: req.session.user.name,
+        department: req.session.user.department,
         role: req.session.user.role,
-        userData: req.session.userData || {}
     });
 });
 

@@ -15,15 +15,13 @@
     <link rel="stylesheet" href="../../frontend/public/styles/base/globals/element-reset.global.css">
     <link rel="stylesheet" href="../../frontend/public/styles/layout/ui/user.ui.css">
     <link rel="stylesheet" href="../../frontend/public/styles/layout/client.layout.css" />
+    <link rel="stylesheet" href="../../frontend/public/styles/base/animations/slide-in-right.animation.css" /> -->
 </head>
 <body>
     <section class="sidebar">
         <div class="sidebar__header">
             <div class="sidebar__header__logo">
-                <!-- <img src="/assets/images/logo_prefeitura_negativa_vertical.png" -->
-                <img src="../../frontend/public/assets/images/logo_prefeitura_negativa_vertical.png"
-                    class="sidebar__header-logo-prefeitura" />
-                <div class="sidebar__header_block"></div>
+                <div class="sidebar__header-logo-prefeitura"></div>
             </div>
 
             <div class="sidebar__header_title">
@@ -52,7 +50,7 @@
 
     <main class="user">
         <div class="user__header">
-            <div class="user__greeting">Olá, <span id="name-user"></span></div>
+            <div class="user__greeting slide-in-right">Olá, <span id="name-user"></span><span id="logout"></span></div>
 
             <div class="user__header-content">
                 <div class="user__presentation">
@@ -129,15 +127,11 @@
             <p class="modal__description">Preencha os detalhes do seu chamado para que nossa equipe possa atender você
                 rapidamente.</p>
 
-            <form class="modal__form" id="ticketForm">
+            <form method="post" class="modal__form" id="ticketForm">
                 <div class="form-group">
                     <label class="modal__label" for="category">Categoria</label>
-                    <select class="modal__select" id="category" name="category" required>
+                    <select class="modal__select" id="problem-category" name="category" required>
                         <option value="" disabled selected>Selecione uma categoria</option>
-                        <option value="Software">Problema com Software</option>
-                        <option value="Rede">Problema de Rede/Internet</option>
-                        <option value="Hardware">Problema com Equipamento</option>
-                        <option value="Suporte Técnico">Dúvida ou Suporte Geral</option>
                     </select>
                 </div>
 
@@ -156,8 +150,8 @@
                 </div>
 
                 <div class="form-actions">
-                    <button class="modal__button modal__button--cancel" type="button" id="closeModalBtn">X</button>
-                    <button class="modal__button modal__button--submit" type="submit">Criar chamado</button>
+                    <button type="button" class="modal__button modal__button--cancel" id="closeModalBtn">X</button>
+                    <button type="submit" class="modal__button modal__button--submit" id="submitModalBtn">Criar chamado</button>
                 </div>
             </form>
         </div>
