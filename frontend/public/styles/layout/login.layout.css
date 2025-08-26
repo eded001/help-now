@@ -2,6 +2,8 @@
 @import url('../base/vars.css');
 
 body {
+    display: grid;
+    place-items: center;
     background-color: var(--color04);
 }
 
@@ -149,4 +151,10 @@ body {
 .footer__section p a {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: var(--color17);
+}
+
+.footer__section p a::after {
+    content: '[link]';
+    display: inline-block;
+    margin-left: 5px;
 }
