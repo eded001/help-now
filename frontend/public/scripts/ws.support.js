@@ -1,5 +1,6 @@
 import { generateUUID } from "./utils/uuid.util.js";
 import { env } from "./constants/main.constant.js";
+import { createTicket } from "./utils/ticket.util.js";
 
 let webSocket = null;
 let supportId = null;
@@ -59,7 +60,7 @@ function handleSupportMessage(event) {
             console.log(`Mensagem do cliente [${response.clientId}]: ${response.payload}`);
             console.log(response.payload);
 
-            addTicketToList();
+            console.log(createTicket(response.payload));
             break;
 
         case 'confirmation':
