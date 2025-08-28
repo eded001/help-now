@@ -1,7 +1,7 @@
 import { ticketTemplate } from '../helpers/ticketTemplate.helper.js';
 import { statusMap, advanceTicketState } from '../helpers/ticketState.helper.js';
 
-export function createTicket(ticketData) {
+function createTicket(ticketData) {
     const temp = document.createElement('div');
     temp.innerHTML = ticketTemplate(ticketData, statusMap);
     const ticketElement = temp.firstElementChild;
@@ -13,3 +13,10 @@ export function createTicket(ticketData) {
 
     return ticketElement;
 }
+
+function addTicketToDOM(ticketData, container) {
+    const ticketElement = createTicket(ticketData);
+    container.appendChild(ticketElement);
+}
+
+export { createTicket, addTicketToDOM };

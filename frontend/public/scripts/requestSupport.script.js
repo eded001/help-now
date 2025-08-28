@@ -1,4 +1,3 @@
-// utils e helpers
 import { getUserInfos } from "./utils/sessionInfo.util.js";
 import { getClientId, sendMessageToSupport } from "./ws.client.js";
 
@@ -10,8 +9,11 @@ const message = {
     host: false,
     payload: {
         category: "",
-        title: "",
+        name: "",
         username: "",
+        title: "",
+        status: "",
+        priority: "",
     }
 };
 
@@ -31,8 +33,9 @@ form.addEventListener("submit", async event => {
         }
     });
 
-    message.payload.username = (await getUserInfos()).username;
-    message.payload.name = (await getUserInfos()).name;
+    const userInfos = await getUserInfos();
+    message.payload.username = userInfos.username;
+    message.payload.name = userInfos.name;
     message.payload.status = "open";
 
     if (!isValid) {
