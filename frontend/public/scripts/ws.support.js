@@ -1,4 +1,4 @@
-import { generateUUID } from "./utils/uuid.util.js";
+import { generateSessionId, generateUUID } from "./utils/uuid.util.js";
 import { env } from "./constants/main.constant.js";
 import { createTicket } from "./utils/ticket.util.js";
 
@@ -8,6 +8,7 @@ let supportId = null;
 const { ip, port } = env;
 
 function startSession() {
+    const sessionId = generateSessionId();
     supportId = generateUUID();
 
     if (webSocket && webSocket.readyState === WebSocket.OPEN) {
@@ -38,6 +39,15 @@ function startSession() {
     });
 }
 
+function sendMessage(data) {
+    if (webSocket && webSocket.readyState === WebSocket.OPEN) {
+        webSocket.send(JSON.stringify(data));
+        console.log("Mensagem enviada ao servidor");
+    } else {
+        console.warn("WebSocket do cliente não está pronto para envio");
+    }
+}
+
 function sendMessageToClient(targetClientId, payload) {
     if (webSocket && webSocket.readyState === WebSocket.OPEN) {
         const message = {
@@ -64,7 +74,7 @@ function handleSupportMessage(event) {
             break;
 
         case 'confirmation':
-            console.log(`Confirmação do servidor: ${response.payload}`);
+            console.log(response.payload);
             break;
 
         default:
