@@ -11,7 +11,7 @@ function startSession() {
     clientId = generateUUID();
 
     if (webSocket && webSocket.readyState === WebSocket.OPEN) {
-        console.log("WebSocket do cliente já conectado");
+        console.log("WebSocket já conectado");
         return;
     }
 
@@ -19,9 +19,10 @@ function startSession() {
 
     webSocket.addEventListener("open", () => {
         console.log("Conexão WebSocket do cliente estabelecida");
+
         sendMessage({
             type: "init",
-            clientId,
+            id: clientId,
             session: sessionId
         });
     });

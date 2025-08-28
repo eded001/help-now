@@ -1,12 +1,12 @@
 const WebSocket = require('ws');
 const { heartbeat } = require('./utils/heartbeat.util');
-const { registerConnection, removeConnection } = require('./managers/connection.manager');
+const { removeConnection } = require('./managers/connection.manager');
 const { handleIncomingMessage } = require('./handlers/message.handler');
 
 function createWebSocketServer(server) {
     const wsServer = new WebSocket.Server({ server });
 
-    wsServer.on('connection', (socket) => {
+    wsServer.on('connection', socket => {
         socket.isAlive = true;
         socket.on('pong', () => (socket.isAlive = true));
 
@@ -15,7 +15,7 @@ function createWebSocketServer(server) {
             wsServer.clients.forEach(client => heartbeat(client));
         }, 5000);
 
-        socket.on('message', (data) => handleIncomingMessage(socket, data));
+        socket.on('message', data => handleIncomingMessage(socket, data));
 
         socket.on('close', () => {
             clearInterval(interval);

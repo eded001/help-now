@@ -4,12 +4,10 @@ async function getSessionInfo() {
 
 export async function getUserInfos() {
     const response = await getSessionInfo();
+
     if (response.ok) {
         const data = await response.json();
-        return {
-            name: data.name,
-            department: data.department
-        };
+        return data;
     } else {
         console.error('Erro ao obter informações da sessão:', response.status);
         return { name: 'Usuário', department: 'Desconhecido' };

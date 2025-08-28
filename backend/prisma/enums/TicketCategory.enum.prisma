@@ -1,7 +1,0 @@
-enum TicketCategory {
-    HARDWARE
-    SOFTWARE
-    NETWORK
-    ACCESS
-    OTHER
-}

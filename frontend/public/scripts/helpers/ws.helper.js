@@ -1,4 +1,4 @@
-import { getWebSocket, getClientId, sendMessageToSupport } from "../ws.client.js";
+import { getWebSocket, sendMessageToSupport } from "../ws.client.js";
 
 function handleSubmit({ userInfos: { name, department }, helpInfos: { category, title, description } }) {
     const ws = getWebSocket();

@@ -20,11 +20,11 @@ function startSession() {
     webSocket.addEventListener("open", () => {
         console.log("Conexão WebSocket do suporte estabelecida");
 
-        const initMessage = {
+        sendMessage({
             type: "support-init",
-            id: supportId
-        };
-        webSocket.send(JSON.stringify(initMessage));
+            id: supportId,
+            session: sessionId
+        });
     });
 
     webSocket.addEventListener("message", handleSupportMessage);

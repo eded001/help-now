@@ -16,15 +16,6 @@ enum Role {
     SUPPORT
 }
 
-// --- enums/TicketCategory.enum.prisma ---
-enum TicketCategory {
-    HARDWARE
-    SOFTWARE
-    NETWORK
-    ACCESS
-    OTHER
-}
-
 // --- enums/TicketPriority.enum.prisma ---
 enum TicketPriority {
     LOW
