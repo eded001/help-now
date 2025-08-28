@@ -17,11 +17,11 @@ enum Role {
 }
 
 // --- enums/TicketPriority.enum.prisma ---
-enum TicketPriority {
-    LOW
-    MEDIUM
-    HIGH
-}
+// enum TicketPriority {
+//     LOW
+//     MEDIUM
+//     HIGH
+// }
 
 // --- enums/TicketStatus.enum.prisma ---
 enum TicketStatus {
