@@ -1,6 +1,7 @@
 const { registerConnection, broadcastToSupports } = require('../managers/connection.manager');
+const prisma = require('../../../prisma/client');
 
-function handleIncomingMessage(socket, data) {
+async function handleIncomingMessage(socket, data) {
     try {
         const message = JSON.parse(data);
 
@@ -32,6 +33,17 @@ function handleIncomingMessage(socket, data) {
                     type: 'client-message',
                     clientId: message.clientId,
                     payload: message.payload
+                });
+
+                await prisma.ticket.create({
+                    data: {
+                        title: message.payload.title,
+                        description: message.payload.description,
+                        category: message.payload.category || "categoria não especificada",
+                        created_by: {
+                            connect: { username: message.payload.username }
+                        },
+                    }
                 });
                 break;
 
