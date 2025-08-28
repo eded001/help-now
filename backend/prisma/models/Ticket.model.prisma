@@ -2,9 +2,8 @@
 model Ticket {
     id          Int            @id @default(autoincrement())
     title       String
-    description String
     status      TicketStatus   @default(OPEN)
-    priority    TicketPriority @default(MEDIUM)
+    // priority    TicketPriority @default(MEDIUM)
     category    TicketCategory
     created_at  DateTime       @default(now())
     updated_at  DateTime       @updatedAt

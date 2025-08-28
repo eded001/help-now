@@ -15,12 +15,10 @@ function createMessageElement({ content, id }, sendMessage) {
     const title = document.createElement('h1');
     const department = document.createElement('h2');
     const author = document.createElement('h3');
-    const description = document.createElement('p');
     const confirmButton = document.createElement('button');
 
     department.textContent = `Setor/Departamento: ${content.department}`;
     author.textContent = `Servidor(a): ${content.name}`;
-    description.textContent = content.description;
     confirmButton.textContent = 'Confirmar recebimento';
 
     confirmButton.addEventListener('click', event => {
@@ -44,7 +42,7 @@ function createMessageElement({ content, id }, sendMessage) {
         parent.children[3].style.color = "#0d850d";
     });
 
-    container.append(title, department, author, description, confirmButton);
+    container.append(title, department, author, confirmButton);
     return container;
 }
 

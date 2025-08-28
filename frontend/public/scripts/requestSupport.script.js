@@ -11,7 +11,6 @@ const message = {
     payload: {
         category: "",
         title: "",
-        description: "",
         username: "",
     }
 };
