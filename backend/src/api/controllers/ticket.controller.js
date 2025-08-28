@@ -13,7 +13,7 @@ async function create(req, res) {
 
         const ticketData = {
             ...value,
-            created_by_username: req.user.username, // pega do JWT
+            created_by_username: req.user.username,
         };
 
         const ticket = await ticketService.create(ticketData);

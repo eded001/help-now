@@ -1,5 +1,3 @@
-// NOTE arquivo que junta todas as rotas do route da API
-
 const express = require('express');
 const router = express.Router();
 
