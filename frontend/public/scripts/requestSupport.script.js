@@ -9,29 +9,32 @@ const message = {
     id: getClientId(),
     host: false,
     payload: {
-        userInfos: { name: "", department: "" },
-        helpInfos: { category: "", title: "", description: "" }
+        category: "",
+        title: "",
+        description: "",
+        username: "",
     }
 };
 
 form.addEventListener("submit", async event => {
     event.preventDefault();
 
-    const { name, department } = await getUserInfos();
-    message.payload.userInfos = { name, department };
-
     const formGroups = document.querySelectorAll(".form-group input, .form-group select, .form-group textarea");
     let isValid = true;
 
     formGroups.forEach(input => {
-        if (input.name in message.payload.helpInfos) {
+        if (input.name in message.payload) {
             if (!input.value.trim()) {
                 isValid = false;
             } else {
-                message.payload.helpInfos[input.name] = input.value.trim();
+                message.payload[input.name] = input.value.trim();
             }
         }
     });
+
+    message.payload.username = (await getUserInfos()).username;
+    message.payload.name = (await getUserInfos()).name;
+    message.payload.status = "open";
 
     if (!isValid) {
         alert("Preencha todos os campos obrigatórios antes de enviar.");
