@@ -46,7 +46,7 @@ module.exports = {
             const { password: _, ...userWithoutPassword } = user;
             req.session.user = userWithoutPassword;
 
-            res.status(201).json({ success: true });
+            res.status(201).json({ success: true, user: userWithoutPassword });
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Erro interno.' });

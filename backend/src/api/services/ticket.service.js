@@ -1,72 +1,47 @@
 const prisma = require('../../../prisma/client');
+const userService = require('./user.service');
 
-// cria um ticket
-async function create(ticketData) {
-    return prisma.ticket.create({
-        data: ticketData,
-        include: {
-            created_by: {
-                select: {
-                    id: true,
-                    username: true,
-                    name: true,
-                    department: true,
-                    role: true
-                }
-            }
-        }
-    });
-}
-
-// lista os tickets
-async function getAll() {
+async function list(filters) {
     return prisma.ticket.findMany({
-        include: {
-            created_by: {
-                select: { id: true, username: true, name: true }
-            },
-            assigned_to: {
-                select: { id: true, username: true, name: true }
-            }
-        },
-        orderBy: { created_at: 'desc' }
+        where: { ...filters },
+        include: { created_by: true, assigned_to: true }
     });
 }
 
-// retorna o ticket por ID
-async function getById(id) {
-    return prisma.ticket.findUnique({
-        where: { id },
-        include: {
-            created_by: {
-                select: { id: true, username: true, name: true }
-            },
-            assigned_to: {
-                select: { id: true, username: true, name: true }
-            }
-        }
+async function create(data) {
+    return prisma.ticket.create({
+        data
     });
 }
 
-// atualiza um ticket
-async function update(id, updates) {
+async function update(id, data) {
+    const allowedFields = ['title', 'description', 'status', 'category', 'resolved_at'];
+    const updateData = {};
+    for (const key of allowedFields) {
+        if (data[key] !== undefined) updateData[key] = data[key];
+    }
+
     return prisma.ticket.update({
-        where: { id },
-        data: updates,
-        include: {
-            created_by: {
-                select: { id: true, username: true, name: true }
-            },
-            assigned_to: {
-                select: { id: true, username: true, name: true }
-            }
-        }
+        where: { id: parseInt(id) },
+        data: updateData,
+        include: { created_by: true, assigned_to: true }
     });
 }
 
-// apaga um ticket
-async function deleteTicket(id) {
-    return prisma.ticket.delete({ where: { id } });
+async function assign(id, assigned_to_username) {
+    // Checa se o usuário existe
+    const user = await userService.getByUsername(assigned_to_username);
+    if (!user) throw new Error('Usuário não encontrado');
+
+    return prisma.ticket.update({
+        where: { id: parseInt(id) },
+        data: { assigned_to_username: assigned_to_username },
+        include: { created_by: true, assigned_to: true }
+    });
 }
 
-module.exports = { create, getAll, getById, update, deleteTicket };
+async function remove(id) {
+    return prisma.ticket.delete({ where: { id: parseInt(id) } });
+}
+
+module.exports = { list, create, update, assign, remove };

@@ -1,75 +1,86 @@
+const ticketService = require('../services/ticket.service');
 const { ticketSchema } = require('../models/ticket.model');
-const TicketService = require('../services/ticket.service.js');
+const { successResponse, errorResponse } = require('../../../utils/response');
 
-module.exports = {
-    // cria um novo ticket
-    async createTicket(req, res) {
-        try {
-            const { error, value: ticketData } = ticketSchema.validate(req.body);
-            if (error) {
-                return res.status(400).json({ error: error.details[0].message });
-            }
-
-            const createdTicket = await TicketService.create(ticketData);
-            return res.status(201).json({
-                success: true,
-                ticket: createdTicket
-            });
-        } catch (err) {
-            console.error('Erro ao criar ticket:', err);
-            return res.status(500).json({ error: 'Não foi possível criar o ticket.' });
+// create
+async function create(req, res) {
+    try {
+        const { error, value } = ticketSchema.validate(req.body);
+        if (error) {
+            const messages = error.details.map(data => data.message);
+            return res.status(400).json({ success: false, message: 'Dados inválidos', errors: messages });
         }
-    },
 
-    // lista os tickets
-    async listTickets(req, res) {
-        try {
-            const tickets = await TicketService.getAll();
-            return res.json({ success: true, tickets });
-        } catch (err) {
-            console.error('Erro ao listar tickets:', err);
-            return res.status(500).json({ error: 'Não foi possível listar os tickets.' });
-        }
-    },
+        const ticketData = {
+            ...value,
+            created_by_username: req.user.username, // pega do JWT
+        };
 
-    // retorna um ticket específico por ID
-    async getTicketById(req, res) {
-        try {
-            const { id } = req.params;
-            const ticket = await TicketService.getById(parseInt(id));
-            if (!ticket) return res.status(404).json({ error: 'Ticket não encontrado.' });
-
-            return res.json({ success: true, ticket });
-        } catch (err) {
-            console.error('Erro ao buscar ticket:', err);
-            return res.status(500).json({ error: 'Não foi possível buscar o ticket.' });
-        }
-    },
-
-    // atualiza dados de um ticket existente
-    async updateTicket(req, res) {
-        try {
-            const { id } = req.params;
-            const { error, value: ticketUpdates } = ticketSchema.validate(req.body, { presence: 'optional' });
-            if (error) return res.status(400).json({ error: error.details[0].message });
-
-            const updatedTicket = await TicketService.update(parseInt(id), ticketUpdates);
-            return res.json({ success: true, ticket: updatedTicket });
-        } catch (err) {
-            console.error('Erro ao atualizar ticket:', err);
-            return res.status(500).json({ error: 'Não foi possível atualizar o ticket.' });
-        }
-    },
-
-    // remove um ticket
-    async deleteTicket(req, res) {
-        try {
-            const { id } = req.params;
-            await TicketService.delete(parseInt(id));
-            return res.json({ success: true, message: 'Ticket apagado com sucesso.' });
-        } catch (err) {
-            console.error('Erro ao apagar ticket:', err);
-            return res.status(500).json({ error: 'Não foi possível apagar o ticket.' });
-        }
+        const ticket = await ticketService.create(ticketData);
+        return successResponse(res, ticket, 201);
+    } catch (err) {
+        return errorResponse(res, err);
     }
-};
+}
+
+// list
+async function list(req, res) {
+    try {
+        const filters = {};
+        if (req.query.status) filters.status = req.query.status;
+        if (req.query.category) filters.category = req.query.category;
+
+        const tickets = await ticketService.list(filters);
+        return successResponse(res, tickets);
+    } catch (err) {
+        return errorResponse(res, err);
+    }
+}
+
+// get by id
+async function get(req, res) {
+    try {
+        const ticket = await ticketService.list({ id: parseInt(req.params.id) });
+        if (!ticket || ticket.length === 0) return res.status(404).json({ success: false, message: 'Ticket não encontrado' });
+        return successResponse(res, ticket[0]);
+    } catch (err) {
+        return errorResponse(res, err);
+    }
+}
+
+// update
+async function update(req, res) {
+    try {
+        const ticket = await ticketService.update(req.params.id, req.body);
+        return successResponse(res, ticket);
+    } catch (err) {
+        return errorResponse(res, err);
+    }
+}
+
+// assign
+async function assign(req, res) {
+    try {
+        const { assigned_to_username } = req.body;
+        if (!assigned_to_username) {
+            return res.status(400).json({ success: false, message: 'assigned_to_username é obrigatório' });
+        }
+
+        const ticket = await ticketService.assign(req.params.id, assigned_to_username);
+        return successResponse(res, ticket);
+    } catch (err) {
+        return errorResponse(res, err);
+    }
+}
+
+// delete
+async function remove(req, res) {
+    try {
+        await ticketService.remove(req.params.id);
+        return res.status(204).send();
+    } catch (err) {
+        return errorResponse(res, err);
+    }
+}
+
+module.exports = { create, list, get, update, assign, remove };
