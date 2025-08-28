@@ -3,12 +3,16 @@ const { registerConnection, broadcastToSupports } = require('../managers/connect
 function handleIncomingMessage(socket, data) {
     try {
         const message = JSON.parse(data);
-        console.log(`[RECEIVED] Mensagem do socket: ${socket.userId || "não registrado"}`);
-        console.log(`[RECEIVED] Conteúdo: ${message}`,);
 
         switch (message.type) {
             case 'init':
                 registerConnection(socket, 'client', message.id);
+
+                console.log(`[RECEIVED] Mensagem do socket: ${socket.userId || "não registrado"}`);
+                console.log("[RECEIVED] Conteúdo:");
+                console.log(message);
+                console.log('-----------------------------------');
+
                 socket.send(JSON.stringify({
                     type: 'confirmation',
                     payload: 'Cliente conectado'
