@@ -123,8 +123,7 @@
     <div class="modal-overlay" id="modalOverlay" style="display:none;">
         <div class="modal">
             <h2 class="modal__title">Solicitar novo chamado</h2>
-            <p class="modal__description">Preencha os detalhes do seu chamado para que nossa equipe possa atender você
-                rapidamente.</p>
+            <p class="modal__description">Preencha os detalhes do seu chamado para que nossa equipe possa atender você rapidamente.</p>
 
             <form method="post" class="modal__form" id="ticketForm">
                 <div class="form-group">
@@ -141,6 +140,23 @@
                     <p class="form-helper-text">Seja breve e direto.</p>
                 </div>
 
+                <div class="form-group" style="display: flex;justify-content: space-between;align-items: center;">
+                    <p class="modal__label">Prioridade</p>
+
+                    <span class="modal__priority__section">
+                        <input type="radio" class="modal__input__radio" name="priority" value="low" id="priority-low" checked>
+                        <label for="priority-low" class="modal__label-priority">Baixa</label>
+                    </span>
+
+                    <span class="modal__priority__section">
+                        <input type="radio" class="modal__input__radio" name="priority" value="medium" id="priority-medium">
+                        <label for="priority-medium" class="modal__label-priority">Média</label>
+                    </span>
+
+                    <span class="modal__priority__section">
+                        <input type="radio" class="modal__input__radio" name="priority" value="high" id="priority-high">
+                        <label for="priority-high" class="modal__label-priority">Alta</label>
+                    </span>
                 </div>
 
                 <div class="form-actions">

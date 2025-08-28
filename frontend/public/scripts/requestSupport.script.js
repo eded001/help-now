@@ -20,16 +20,30 @@ const message = {
 form.addEventListener("submit", async event => {
     event.preventDefault();
 
-    const formGroups = document.querySelectorAll(".form-group input, .form-group select, .form-group textarea");
+    const formGroups = document.querySelectorAll(".form-group input, .form-group select");
     let isValid = true;
 
     formGroups.forEach(input => {
-        if (input.name in message.payload) {
-            if (!input.value.trim()) {
+        if (input.type === "radio") {
+            if (input.checked) {
+                message.payload[input.name] = input.value;
+            }
+            return;
+        }
+
+        if (input.tagName === "select") {
+            if (!input.value) {
                 isValid = false;
             } else {
-                message.payload[input.name] = input.value.trim();
+                message.payload[input.name] = input.value;
             }
+            return;
+        }
+
+        if (!input.value.trim()) {
+            isValid = false;
+        } else {
+            message.payload[input.name] = input.value.trim();
         }
     });
 
