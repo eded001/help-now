@@ -49,19 +49,20 @@ model User {
 // --- models/Ticket.model.prisma ---
 // models/ticket.prisma
 model Ticket {
-    id          Int            @id @default(autoincrement())
+    id          Int          @id @default(autoincrement())
     title       String
     description String
-    status      TicketStatus   @default(OPEN)
-    priority    TicketPriority @default(MEDIUM)
-    category    TicketCategory
-    created_at  DateTime       @default(now())
-    updated_at  DateTime       @updatedAt
+    status      TicketStatus @default(OPEN)
+    // priority    TicketPriority @default(MEDIUM)
+    category    String
+    created_at  DateTime     @default(now())
+    updated_at  DateTime     @updatedAt
     resolved_at DateTime?
 
-    created_by_id Int
-    created_by    User @relation("CreatedTickets", fields: [created_by_id], references: [id])
+    // Relação com usuário pelo username
+    created_by_username String
+    created_by          User   @relation("CreatedTickets", fields: [created_by_username], references: [username])
 
-    assigned_to_id Int?
-    assigned_to    User? @relation("AssignedTickets", fields: [assigned_to_id], references: [id])
+    assigned_to_username String?
+    assigned_to          User?   @relation("AssignedTickets", fields: [assigned_to_username], references: [username])
 }
