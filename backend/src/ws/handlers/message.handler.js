@@ -29,9 +29,9 @@ async function handleIncomingMessage(socket, data) {
                 }));
                 break;
 
-            case 'client-message':
+            case 'client-request':
                 broadcastToSupports({
-                    type: 'client-message',
+                    type: 'client-request',
                     clientId: message.clientId,
                     payload: message.payload,
                     user: message.user

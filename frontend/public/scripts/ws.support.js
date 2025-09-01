@@ -72,7 +72,7 @@ function handleSupportMessage(event) {
     const response = JSON.parse(event.data);
 
     switch (response.type) {
-        case 'client-message':
+        case 'client-request':
             console.log(`Mensagem do cliente [${response.clientId}]: ${response.payload}`);
             console.log(response.payload);
 

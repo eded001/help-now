@@ -53,7 +53,7 @@ async function sendMessageToSupport(payload) {
     const { username, name } = await getUserInfos();
 
     sendMessage({
-        type: "client-message",
+        type: "client-request",
         clientId,
         payload,
         user: { username, name }

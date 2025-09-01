@@ -4,7 +4,7 @@ import { getClientId, sendMessageToSupport } from "./ws.client.js";
 const form = document.querySelector("#ticketForm");
 
 const message = {
-    type: "client-message",
+    type: "client-request",
     id: getClientId(),
     host: false,
     payload: {
