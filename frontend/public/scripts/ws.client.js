@@ -43,7 +43,6 @@ function startSession() {
 function sendMessage(data) {
     if (webSocket && webSocket.readyState === WebSocket.OPEN) {
         webSocket.send(JSON.stringify(data));
-        console.log("Mensagem enviada ao servidor");
     } else {
         console.warn("WebSocket do cliente não está pronto para envio");
     }
