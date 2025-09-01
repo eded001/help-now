@@ -38,7 +38,8 @@ async function handleIncomingMessage(socket, data) {
                 await prisma.ticket.create({
                     data: {
                         title: message.payload.title,
-                        category: message.payload.category || "categoria não especificada",
+                        category: message.payload.category,
+                        priority: message.payload.priority,
                         created_by: {
                             connect: { username: message.payload.username }
                         },

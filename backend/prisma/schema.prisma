@@ -17,11 +17,11 @@ enum Role {
 }
 
 // --- enums/TicketPriority.enum.prisma ---
-// enum TicketPriority {
-//     LOW
-//     MEDIUM
-//     HIGH
-// }
+enum TicketPriority {
+    LOW
+    MEDIUM
+    HIGH
+}
 
 // --- enums/TicketStatus.enum.prisma ---
 enum TicketStatus {
@@ -49,13 +49,13 @@ model User {
 // --- models/Ticket.model.prisma ---
 // models/ticket.prisma
 model Ticket {
-    id          Int          @id @default(autoincrement())
+    id          Int            @id @default(autoincrement())
     title       String
-    status      TicketStatus @default(OPEN)
-    // priority    TicketPriority @default(MEDIUM)
+    status      TicketStatus   @default(OPEN)
+    priority    TicketPriority
     category    String
-    created_at  DateTime     @default(now())
-    updated_at  DateTime     @updatedAt
+    created_at  DateTime       @default(now())
+    updated_at  DateTime       @updatedAt
     resolved_at DateTime?
 
     // Relação com usuário pelo username
