@@ -9,10 +9,10 @@ async function handleIncomingMessage(socket, data) {
             case 'init':
                 registerConnection(socket, 'client', message.id, message.user.username);
 
-                console.log(`[RECEIVED] Mensagem do socket: ${socket.userId || "não registrado"}`);
-                console.log("[RECEIVED] Conteúdo:");
-                console.log(message);
-                console.log('-----------------------------------');
+                console.log('=================CLIENT-INIT=================');
+                console.log(`[USER-INFO] Usuário: ${message.user.name} (${message.user.username})`);
+                console.log('=============================================');
+                console.log();
 
                 socket.send(JSON.stringify({
                     type: 'confirmation',
@@ -22,6 +22,12 @@ async function handleIncomingMessage(socket, data) {
 
             case 'support-init':
                 registerConnection(socket, 'support', message.id);
+
+                console.log('=================SUPPORT-INIT================');
+                console.log(`[SUPPORT-INIT] Usuário: ${message.user.name} (${message.user.username})`);
+                console.log('=============================================');
+                console.log();
+
                 socket.send(JSON.stringify({
                     type: 'confirmation',
                     payload: 'Suporte conectado',
@@ -37,6 +43,14 @@ async function handleIncomingMessage(socket, data) {
                     user: message.user
                 });
 
+                console.log('=================CLIENT-INFO=================');
+                console.log(`[CLIENT-INFO] Usuário: ${message.user.name} (${message.user.username})`);
+                console.log("[CLIENT-REQUEST] Conteúdo:");
+                // console.log(message.payload);
+                console.log(message);
+                console.log('=============================================');
+                console.log();
+
                 await prisma.ticket.create({
                     data: {
                         title: message.payload.title,
@@ -48,6 +62,15 @@ async function handleIncomingMessage(socket, data) {
                     }
                 });
                 break;
+
+            case 'support-message':
+                console.log('=================SUPPORT-MESSAGE===============');
+                console.log(`[SUPPORT-MESSAGE] Usuário: ${message.user.name} (${message.user.username})`);
+                console.log("[SUPPORT-MESSAGE] Conteúdo:");
+                // console.log(message.payload);
+                console.log(message);
+                console.log('=============================================');
+                console.log();
 
             default:
                 console.warn("Tipo de mensagem não reconhecido:", message.type);
