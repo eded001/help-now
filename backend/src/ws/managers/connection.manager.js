@@ -1,12 +1,14 @@
 const clients = new Map();   // clientId -> socket
 const supports = new Map();  // supportId -> socket
 
-function registerConnection(socket, type, id) {
-    if (type === 'client') clients.set(id, socket);
-    if (type === 'support') supports.set(id, socket);
+function registerConnection(socket, type, id, username) {
+    const connectionData = { socket, username };
 
-    socket.userType = type;
-    socket.userId = id;
+    if (type === 'client') {
+        clients.set(id, connectionData);
+    } else if (type === 'support') {
+        supports.set(id, connectionData);
+    }
 }
 
 function removeConnection(socket) {

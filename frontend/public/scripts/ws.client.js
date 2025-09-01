@@ -1,5 +1,6 @@
 import { generateSessionId, generateUUID } from "./utils/uuid.util.js";
 import { env } from "./constants/main.constant.js";
+import { getUserInfos } from "./utils/sessionInfo.util.js";
 
 let webSocket = null;
 let clientId = null;
@@ -17,13 +18,14 @@ function startSession() {
 
     webSocket = new WebSocket(`ws://${ip}:${port}`);
 
-    webSocket.addEventListener("open", () => {
-        console.log("Conexão WebSocket do cliente estabelecida");
+    webSocket.addEventListener("open", async () => {
+        const { username, name } = await getUserInfos();
 
         sendMessage({
             type: "init",
             id: clientId,
-            session: sessionId
+            session: sessionId,
+            user: { username, name }
         });
     });
 
@@ -47,11 +49,14 @@ function sendMessage(data) {
     }
 }
 
-function sendMessageToSupport(payload) {
+async function sendMessageToSupport(payload) {
+    const { username, name } = await getUserInfos();
+
     sendMessage({
         type: "client-message",
         clientId,
-        payload
+        payload,
+        user: { username, name }
     });
 }
 

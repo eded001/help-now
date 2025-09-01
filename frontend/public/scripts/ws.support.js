@@ -1,6 +1,7 @@
 import { generateSessionId, generateUUID } from "./utils/uuid.util.js";
 import { env } from "./constants/main.constant.js";
 import { addTicketToDOM, createTicket } from "./utils/ticket.util.js";
+import { getUserInfos } from "./utils/sessionInfo.util.js";
 
 let webSocket = null;
 let supportId = null;
@@ -18,13 +19,14 @@ function startSession() {
 
     webSocket = new WebSocket(`ws://${ip}:${port}`);
 
-    webSocket.addEventListener("open", () => {
-        console.log("Conexão WebSocket do suporte estabelecida");
+    webSocket.addEventListener("open", async () => {
+        const { username, name } = await getUserInfos();
 
         sendMessage({
             type: "support-init",
             id: supportId,
-            session: sessionId
+            session: sessionId,
+            user: { username, name }
         });
     });
 
@@ -48,13 +50,17 @@ function sendMessage(data) {
     }
 }
 
-function sendMessageToClient(targetClientId, payload) {
+async function sendMessageToClient(targetClientId, payload) {
     if (webSocket && webSocket.readyState === WebSocket.OPEN) {
+
+        const { username, name } = await getUserInfos();
+
         const message = {
             type: "support-message",
             id: supportId,
             targetClientId,
-            payload
+            payload,
+            user: { username, name }
         };
         webSocket.send(JSON.stringify(message));
     } else {

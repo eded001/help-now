@@ -7,7 +7,7 @@ async function handleIncomingMessage(socket, data) {
 
         switch (message.type) {
             case 'init':
-                registerConnection(socket, 'client', message.id);
+                registerConnection(socket, 'client', message.id, message.user.username);
 
                 console.log(`[RECEIVED] Mensagem do socket: ${socket.userId || "não registrado"}`);
                 console.log("[RECEIVED] Conteúdo:");
@@ -24,7 +24,8 @@ async function handleIncomingMessage(socket, data) {
                 registerConnection(socket, 'support', message.id);
                 socket.send(JSON.stringify({
                     type: 'confirmation',
-                    payload: 'Suporte conectado'
+                    payload: 'Suporte conectado',
+                    username: message.user.username
                 }));
                 break;
 
@@ -32,7 +33,8 @@ async function handleIncomingMessage(socket, data) {
                 broadcastToSupports({
                     type: 'client-message',
                     clientId: message.clientId,
-                    payload: message.payload
+                    payload: message.payload,
+                    user: message.user
                 });
 
                 await prisma.ticket.create({
