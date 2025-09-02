@@ -22,7 +22,7 @@ function startSession() {
         const { username, name } = await getUserInfos();
 
         sendMessage({
-            type: "init",
+            type: "client-init",
             id: clientId,
             session: sessionId,
             user: { username, name }

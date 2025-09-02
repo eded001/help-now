@@ -6,7 +6,7 @@ async function handleIncomingMessage(socket, data) {
         const message = JSON.parse(data);
 
         switch (message.type) {
-            case 'init':
+            case 'client-init':
                 registerConnection(socket, 'client', message.id, message.user.username);
 
                 console.log('=================CLIENT-INIT=================');
