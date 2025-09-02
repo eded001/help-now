@@ -24,7 +24,7 @@ async function handleIncomingMessage(socket, data) {
                 registerConnection(socket, 'support', message.id, message.user.username);
 
                 console.log('=================SUPPORT-INIT================');
-                console.log(`[SUPPORT-INIT] Usuário: ${message.user.name} (${message.user.username})`);
+                console.log(`[SUPPORT-INFO] Usuário: ${message.user.name} (${message.user.username})`);
                 console.log('=============================================');
                 console.log();
 
