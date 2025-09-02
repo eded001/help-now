@@ -1,3 +1,4 @@
+import { formatDate } from './formatDate.js';
 import { translateProblem } from './translate.helper.js';
 
 function templateSupport(ticketData, statusMap) {
@@ -26,3 +27,25 @@ function templateSupport(ticketData, statusMap) {
         </div>
     `;
 }
+
+function templateClient(ticketData, statusMap) {
+    const { id, category, title, status, createdAt } = ticketData;
+
+    return `
+        <div class="ticket">
+            <div class="ticket__header">
+                <a href="#" class="ticket__code">#${id || ''}</a>
+                <span class="ticket__category">${translateProblem(category)}</span>
+            </div>
+            <div class="ticket__title">${title}</div>
+            <div class="ticket__footer">
+                <span class="ticket__info">Aberto em ${formatDate(createdAt)}</span>
+                <span class="ticket__status ${statusMap[status]?.class || ''}">
+                    ${statusMap[status]?.text || ''}
+                </span>
+            </div>
+        </div>
+    `;
+}
+
+export { templateSupport, templateClient };
