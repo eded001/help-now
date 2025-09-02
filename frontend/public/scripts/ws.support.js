@@ -1,6 +1,6 @@
 import { generateSessionId, generateUUID } from "./utils/uuid.util.js";
 import { env } from "./constants/main.constant.js";
-import { addTicketToDOM, createTicket } from "./utils/ticket.util.js";
+import { addTicketToDOM } from "./utils/ticket.util.js";
 import { getUserInfos } from "./utils/sessionInfo.util.js";
 
 let webSocket = null;
@@ -74,9 +74,7 @@ function handleSupportMessage(event) {
         case 'client-request':
             console.log(`Mensagem do cliente [${response.clientId}]: ${response.payload}`);
             console.log(response.payload);
-
-            createTicket(response.payload);
-            addTicketToDOM(response.payload, document.querySelector('.user__tickets'));
+            addTicketToDOM(response.payload, document.querySelector('.user__tickets'), "support");
             break;
 
         case 'confirmation':
