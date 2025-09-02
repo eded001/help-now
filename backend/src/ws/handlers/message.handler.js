@@ -36,13 +36,6 @@ async function handleIncomingMessage(socket, data) {
                 break;
 
             case 'client-request':
-                broadcastToSupports({
-                    type: 'client-request',
-                    clientId: message.clientId,
-                    payload: message.payload,
-                    user: message.user
-                });
-
                 console.log('=================CLIENT-INFO=================');
                 console.log(`[CLIENT-INFO] Usuário: ${message.user.name} (${message.user.username})`);
                 console.log("[CLIENT-REQUEST] Conteúdo:");
@@ -51,7 +44,7 @@ async function handleIncomingMessage(socket, data) {
                 console.log('=============================================');
                 console.log();
 
-                await prisma.ticket.create({
+                const ticket = await prisma.ticket.create({
                     data: {
                         title: message.payload.title,
                         category: message.payload.category,
@@ -59,7 +52,37 @@ async function handleIncomingMessage(socket, data) {
                         created_by: {
                             connect: { username: message.payload.username }
                         },
+                    },
+                    include: {
+                        created_by: true
                     }
+                });
+
+                console.log(ticket);
+
+                const ticketInfos = {
+                    id: ticket.id,
+                    title: ticket.title,
+                    status: ticket.status.toLowerCase(),
+                    priority: ticket.priority,
+                    category: ticket.category,
+                    name: ticket.created_by.name,
+                    username: ticket.created_by.username,
+                    createdAt: ticket.created_at,
+                    department: ticket.created_by.department
+                };
+
+                socket.send(JSON.stringify({
+                    type: 'db-info',
+                    clientId: message.clientId,
+                    payload: ticketInfos
+                }));
+
+                broadcastToSupports({
+                    type: 'client-request',
+                    clientId: message.clientId,
+                    payload: ticketInfos,
+                    user: message.user
                 });
                 break;
 
