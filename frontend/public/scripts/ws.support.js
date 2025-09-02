@@ -49,19 +49,18 @@ function sendMessage(data) {
     }
 }
 
-async function sendMessageToClient(targetClientId, payload) {
+async function sendMessageToClient(clientId, payload) {
     if (webSocket && webSocket.readyState === WebSocket.OPEN) {
-
         const { username, name } = await getUserInfos();
 
         const message = {
             type: "support-message",
             id: supportId,
-            targetClientId,
+            target: clientId,
             payload,
             user: { username, name }
         };
-        webSocket.send(JSON.stringify(message));
+        sendMessage(JSON.stringify(message));
     } else {
         console.warn("WebSocket não está pronto para enviar mensagens");
     }
@@ -72,11 +71,9 @@ function handleSupportMessage(event) {
 
     switch (response.type) {
         case 'client-request':
-            console.log(`Mensagem do cliente [${response.clientId}]: ${response.payload}`);
             console.log(response.payload);
             addTicketToDOM(response.payload, document.querySelector('.user__tickets'), "support");
             break;
-
         case 'confirmation':
             console.log(response.payload);
             break;
@@ -94,4 +91,4 @@ function getSupportId() {
     return supportId;
 }
 
-export { startSession, sendMessageToClient, handleSupportMessage, getWebSocket, getSupportId };
+export { startSession, sendMessage, sendMessageToClient, handleSupportMessage, getWebSocket, getSupportId };
