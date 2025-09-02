@@ -1,22 +1,29 @@
-import { ticketTemplate } from '../helpers/ticketTemplate.helper.js';
+import { templateSupport, templateClient } from '../helpers/ticketTemplate.helper.js';
 import { statusMap, advanceTicketState } from '../helpers/ticketState.helper.js';
 
-function createTicket(ticketData) {
+function createTicket(ticketData, type) {
     const temp = document.createElement('div');
-    temp.innerHTML = ticketTemplate(ticketData, statusMap);
+
+    const templateFn = type === 'support' ? templateSupport : templateClient;
+    temp.innerHTML = templateFn(ticketData, statusMap);
+
     const ticketElement = temp.firstElementChild;
 
-    const button = ticketElement.querySelector('.ticket__button');
-    if (button) {
-        button.addEventListener('click', () => advanceTicketState(ticketData, ticketElement));
+    if (type === 'support') {
+        const button = ticketElement.querySelector('.ticket__button');
+        if (button) {
+            button.addEventListener('click', () =>
+                advanceTicketState(ticketData, ticketElement)
+            );
+        }
     }
 
     return ticketElement;
 }
 
-function addTicketToDOM(ticketData, container) {
-    const ticketElement = createTicket(ticketData);
+function addTicketToDOM(ticketData, container, type = 'client') {
+    const ticketElement = createTicket(ticketData, type);
     container.appendChild(ticketElement);
 }
 
-export { createTicket, addTicketToDOM };
+export { addTicketToDOM };
