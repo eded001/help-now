@@ -27,8 +27,8 @@ function createMessageElement({ content, id }, sendMessage) {
 
         sendMessage({
             type: 'host-confirm',
-            to: id,
-            message: `Sua mensagem foi lida pelo host às ${new Date().toLocaleTimeString()}`
+            clientId: id,
+            payload: `Sua mensagem foi lida pelo host às ${new Date().toLocaleTimeString()}`
         });
 
         confirmButton.disabled = true;
