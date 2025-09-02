@@ -1,13 +1,17 @@
 import { translateProblem } from './translate.helper.js';
 
-export function ticketTemplate(ticketData, statusMap) {
-    const { category, title, code, status } = ticketData;
+function templateSupport(ticketData, statusMap) {
+    const { category, title, id, status, name, department } = ticketData;
 
     return `
         <div class="ticket">
             <div class="ticket__header">
-                <a href="#" class="ticket__code">#${code || ''}</a>
+                <a href="#" class="ticket__code">#${id || ''}</a>
                 <span class="ticket__category">${translateProblem(category)}</span>
+                <span class="ticket__separator">|</span>
+                <span class="ticket__user-info">${name}</span>
+                <span class="ticket__separator">-</span>
+                <span class="ticket__user-info">${department}</span>
             </div>
             <div class="ticket__title">${title}</div>
             <div class="ticket__footer">
