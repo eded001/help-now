@@ -1,6 +1,7 @@
 import { generateSessionId, generateUUID } from "./utils/uuid.util.js";
 import { env } from "./constants/main.constant.js";
 import { getUserInfos } from "./utils/sessionInfo.util.js";
+import { addTicketToDOM } from "./utils/ticket.util.js";
 
 let webSocket = null;
 let clientId = null;
@@ -61,8 +62,21 @@ async function sendMessageToSupport(payload) {
 
 function handleClientMessage(event) {
     const response = JSON.parse(event.data);
-    if (response.type === "confirmation") console.log(response.payload);
-    else console.log("Mensagem recebida:", response);
+
+    switch (response.type) {
+        case "confirmation":
+            console.log(response.payload);
+            break;
+        case "db-info":
+            console.log(response.payload);
+            addTicketToDOM(response.payload, document.querySelector('.user__tickets'));
+        default:
+            break;
+        case "host-confirm":
+            console.log(response.payload);
+            console.log("Mensagem recebida:", response.payload);
+            break;
+    }
 }
 
 function getWebSocket() {
