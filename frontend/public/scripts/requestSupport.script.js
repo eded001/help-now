@@ -14,6 +14,7 @@ const message = {
         title: "",
         status: "",
         priority: "",
+        createdAt: new Date()
     }
 };
 
