@@ -1,4 +1,4 @@
-const { registerConnection, broadcastToSupports } = require('../managers/connection.manager');
+const { registerConnection, broadcastToSupports, sendToUser } = require('../managers/connection.manager');
 const prisma = require('../../../prisma/client');
 
 async function handleIncomingMessage(socket, data) {
@@ -7,7 +7,7 @@ async function handleIncomingMessage(socket, data) {
 
         switch (message.type) {
             case 'client-init':
-                registerConnection(socket, 'client', message.id, message.user.username);
+                registerConnection(socket, 'client', message.user.username);
 
                 console.log('=================CLIENT-INIT=================');
                 console.log(`[USER-INFO] Usuário: ${message.user.name} (${message.user.username})`);
@@ -21,7 +21,7 @@ async function handleIncomingMessage(socket, data) {
                 break;
 
             case 'support-init':
-                registerConnection(socket, 'support', message.id, message.user.username);
+                registerConnection(socket, 'support', message.user.username);
 
                 console.log('=================SUPPORT-INIT================');
                 console.log(`[SUPPORT-INFO] Usuário: ${message.user.name} (${message.user.username})`);
@@ -39,8 +39,8 @@ async function handleIncomingMessage(socket, data) {
                 console.log('=================CLIENT-INFO=================');
                 console.log(`[CLIENT-INFO] Usuário: ${message.user.name} (${message.user.username})`);
                 console.log("[CLIENT-REQUEST] Conteúdo:");
-                // console.log(message.payload);
-                console.log(message);
+                console.log(message.payload);
+                // console.log(message);
                 console.log('=============================================');
                 console.log();
 
@@ -58,8 +58,6 @@ async function handleIncomingMessage(socket, data) {
                     }
                 });
 
-                console.log(ticket);
-
                 const ticketInfos = {
                     id: ticket.id,
                     title: ticket.title,
@@ -74,13 +72,13 @@ async function handleIncomingMessage(socket, data) {
 
                 socket.send(JSON.stringify({
                     type: 'db-info',
-                    clientId: message.clientId,
+                    id: message.id,
                     payload: ticketInfos
                 }));
 
                 broadcastToSupports({
                     type: 'client-request',
-                    clientId: message.clientId,
+                    id: message.id,
                     payload: ticketInfos,
                     user: message.user
                 });
@@ -90,10 +88,20 @@ async function handleIncomingMessage(socket, data) {
                 console.log('=================SUPPORT-MESSAGE===============');
                 console.log(`[SUPPORT-MESSAGE] Usuário: ${message.user.name} (${message.user.username})`);
                 console.log("[SUPPORT-MESSAGE] Conteúdo:");
-                // console.log(message.payload);
+                console.log(message.payload);
+                console.log('=============================================');
+                console.log();
+
+            case 'support-response':
+                console.log('=================SUPPORT-RESPONSE===============');
+                console.log(`[SUPPORT-MESSAGE] Usuário: ${message.user.name} (${message.user.username})`);
+                console.log("[SUPPORT-MESSAGE] Conteúdo:");
                 console.log(message);
                 console.log('=============================================');
                 console.log();
+
+                sendToUser(message.target, 'client', { type: 'support-response', payload: message.payload, user: message.user });
+                break
 
             default:
                 console.warn("Tipo de mensagem não reconhecido:", message.type);
