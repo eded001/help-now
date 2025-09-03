@@ -1,7 +1,7 @@
-import { generateSessionId, generateUUID } from "./utils/uuid.util.js";
-import { env } from "./constants/main.constant.js";
-import { getUserInfos } from "./utils/sessionInfo.util.js";
-import { addTicketToDOM } from "./utils/ticket.util.js";
+import { generateSessionId, generateUUID } from "../utils/uuid.util.js";
+import { env } from "../constants/main.constant.js";
+import { getUserInfos } from "../utils/sessionInfo.util.js";
+import { addTicketToDOM } from "../utils/ticket.util.js";
 
 let webSocket = null;
 let clientId = null;
@@ -50,14 +50,24 @@ function sendMessage(data) {
 }
 
 async function sendMessageToSupport(payload) {
-    const { username, name } = await getUserInfos();
+    try {
+        if (webSocket && webSocket.readyState === WebSocket.OPEN) {
+            const { username, name } = await getUserInfos();
 
-    sendMessage({
-        type: "client-request",
-        clientId,
-        payload,
-        user: { username, name }
-    });
+            const message = {
+                type: "client-request",
+                id: clientId,
+                payload,
+                user: { username, name }
+            };
+
+            sendMessage(message);
+        } else {
+            console.warn("WebSocket não está pronto para enviar mensagens");
+        }
+    } catch (err) {
+        console.error("Erro ao enviar mensagem para suporte:", err);
+    }
 }
 
 function handleClientMessage(event) {
@@ -67,15 +77,18 @@ function handleClientMessage(event) {
         case "confirmation":
             console.log(response.payload);
             break;
+
         case "db-info":
-            console.log(response.payload);
-            addTicketToDOM(response.payload, document.querySelector('.user__tickets'));
+            console.log("Informações recebidas do DB:", response.payload);
+            addTicketToDOM(response.payload, document.querySelector('.user__tickets'), "client");
+            break;
+
+        case "support-response":
+            console.log("Resposta do suporte:", response.payload);
+            break;
+
         default:
-            break;
-        case "host-confirm":
-            console.log(response.payload);
-            console.log("Mensagem recebida:", response.payload);
-            break;
+            console.warn("Mensagem de tipo de desconhecido: ", response.type);
     }
 }
 

@@ -1,4 +1,4 @@
-import { getUserInfos } from "./utils/sessionInfo.util.js";
+import { getUserInfos } from "../utils/sessionInfo.util.js";
 import { getClientId, sendMessageToSupport } from "./ws.client.js";
 
 const form = document.querySelector("#ticketForm");
