@@ -27,7 +27,7 @@ function createMessageElement({ content, id }, sendMessage) {
 
         sendMessage({
             type: 'host-confirm',
-            clientId: id,
+            id: id,
             payload: `Sua mensagem foi lida pelo host às ${new Date().toLocaleTimeString()}`
         });
 
