@@ -4,6 +4,10 @@ export const statusMap = {
     closed: { text: 'Fechado', class: 'ticket__status--closed', button: null }
 };
 
+function formatDateBR(date) {
+    return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+}
+
 export function advanceTicketState(ticketData, ticketElement) {
     const statusEl = ticketElement.querySelector('.ticket__status');
     const footer = ticketElement.querySelector('.ticket__footer');
