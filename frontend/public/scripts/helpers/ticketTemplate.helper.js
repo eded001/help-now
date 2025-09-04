@@ -2,10 +2,10 @@ import { formatDate } from './formatDate.js';
 import { translateProblem } from './translate.helper.js';
 
 function templateSupport(ticketData, statusMap) {
-    const { category, title, id, status, name, department } = ticketData;
+    const { category, title, id, status, name, department, username } = ticketData;
 
     return `
-        <div class="ticket">
+        <div class="ticket" data-username="${username}">
             <div class="ticket__header">
                 <a href="#" class="ticket__code">#${id || ''}</a>
                 <span class="ticket__category">${translateProblem(category)}</span>
