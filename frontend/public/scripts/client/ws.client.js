@@ -88,7 +88,7 @@ function handleClientMessage(event) {
             break;
 
         default:
-            console.warn("Mensagem de tipo de desconhecido: ", response.type);
+            console.warn("Mensagem de tipo desconhecido: ", response.type);
     }
 }
 

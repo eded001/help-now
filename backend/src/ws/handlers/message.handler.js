@@ -40,11 +40,10 @@ async function handleIncomingMessage(socket, data) {
                 console.log(`[CLIENT-INFO] Usuário: ${message.user.name} (${message.user.username})`);
                 console.log("[CLIENT-REQUEST] Conteúdo:");
                 console.log(message.payload);
-                // console.log(message);
                 console.log('=============================================');
                 console.log();
 
-                const ticket = await prisma.ticket.create({
+                let ticket = await prisma.ticket.create({
                     data: {
                         title: message.payload.title,
                         category: message.payload.category,
@@ -85,7 +84,7 @@ async function handleIncomingMessage(socket, data) {
                 break;
 
             case 'support-message':
-                console.log('=================SUPPORT-MESSAGE===============');
+                console.log('================SUPPORT-MESSAGE==============');
                 console.log(`[SUPPORT-MESSAGE] Usuário: ${message.user.name} (${message.user.username})`);
                 console.log("[SUPPORT-MESSAGE] Conteúdo:");
                 console.log(message.payload);
@@ -93,10 +92,10 @@ async function handleIncomingMessage(socket, data) {
                 console.log();
 
             case 'support-response':
-                console.log('=================SUPPORT-RESPONSE===============');
+                console.log('================SUPPORT-RESPONSE=============');
                 console.log(`[SUPPORT-MESSAGE] Usuário: ${message.user.name} (${message.user.username})`);
                 console.log("[SUPPORT-MESSAGE] Conteúdo:");
-                console.log(message);
+                console.log(message.payload);
                 console.log('=============================================');
                 console.log();
 

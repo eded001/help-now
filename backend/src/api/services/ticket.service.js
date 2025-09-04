@@ -17,6 +17,7 @@ async function create(data) {
 async function update(id, data) {
     const allowedFields = ['title', 'status', 'category', 'priority' ,'resolved_at'];
     const updateData = {};
+
     for (const key of allowedFields) {
         if (data[key] !== undefined) updateData[key] = data[key];
     }

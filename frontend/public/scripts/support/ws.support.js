@@ -87,7 +87,7 @@ function handleSupportMessage(event) {
             break;
 
         default:
-            console.warn("Mensagem não tratada:", response);
+            console.warn("Mensagem não tratada:", response.payload);
     }
 }
 
