@@ -14,6 +14,7 @@ export function advanceTicketState(ticketData, ticketElement) {
     const statusEl = ticketElement.querySelector('.ticket__status');
     const footer = ticketElement.querySelector('.ticket__footer');
     const button = ticketElement.querySelector('.ticket__button');
+    const infoEl = ticketElement.querySelector('.ticket__info');
 
     if (ticketData.status === 'open') {
         ticketData.status = 'in-progress';
@@ -30,12 +31,22 @@ export function advanceTicketState(ticketData, ticketElement) {
         ticketData.status = 'closed';
         statusEl.textContent = statusMap['closed'].text;
         statusEl.className = `ticket__status ${statusMap['closed'].class}`;
-        button.remove();
+        if (button) button.remove();
 
-        const info = document.createElement('span');
-        info.className = 'ticket__info';
-        const date = new Date();
-        info.textContent = `Fechado em ${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
-        footer.prepend(info);
+        const dateClosed = new Date();
+        if (infoEl) {
+            infoEl.textContent = `Fechado em ${formatDateBR(dateClosed)}`;
+        } else {
+            const newInfo = document.createElement('span');
+            newInfo.className = 'ticket__info';
+            newInfo.textContent = `Fechado em ${formatDateBR(dateClosed)}`;
+            footer.prepend(newInfo);
+        }
+
+        sendMessageToClient(ticketData.username, {
+            id: ticketData.id,
+            status: ticketData.status,
+            date_closed: dateClosed.toISOString()
+        });
     }
 }
