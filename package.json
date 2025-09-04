@@ -9,7 +9,7 @@
     "prisma-generate": "cd backend && npx prisma generate",
     "init": "npm run init-js && npm run prisma-migrate && npm run prisma-generate",
     "start": "cd backend && node server.js",
-    "prisma-studio": "npx prisma studio --schema backend/prisma/schema.prisma"
+    "db": "npx prisma studio --schema backend/prisma/schema.prisma"
   },
   "repository": {
     "type": "git",
