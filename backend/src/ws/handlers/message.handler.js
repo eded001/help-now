@@ -99,8 +99,27 @@ async function handleIncomingMessage(socket, data) {
                 console.log('=============================================');
                 console.log();
 
-                sendToUser(message.target, 'client', { type: 'support-response', payload: message.payload, user: message.user });
-                break
+                const { id, status, date_closed } = message.payload;
+
+                const statusFormatted = status.replace("-", "_").toUpperCase();
+
+                const updateData = { status: statusFormatted };
+
+                if (status === 'closed' && date_closed) {
+                    updateData.resolved_at = new Date(date_closed);
+                }
+
+                ticket = await prisma.ticket.update({
+                    where: { id },
+                    data: updateData,
+                });
+
+                sendToUser(message.target, 'client', {
+                    type: 'support-response',
+                    payload: message.payload,
+                    user: message.user
+                });
+                break;
 
             default:
                 console.warn("Tipo de mensagem não reconhecido:", message.type);
