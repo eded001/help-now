@@ -1,5 +1,0 @@
-enum TicketPriority {
-    LOW
-    MEDIUM
-    HIGH
-}
