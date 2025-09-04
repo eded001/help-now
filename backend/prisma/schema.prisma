@@ -27,7 +27,7 @@ enum TicketPriority {
 enum TicketStatus {
     OPEN
     IN_PROGRESS
-    RESOLVED
+    CLOSED
 }
 
 // --- models/User.model.prisma ---
