@@ -2,6 +2,7 @@ import { generateSessionId, generateUUID } from "../utils/uuid.util.js";
 import { env } from "../constants/main.constant.js";
 import { getUserInfos } from "../utils/sessionInfo.util.js";
 import { addTicketToDOM } from "../utils/ticket.util.js";
+import { statusMap } from "../helpers/ticketState.helper.js";
 
 let webSocket = null;
 let clientId = null;
@@ -85,6 +86,26 @@ function handleClientMessage(event) {
 
         case "support-response":
             console.log("Resposta do suporte:", response.payload);
+
+            const ticketContainer = document.querySelector('.user__tickets');
+            const ticketElement = [...ticketContainer.querySelectorAll('.ticket')]
+                .find(t => t.querySelector('.ticket__code').textContent.includes("#" + response.payload.id));
+
+            if (ticketElement) {
+                const statusEl = ticketElement.querySelector('.ticket__status');
+                statusEl.textContent = statusMap[response.payload.status]?.text || '';
+                statusEl.className = `ticket__status ${statusMap[response.payload.status]?.class || ''}`;
+
+                const infoEl = ticketElement.querySelector('.ticket__info');
+                if (response.payload.status === 'closed' && response.payload.date_closed) {
+                    const date = new Date(response.payload.date_closed);
+                    infoEl.textContent = `Fechado em ${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+                } else if (response.payload.createdAt) {
+                    const date = new Date(response.payload.createdAt);
+                    infoEl.textContent = `Aberto em ${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
+                }
+            }
+
             break;
 
         default:
