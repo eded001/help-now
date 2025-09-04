@@ -4,6 +4,7 @@ const prisma = require('../../../prisma/client');
 async function handleIncomingMessage(socket, data) {
     try {
         const message = JSON.parse(data);
+        let ticket;
 
         switch (message.type) {
             case 'client-init':
@@ -43,7 +44,7 @@ async function handleIncomingMessage(socket, data) {
                 console.log('=============================================');
                 console.log();
 
-                let ticket = await prisma.ticket.create({
+                ticket = await prisma.ticket.create({
                     data: {
                         title: message.payload.title,
                         category: message.payload.category,
