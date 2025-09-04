@@ -1,3 +1,5 @@
+import { sendMessageToClient } from "../../scripts/support/ws.support.js";
+
 export const statusMap = {
     open: { text: 'Aberto', class: 'ticket__status--open', button: 'Aceitar' },
     'in-progress': { text: 'Em andamento', class: 'ticket__status--in-progress', button: 'Resolver' },
@@ -18,6 +20,12 @@ export function advanceTicketState(ticketData, ticketElement) {
         statusEl.textContent = statusMap['in-progress'].text;
         statusEl.className = `ticket__status ${statusMap['in-progress'].class}`;
         button.textContent = statusMap['in-progress'].button;
+
+        sendMessageToClient(ticketData.username, {
+            id: ticketData.id,
+            status: ticketData.status
+        });
+
     } else if (ticketData.status === 'in-progress') {
         ticketData.status = 'closed';
         statusEl.textContent = statusMap['closed'].text;
