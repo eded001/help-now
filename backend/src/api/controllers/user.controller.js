@@ -54,9 +54,9 @@ module.exports = {
     },
 
     async logout(req, res) {
-        req.session.destroy(err => {
-            if (err) {
-                console.error(err);
+        req.session.destroy(error => {
+            if (error) {
+                console.error(error);
                 return res.status(500).json({ error: 'Erro ao fazer logout.' });
             }
 

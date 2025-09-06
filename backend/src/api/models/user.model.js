@@ -8,6 +8,4 @@ const userSchema = Joi.object({
     role: Joi.string().valid('ADMIN', 'CLIENT', 'SUPPORT').default('CLIENT'),
 });
 
-module.exports = {
-    userSchema
-};
+module.exports = userSchema;

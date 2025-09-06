@@ -18,8 +18,8 @@ async function create(req, res) {
 
         const ticket = await ticketService.create(ticketData);
         return successResponse(res, ticket, 201);
-    } catch (err) {
-        return errorResponse(res, err);
+    } catch (error) {
+        return errorResponse(res, error);
     }
 }
 
@@ -32,8 +32,8 @@ async function list(req, res) {
 
         const tickets = await ticketService.list(filters);
         return successResponse(res, tickets);
-    } catch (err) {
-        return errorResponse(res, err);
+    } catch (error) {
+        return errorResponse(res, error);
     }
 }
 
@@ -43,8 +43,8 @@ async function get(req, res) {
         const ticket = await ticketService.list({ id: parseInt(req.params.id) });
         if (!ticket || ticket.length === 0) return res.status(404).json({ success: false, message: 'Ticket não encontrado' });
         return successResponse(res, ticket[0]);
-    } catch (err) {
-        return errorResponse(res, err);
+    } catch (error) {
+        return errorResponse(res, error);
     }
 }
 
@@ -53,8 +53,8 @@ async function update(req, res) {
     try {
         const ticket = await ticketService.update(req.params.id, req.body);
         return successResponse(res, ticket);
-    } catch (err) {
-        return errorResponse(res, err);
+    } catch (error) {
+        return errorResponse(res, error);
     }
 }
 
@@ -68,8 +68,8 @@ async function assign(req, res) {
 
         const ticket = await ticketService.assign(req.params.id, assigned_to_username);
         return successResponse(res, ticket);
-    } catch (err) {
-        return errorResponse(res, err);
+    } catch (error) {
+        return errorResponse(res, error);
     }
 }
 
@@ -78,8 +78,8 @@ async function remove(req, res) {
     try {
         await ticketService.remove(req.params.id);
         return res.status(204).send();
-    } catch (err) {
-        return errorResponse(res, err);
+    } catch (error) {
+        return errorResponse(res, error);
     }
 }
 

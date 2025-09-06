@@ -7,7 +7,6 @@ const ticketSchema = Joi.object({
     priority: Joi.string().valid('low', 'medium', 'high').required(),
     created_by_username: Joi.string().min(3).max(50).required(),
     assigned_to_username: Joi.string().min(3).max(50).optional(),
-    resolved_at: Joi.date().optional()
 });
 
 module.exports = { ticketSchema };
