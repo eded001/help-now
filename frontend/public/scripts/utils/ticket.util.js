@@ -21,9 +21,9 @@ function createTicket(ticketData, type) {
     return ticketElement;
 }
 
-function addTicketToDOM(ticketData, container, type = 'client') {
+function addTicketToDOM(ticketData, type = 'client') {
     const ticketElement = createTicket(ticketData, type);
-    container.appendChild(ticketElement);
+    return ticketElement;
 }
 
 export { addTicketToDOM };
