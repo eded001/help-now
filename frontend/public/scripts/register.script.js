@@ -4,13 +4,12 @@ const userUsernameInput = document.querySelector("#id-user");
 const userPasswordInput = document.querySelector("#pass-user");
 const userDepartmentInput = document.querySelector("#department-user");
 import { populateSelect } from "./utils/dom.util.js";
-import { elements } from "./constants/elements.constant.js";
 import { departments } from "./constants/main.constant.js";
 
 import { register, login } from "./utils/user.util.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    populateSelect(elements.departmentSelect, departments);
+    populateSelect(document.querySelector('#department-user'), departments);
 });
 
 form.addEventListener('submit', async event => {

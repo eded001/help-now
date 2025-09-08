@@ -15,7 +15,7 @@ async function create(data) {
 }
 
 async function update(id, data) {
-    const allowedFields = ['title', 'status', 'category', 'priority' ,'resolved_at'];
+    const allowedFields = ['title', 'status', 'category', 'priority', 'resolved_at'];
     const updateData = {};
 
     for (const key of allowedFields) {
@@ -30,7 +30,6 @@ async function update(id, data) {
 }
 
 async function assign(id, assigned_to_username) {
-    // Checa se o usuário existe
     const user = await userService.getByUsername(assigned_to_username);
     if (!user) throw new Error('Usuário não encontrado');
 

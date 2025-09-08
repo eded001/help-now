@@ -9,29 +9,24 @@ generator client {
     provider = "prisma-client-js"
 }
 
-// --- enums/Roles.enum.prisma ---
 enum Role {
     ADMIN
     CLIENT
     SUPPORT
 }
 
-// --- enums/TicketPriority.enum.prisma ---
 enum TicketPriority {
     LOW
     MEDIUM
     HIGH
 }
 
-// --- enums/TicketStatus.enum.prisma ---
 enum TicketStatus {
     OPEN
     IN_PROGRESS
     CLOSED
 }
 
-// --- models/User.model.prisma ---
-// models/user.prisma
 model User {
     id         Int      @id @default(autoincrement())
     name       String
@@ -46,8 +41,6 @@ model User {
     ticketsAssigned Ticket[] @relation("AssignedTickets")
 }
 
-// --- models/Ticket.model.prisma ---
-// models/ticket.prisma
 model Ticket {
     id          Int            @id @default(autoincrement())
     title       String
