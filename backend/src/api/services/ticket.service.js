@@ -35,7 +35,23 @@ async function assign(id, assigned_to_username) {
 
     return prisma.ticket.update({
         where: { id: parseInt(id) },
-        data: { assigned_to_username: assigned_to_username },
+        data: { assigned_to_username },
+        include: { created_by: true, assigned_to: true }
+    });
+}
+
+async function getUnassigned() {
+    return prisma.ticket.findMany({
+        where: {
+            assigned_to_username: { equals: null }
+        },
+        include: {
+            created_by: true,
+            assigned_to: true
+        }
+    });
+}
+
 async function getById(id) {
     return prisma.ticket.findUnique({
         where: { id: parseInt(id) },
@@ -47,4 +63,12 @@ async function remove(id) {
     return prisma.ticket.delete({ where: { id: parseInt(id) } });
 }
 
-module.exports = { list, create, update, assign, remove };
+async function getByUsername(username) {
+    return prisma.ticket.findMany({
+        where: { created_by_username: username },
+        include: { created_by: true, assigned_to: true },
+        orderBy: { created_at: 'desc' }
+    });
+}
+
+module.exports = { list, create, update, assign, getUnassigned, getById, remove, getByUsername };

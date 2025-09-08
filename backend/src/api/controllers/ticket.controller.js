@@ -48,6 +48,24 @@ async function getById(req, res) {
     }
 }
 
+// get by username
+async function getByUsername(req, res) {
+    try {
+        if (!req.session.user || !req.session.user.username) {
+            return res.status(401).json({ success: false, message: 'Usuário não autenticado' });
+        }
+
+        const tickets = await ticketService.getByUsername(req.session.user.username);
+        if (!tickets || tickets.length === 0) {
+            return res.status(404).json({ success: false, message: 'Nenhum ticket encontrado para este usuário' });
+        }
+
+        return successResponse(res, tickets);
+    } catch (error) {
+        return errorResponse(res, error);
+    }
+}
+
 // update
 async function update(req, res) {
     try {
@@ -73,6 +91,16 @@ async function assign(req, res) {
     }
 }
 
+// get all unassigned tickets
+async function getUnassigned(req, res) {
+    try {
+        const tickets = await ticketService.getUnassigned();
+        return successResponse(res, tickets);
+    } catch (error) {
+        return errorResponse(res, error);
+    }
+}
+
 // delete
 async function remove(req, res) {
     try {
@@ -83,4 +111,4 @@ async function remove(req, res) {
     }
 }
 
-module.exports = { create, list, get, update, assign, remove };
+module.exports = { create, list, getById, getByUsername, update, assign, getUnassigned, remove };
