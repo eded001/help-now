@@ -2,7 +2,8 @@ import { formatDate } from './formatDate.js';
 import { translateProblem } from './translate.helper.js';
 
 function templateSupport(ticketData, statusMap) {
-    const { category, title, id, status, name, department, username } = ticketData;
+    const { category, title, id, status, created_by } = ticketData;
+    const { name, department, username } = created_by;
 
     return `
         <div class="ticket" data-username="${username}">
