@@ -1,7 +1,7 @@
 const prisma = require('../../../prisma/client');
 const userService = require('./user.service');
 
-async function list(filters) {
+async function list(filters = {}) {
     return prisma.ticket.findMany({
         where: { ...filters },
         include: { created_by: true, assigned_to: true }
@@ -9,9 +9,7 @@ async function list(filters) {
 }
 
 async function create(data) {
-    return prisma.ticket.create({
-        data
-    });
+    return prisma.ticket.create({ data });
 }
 
 async function update(id, data) {
