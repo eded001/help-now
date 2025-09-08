@@ -32,8 +32,8 @@ function startSession() {
 
     webSocket.addEventListener("message", handleSupportMessage);
 
-    webSocket.addEventListener("error", (err) => {
-        console.error("Erro no WebSocket do suporte:", err);
+    webSocket.addEventListener("error", (error) => {
+        console.error("Erro no WebSocket do suporte:", error);
     });
 
     webSocket.addEventListener("close", () => {
@@ -68,8 +68,8 @@ async function sendMessageToClient(targetId, payload) {
         } else {
             console.warn("WebSocket não está pronto para enviar mensagens");
         }
-    } catch (err) {
-        console.error("Erro ao enviar mensagem para cliente:", err);
+    } catch (error) {
+        console.error("Erro ao enviar mensagem para cliente:", error);
     }
 }
 
@@ -79,7 +79,11 @@ function handleSupportMessage(event) {
     switch (response.type) {
         case "client-request":
             console.log("Novo ticket do cliente:", response.payload);
-            addTicketToDOM(response.payload, document.querySelector('.user__tickets'), "support");
+
+            const container = document.querySelector('.user__tickets');
+            const ticket = addTicketToDOM(response.payload, "support");
+
+            container.insertBefore(ticket, container.firstChild);
             break;
 
         case "confirmation":

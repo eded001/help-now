@@ -66,8 +66,8 @@ async function sendMessageToSupport(payload) {
         } else {
             console.warn("WebSocket não está pronto para enviar mensagens");
         }
-    } catch (err) {
-        console.error("Erro ao enviar mensagem para suporte:", err);
+    } catch (error) {
+        console.error("Erro ao enviar mensagem para suporte:", error);
     }
 }
 
@@ -81,7 +81,12 @@ function handleClientMessage(event) {
 
         case "db-info":
             console.log("Informações recebidas do DB:", response.payload);
-            addTicketToDOM(response.payload, document.querySelector('.user__tickets'), "client");
+
+            const container = document.querySelector('.user__tickets');
+            const ticket = addTicketToDOM(response.payload, "client");
+
+            container.insertBefore(ticket, container.firstChild);
+
             break;
 
         case "support-response":
