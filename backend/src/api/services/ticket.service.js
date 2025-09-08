@@ -36,6 +36,9 @@ async function assign(id, assigned_to_username) {
     return prisma.ticket.update({
         where: { id: parseInt(id) },
         data: { assigned_to_username: assigned_to_username },
+async function getById(id) {
+    return prisma.ticket.findUnique({
+        where: { id: parseInt(id) },
         include: { created_by: true, assigned_to: true }
     });
 }

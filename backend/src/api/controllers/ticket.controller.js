@@ -38,9 +38,9 @@ async function list(req, res) {
 }
 
 // get by id
-async function get(req, res) {
+async function getById(req, res) {
     try {
-        const ticket = await ticketService.list({ id: parseInt(req.params.id) });
+        const ticket = await ticketService.getById(parseInt(req.params.id));
         if (!ticket || ticket.length === 0) return res.status(404).json({ success: false, message: 'Ticket não encontrado' });
         return successResponse(res, ticket[0]);
     } catch (error) {
